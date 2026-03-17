@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DUoS + TNUoS Coordinate Lookup</title>
+  <meta name="robots" content="noindex">
+  <style>
+    :root {
+      --bg: #f2efe8;
+      --panel: #fffdf8;
+      --ink: #1b1e24;
+      --accent: #1f6f78;
+      --accent-2: #f08a24;
+      --line: #d6cec1;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, #f9f4e8 0, transparent 30%),
+        radial-gradient(circle at 90% 90%, #dff1f3 0, transparent 35%),
+        var(--bg);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: min(760px, 100%);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 14px 40px rgba(27, 30, 36, 0.12);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+    }
+
+    p {
+      margin: 0 0 18px;
+      line-height: 1.45;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-size: 1rem;
+      background: #fff;
+    }
+
+    button {
+      margin-top: 14px;
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 1rem;
+      cursor: pointer;
+      background: var(--accent);
+      color: white;
+    }
+
+    button:hover { filter: brightness(1.05); }
+
+    .status {
+      margin-top: 12px;
+      color: #555;
+      font-size: 0.9rem;
+    }
+
+    .result {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      display: none;
+    }
+
+    .result-row {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px dashed #e8e1d5;
+    }
+
+    .result-row:last-child { border-bottom: none; }
+    .k { font-weight: 600; }
+    .v { color: #222; }
+
+    .warn {
+      margin-top: 10px;
+      color: #8b2e2e;
+      font-weight: 600;
+    }
+
+    @media (max-width: 640px) {
+      .row { grid-template-columns: 1fr; }
+      .result-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>DUoS + TNUoS Lookup</h1>
+    <p>Enter latitude/longitude to return DUoS region, TNUoS demand region (GSP group), and TNUoS generation zone.</p>
+
+    <div class="row">
+      <div>
+        <label for="lat">Latitude</label>
+        <input id="lat" type="number" step="any" placeholder="e.g. 52.2053">
+      </div>
+      <div>
+        <label for="lon">Longitude</label>
+        <input id="lon" type="number" step="any" placeholder="e.g. 0.1218">
+      </div>
+    </div>
+
+    <button id="lookupBtn">Lookup Regions</button>
+    <div class="status" id="status">Loading datasets...</div>
+
+    <section class="result" id="result"></section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.11.0/proj4.js"></script>
+  <script>
+    const datasets = {
+      dno: null,
+      gsp: null,
+      gen: null,
+    };
+
+    // DNO polygons are published in British National Grid (EPSG:27700).
+    proj4.defs(
+      "EPSG:27700",
+      "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 +units=m +no_defs"
+    );
+
+    function bboxFromRing(ring) {
+      let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+      for (const p of ring) {
+        const x = p[0];
+        const y = p[1];
+        if (x < minX) minX = x;
+        if (x > maxX) maxX = x;
+        if (y < minY) minY = y;
+        if (y > maxY) maxY = y;
+      }
+      return [minX, minY, maxX, maxY];
+    }
+
+    function pointInRing(point, ring) {
+      const x = point[0];
+      const y = point[1];
+      let inside = false;
+      for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+        const xi = ring[i][0], yi = ring[i][1];
+        const xj = ring[j][0], yj = ring[j][1];
+        const intersect = ((yi > y) !== (yj > y)) &&
+          (x < (xj - xi) * (y - yi) / ((yj - yi) || 1e-20) + xi);
+        if (intersect) inside = !inside;
+      }
+      return inside;
+    }
+
+    function pointInPolygon(point, polygon) {
+      if (!polygon || polygon.length === 0) return false;
+      if (!pointInRing(point, polygon[0])) return false;
+      for (let i = 1; i < polygon.length; i++) {
+        if (pointInRing(point, polygon[i])) return false;
+      }
+      return true;
+    }
+
+    function toPolygons(geometry) {
+      if (!geometry || !geometry.coordinates || geometry.coordinates.length === 0) {
+        return [];
+      }
+      if (geometry.type === "Polygon") {
+        return [geometry.coordinates];
+      }
+      if (geometry.type === "MultiPolygon") {
+        return geometry.coordinates;
+      }
+      return [];
+    }
+
+    function prepareFeatures(featureCollection) {
+      const out = [];
+      for (const feature of featureCollection.features || []) {
+        const polygons = toPolygons(feature.geometry);
+        if (polygons.length === 0) continue;
+        const bboxes = polygons
+          .filter(poly => poly && poly.length > 0 && poly[0].length > 0)
+          .map(poly => bboxFromRing(poly[0]));
+        if (bboxes.length === 0) continue;
+
+        const minX = Math.min(...bboxes.map(b => b[0]));
+        const minY = Math.min(...bboxes.map(b => b[1]));
+        const maxX = Math.max(...bboxes.map(b => b[2]));
+        const maxY = Math.max(...bboxes.map(b => b[3]));
+
+        out.push({
+          properties: feature.properties || {},
+          polygons,
+          bbox: [minX, minY, maxX, maxY],
+        });
+      }
+      return out;
+    }
+
+    function findContaining(point, preparedFeatures) {
+      for (const item of preparedFeatures) {
+        const [minX, minY, maxX, maxY] = item.bbox;
+        if (point[0] < minX || point[0] > maxX || point[1] < minY || point[1] > maxY) {
+          continue;
+        }
+        for (const polygon of item.polygons) {
+          if (pointInPolygon(point, polygon)) {
+            return item.properties;
+          }
+        }
+      }
+      return {};
+    }
+
+    function renderResult(rows, warning) {
+      const result = document.getElementById("result");
+      result.style.display = "block";
+      result.innerHTML = rows.map(([k, v]) => `
+        <div class="result-row">
+          <div class="k">${k}</div>
+          <div class="v">${v ?? "Not found"}</div>
+        </div>
+      `).join("") + (warning ? `<div class="warn">${warning}</div>` : "");
+    }
+
+    async function loadData() {
+      const status = document.getElementById("status");
+      try {
+        const [dno, gsp, gen] = await Promise.all([
+          fetch("./data/slim_dno_20240503.geojson").then(r => r.json()),
+          fetch("./data/slim_gsp_20251204.geojson").then(r => r.json()),
+          fetch("./data/slim_tnuos_generation_zones.geojson").then(r => r.json()),
+        ]);
+
+        datasets.dno = prepareFeatures(dno);
+        datasets.gsp = prepareFeatures(gsp);
+        datasets.gen = prepareFeatures(gen);
+        status.textContent = "Datasets loaded. Ready.";
+      } catch (err) {
+        status.textContent = "Failed to load local datasets. Start a local server and open this page from it.";
+      }
+    }
+
+    document.getElementById("lookupBtn").addEventListener("click", () => {
+      const lat = parseFloat(document.getElementById("lat").value);
+      const lon = parseFloat(document.getElementById("lon").value);
+      const status = document.getElementById("status");
+
+      if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+        status.textContent = "Enter valid numeric latitude and longitude.";
+        return;
+      }
+      if (!datasets.dno || !datasets.gsp || !datasets.gen) {
+        status.textContent = "Datasets not loaded yet.";
+        return;
+      }
+
+      const pointWgs84 = [lon, lat];
+      const pointDno = proj4("EPSG:4326", "EPSG:27700", pointWgs84);
+
+      const dno = findContaining(pointDno, datasets.dno);
+      const gsp = findContaining(pointWgs84, datasets.gsp);
+      const gen = findContaining(pointWgs84, datasets.gen);
+
+      renderResult([
+        ["Latitude", lat],
+        ["Longitude", lon],
+        ["DUoS region", dno.Area],
+        ["DUoS operator", dno.DNO_Full || dno.DNO],
+        ["TNUoS demand region", gsp.GSPGroup],
+        ["GSP code", gsp.GSPs],
+        ["TNUoS generation zone", gen.layer],
+      ], "Note: Demand and generation zones are parallel spatial lookups, not tariff-derived from each other.");
+
+      status.textContent = "Lookup complete.";
+    });
+
+    loadData();
+  </script>
+</body>
+</html>
