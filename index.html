@@ -7,23 +7,32 @@
   <meta name="robots" content="noindex">
   <style>
     :root {
-      --bg: #f2efe8;
-      --panel: #fffdf8;
-      --ink: #1b1e24;
-      --accent: #1f6f78;
-      --accent-2: #f08a24;
-      --line: #d6cec1;
+      --charcoal: #1f1f23;
+      --purple: #8d2eff;
+      --pink: #ff00a8;
+      --green: #76f5d8;
+      --blue: #0c1c73;
+      --bg: var(--charcoal);
+      --panel: rgba(12, 28, 115, 0.86);
+      --ink: #ffffff;
+      --line: rgba(118, 245, 216, 0.34);
+      --input-bg: rgba(31, 31, 35, 0.9);
+      --input-line: rgba(118, 245, 216, 0.55);
+      --status: #d8d8e6;
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: "Segoe UI", Tahoma, sans-serif;
+      font-family: "Sharp Sans Semibold", "Sharp Sans", "Segoe UI Semibold", "Segoe UI", Tahoma, sans-serif;
+      font-weight: 600;
       color: var(--ink);
       background:
-        radial-gradient(circle at 10% 10%, #f9f4e8 0, transparent 30%),
-        radial-gradient(circle at 90% 90%, #dff1f3 0, transparent 35%),
+        radial-gradient(circle at 8% 8%, rgba(141, 46, 255, 0.4) 0, transparent 34%),
+        radial-gradient(circle at 92% 10%, rgba(255, 0, 168, 0.32) 0, transparent 36%),
+        radial-gradient(circle at 15% 92%, rgba(118, 245, 216, 0.24) 0, transparent 35%),
+        radial-gradient(circle at 85% 88%, rgba(12, 28, 115, 0.55) 0, transparent 42%),
         var(--bg);
       min-height: 100vh;
       display: grid;
@@ -37,12 +46,14 @@
       border: 1px solid var(--line);
       border-radius: 16px;
       padding: 24px;
-      box-shadow: 0 14px 40px rgba(27, 30, 36, 0.12);
+      box-shadow: 0 16px 42px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(4px);
     }
 
     h1 {
       margin: 0 0 12px;
       font-size: clamp(1.4rem, 2.5vw, 2rem);
+      color: var(--green);
     }
 
     p {
@@ -65,10 +76,23 @@
     input {
       width: 100%;
       padding: 10px 12px;
-      border: 1px solid var(--line);
+      border: 1px solid var(--input-line);
       border-radius: 10px;
       font-size: 1rem;
-      background: #fff;
+      font-family: inherit;
+      font-weight: 600;
+      color: var(--ink);
+      background: var(--input-bg);
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px rgba(255, 0, 168, 0.25);
     }
 
     button {
@@ -77,8 +101,10 @@
       border-radius: 10px;
       padding: 10px 14px;
       font-size: 1rem;
+      font-family: inherit;
+      font-weight: 600;
       cursor: pointer;
-      background: var(--accent);
+      background: linear-gradient(120deg, var(--purple), var(--pink));
       color: white;
     }
 
@@ -86,7 +112,7 @@
 
     .status {
       margin-top: 12px;
-      color: #555;
+      color: var(--status);
       font-size: 0.9rem;
     }
 
@@ -94,7 +120,7 @@
       margin-top: 18px;
       padding: 14px;
       border-radius: 12px;
-      background: #fff;
+      background: rgba(31, 31, 35, 0.84);
       border: 1px solid var(--line);
       display: none;
     }
@@ -104,16 +130,16 @@
       grid-template-columns: 220px 1fr;
       gap: 10px;
       padding: 6px 0;
-      border-bottom: 1px dashed #e8e1d5;
+      border-bottom: 1px dashed rgba(118, 245, 216, 0.26);
     }
 
     .result-row:last-child { border-bottom: none; }
     .k { font-weight: 600; }
-    .v { color: #222; }
+    .v { color: #ffffff; }
 
     .warn {
       margin-top: 10px;
-      color: #8b2e2e;
+      color: var(--green);
       font-weight: 600;
     }
 
