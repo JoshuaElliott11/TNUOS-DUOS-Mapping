@@ -41,7 +41,7 @@
     }
 
     .card {
-      width: min(760px, 100%);
+      width: min(900px, 100%);
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 16px;
@@ -61,10 +61,19 @@
       line-height: 1.45;
     }
 
+    .section-title {
+      margin: 18px 0 10px;
+      color: var(--green);
+      letter-spacing: 0.02em;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+    }
+
     .row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
+      margin-bottom: 12px;
     }
 
     label {
@@ -73,7 +82,8 @@
       margin-bottom: 6px;
     }
 
-    input {
+    input,
+    select {
       width: 100%;
       padding: 10px 12px;
       border: 1px solid var(--input-line);
@@ -89,14 +99,21 @@
       color: rgba(255, 255, 255, 0.65);
     }
 
-    input:focus {
+    input:focus,
+    select:focus {
       outline: none;
       border-color: var(--pink);
       box-shadow: 0 0 0 3px rgba(255, 0, 168, 0.25);
     }
 
+    .button-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
     button {
-      margin-top: 14px;
       border: 0;
       border-radius: 10px;
       padding: 10px 14px;
@@ -106,6 +123,11 @@
       cursor: pointer;
       background: linear-gradient(120deg, var(--purple), var(--pink));
       color: white;
+    }
+
+    button.secondary {
+      background: linear-gradient(120deg, #2f377a, #1d2452);
+      border: 1px solid rgba(118, 245, 216, 0.25);
     }
 
     button:hover { filter: brightness(1.05); }
@@ -127,7 +149,7 @@
 
     .result-row {
       display: grid;
-      grid-template-columns: 220px 1fr;
+      grid-template-columns: 250px 1fr;
       gap: 10px;
       padding: 6px 0;
       border-bottom: 1px dashed rgba(118, 245, 216, 0.26);
@@ -143,17 +165,23 @@
       font-weight: 600;
     }
 
+    .hidden {
+      display: none;
+    }
+
     @media (max-width: 640px) {
       .row { grid-template-columns: 1fr; }
       .result-row { grid-template-columns: 1fr; }
+      .button-row button { width: 100%; }
     }
   </style>
 </head>
 <body>
   <main class="card">
-    <h1>DUoS + TNUoS Lookup</h1>
-    <p>Enter latitude/longitude to return DUoS region, TNUoS demand region (GSP group), and TNUoS generation zone.</p>
+    <h1>DUoS + TNUoS Lookup + Tariff Recommender</h1>
+    <p>Select a site archetype, add location and capacity, and the tool will tell you which DUoS/TNUoS tariff presets and residual band inputs to include.</p>
 
+    <div class="section-title">Location</div>
     <div class="row">
       <div>
         <label for="lat">Latitude</label>
@@ -165,21 +193,146 @@
       </div>
     </div>
 
-    <button id="lookupBtn">Lookup Regions</button>
-    <div class="status" id="status">Loading datasets...</div>
+    <div class="section-title">Site Setup</div>
+    <div class="row">
+      <div>
+        <label for="siteType">Site archetype</label>
+        <select id="siteType">
+          <option value="dist_import_final">1. Pure final-demand import site distribution-connected (no export)</option>
+          <option value="trans_import_final">2. Pure final-demand import site transmission-connected (no export)</option>
+          <option value="dist_import_export">3. Distribution-connected import + export site (final-demand plus embedded export)</option>
+          <option value="dist_export_only">4. Distribution-connected export-led site (embedded export only)</option>
+          <option value="trans_generation_export">5. Pure transmission-connected generation/export site</option>
+          <option value="dist_storage_bidirectional">6. Distribution-connected bidirectional storage/energy site (import and export)</option>
+          <option value="trans_storage_bidirectional">7. Transmission-connected bidirectional storage/energy site (import and export)</option>
+        </select>
+      </div>
+      <div id="demandBasisWrap">
+        <label for="demandBasis">Band basis</label>
+        <select id="demandBasis"></select>
+      </div>
+    </div>
 
+    <div class="section-title">Connection / Usage Input</div>
+    <div class="row">
+      <div>
+        <label for="capacity">Capacity / annual quantity</label>
+        <input id="capacity" type="number" step="any" placeholder="e.g. 120">
+      </div>
+      <div>
+        <label for="capacityUnit">Input unit</label>
+        <select id="capacityUnit">
+          <option value="kVA">kVA</option>
+          <option value="kW">kW</option>
+          <option value="kWh">kWh/year</option>
+          <option value="MWh">MWh/year</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="button-row">
+      <button id="lookupBtn" class="secondary">Lookup Regions</button>
+      <button id="recommendBtn">Recommend Tariffs</button>
+    </div>
+
+    <div class="status" id="status">Loading datasets...</div>
     <section class="result" id="result"></section>
   </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.11.0/proj4.js"></script>
   <script>
-    const datasets = {
-      dno: null,
-      gsp: null,
-      gen: null,
+    const SITE_ARCHETYPES = {
+      pure_final_dist: {
+        label: "1. Pure final-demand import site distribution-connected (no export)",
+        needsLvHvBand: true,
+        needsResidualBand: true,
+        residualType: "distribution",
+        tariffs: ["duos_site_specific_import", "tnuos_residual", "tnuos_import_triads"],
+      },
+      pure_final_trans: {
+        label: "2. Pure final-demand import site transmission-connected (no export)",
+        needsLvHvBand: false,
+        needsResidualBand: true,
+        residualType: "t_demand",
+        tariffs: ["tnuos_residual", "tnuos_import_triads"],
+      },
+      standalone_storage_dist: {
+        label: "3. Stand-alone storage / non-final demand site distribution-connected",
+        needsLvHvBand: false,
+        needsResidualBand: false,
+        residualType: "none",
+        tariffs: ["duos_no_residual_import", "duos_generation_site_specific_export", "tnuos_import_triads", "tnuos_embedded_export"],
+      },
+      standalone_storage_trans: {
+        label: "4. Stand-alone storage / non-final demand site transmission-connected",
+        needsLvHvBand: false,
+        needsResidualBand: false,
+        residualType: "none",
+        tariffs: ["tnuos_import_triads", "tnuos_wider_generation"],
+      },
+      dist_generator_only: {
+        label: "5. Distribution-connected generator only (<100 MW, no demand)",
+        needsLvHvBand: false,
+        needsResidualBand: false,
+        residualType: "none",
+        tariffs: ["duos_generation_site_specific_export", "tnuos_embedded_export"],
+      },
+      trans_generator_only: {
+        label: "6. Transmission-connected generator / Distribution-Connected TEC >100 MW",
+        needsLvHvBand: false,
+        needsResidualBand: false,
+        residualType: "none",
+        tariffs: ["tnuos_wider_generation"],
+      },
+      mixed_dist: {
+        label: "7. Mixed final-demand + generation site Distribution Connected (BtM co-loc + generation) <100MW TEC",
+        needsLvHvBand: true,
+        needsResidualBand: true,
+        residualType: "distribution",
+        tariffs: ["duos_site_specific_import", "duos_generation_site_specific_export", "tnuos_residual", "tnuos_import_triads", "tnuos_embedded_export"],
+      },
+      mixed_trans: {
+        label: "8. Mixed final-demand + generation site Transmission Connected (BtM co-location)",
+        needsLvHvBand: false,
+        needsResidualBand: true,
+        residualType: "t_demand",
+        tariffs: ["tnuos_residual", "tnuos_import_triads", "tnuos_wider_generation"],
+      },
+      colocated_dist: {
+        label: "9. Co-located Renewables + BESS Import - Distribution",
+        needsLvHvBand: false,
+        needsResidualBand: false,
+        residualType: "none",
+        tariffs: ["duos_no_residual_import", "duos_generation_site_specific_export", "tnuos_import_triads", "tnuos_embedded_export"],
+      },
+      colocated_trans: {
+        label: "10. Co-located Renewables + BESS Import - Transmission",
+        needsLvHvBand: false,
+        needsResidualBand: false,
+        residualType: "none",
+        tariffs: ["tnuos_import_triads", "tnuos_wider_generation"],
+      },
     };
 
-    // DNO polygons are published in British National Grid (EPSG:27700).
+    const DEMAND_ZONE_FROM_GSP_GROUP = {
+      _A: { zone: 1, name: "Northern Scotland" },
+      _B: { zone: 2, name: "Southern Scotland" },
+      _C: { zone: 3, name: "Northern" },
+      _D: { zone: 4, name: "North West" },
+      _E: { zone: 5, name: "Yorkshire" },
+      _F: { zone: 6, name: "N Wales & Mersey" },
+      _G: { zone: 7, name: "East Midlands" },
+      _H: { zone: 8, name: "Midlands" },
+      _J: { zone: 9, name: "Eastern" },
+      _K: { zone: 10, name: "South Wales" },
+      _L: { zone: 11, name: "South East" },
+      _M: { zone: 12, name: "London" },
+      _N: { zone: 13, name: "Southern" },
+      _P: { zone: 14, name: "South Western" },
+    };
+
+    const datasets = { dno: null, gsp: null, gen: null };
+
     proj4.defs(
       "EPSG:27700",
       "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 +units=m +no_defs"
@@ -222,15 +375,9 @@
     }
 
     function toPolygons(geometry) {
-      if (!geometry || !geometry.coordinates || geometry.coordinates.length === 0) {
-        return [];
-      }
-      if (geometry.type === "Polygon") {
-        return [geometry.coordinates];
-      }
-      if (geometry.type === "MultiPolygon") {
-        return geometry.coordinates;
-      }
+      if (!geometry || !geometry.coordinates || geometry.coordinates.length === 0) return [];
+      if (geometry.type === "Polygon") return [geometry.coordinates];
+      if (geometry.type === "MultiPolygon") return geometry.coordinates;
       return [];
     }
 
@@ -248,12 +395,7 @@
         const minY = Math.min(...bboxes.map(b => b[1]));
         const maxX = Math.max(...bboxes.map(b => b[2]));
         const maxY = Math.max(...bboxes.map(b => b[3]));
-
-        out.push({
-          properties: feature.properties || {},
-          polygons,
-          bbox: [minX, minY, maxX, maxY],
-        });
+        out.push({ properties: feature.properties || {}, polygons, bbox: [minX, minY, maxX, maxY] });
       }
       return out;
     }
@@ -261,13 +403,9 @@
     function findContaining(point, preparedFeatures) {
       for (const item of preparedFeatures) {
         const [minX, minY, maxX, maxY] = item.bbox;
-        if (point[0] < minX || point[0] > maxX || point[1] < minY || point[1] > maxY) {
-          continue;
-        }
+        if (point[0] < minX || point[0] > maxX || point[1] < minY || point[1] > maxY) continue;
         for (const polygon of item.polygons) {
-          if (pointInPolygon(point, polygon)) {
-            return item.properties;
-          }
+          if (pointInPolygon(point, polygon)) return item.properties;
         }
       }
       return {};
@@ -284,6 +422,134 @@
       `).join("") + (warning ? `<div class="warn">${warning}</div>` : "");
     }
 
+    function getDemandZone(gspGroup) {
+      return DEMAND_ZONE_FROM_GSP_GROUP[gspGroup] || { zone: null, name: null };
+    }
+
+    function recommendBandByBasis(demandBasis, value, unit) {
+      if (!Number.isFinite(value)) return null;
+
+      if (demandBasis === "LV_NO_MIC") {
+        const annualKwh = unit === "MWh" ? value * 1000 : value;
+        if (!Number.isFinite(annualKwh)) return null;
+        if (annualKwh <= 3986) return 1;
+        if (annualKwh <= 13677) return 2;
+        if (annualKwh <= 27543) return 3;
+        return 4;
+      }
+
+      if (demandBasis === "LV_MIC") {
+        if (value <= 90) return 1;
+        if (value <= 150) return 2;
+        if (value <= 250) return 3;
+        return 4;
+      }
+
+      if (demandBasis === "HV") {
+        if (value <= 500) return 1;
+        if (value <= 1100) return 2;
+        if (value <= 2000) return 3;
+        return 4;
+      }
+
+      if (demandBasis === "EHV") {
+        if (value <= 3500) return 1;
+        if (value <= 11000) return 2;
+        if (value <= 20000) return 3;
+        return 4;
+      }
+
+      return null;
+    }
+
+    function recommendBandTDemand(value, unit) {
+      if (!Number.isFinite(value)) return null;
+      const mwh = unit === "kWh" ? value / 1000 : value;
+      if (!Number.isFinite(mwh)) return null;
+      if (mwh <= 25131) return 1;
+      if (mwh <= 64451) return 2;
+      if (mwh <= 163880) return 3;
+      return 4;
+    }
+
+    function basisLabelForDisplay(demandBasis) {
+      if (demandBasis === "LV_NO_MIC") return "LV no MIC";
+      if (demandBasis === "LV_MIC") return "LV";
+      if (demandBasis === "HV") return "HV";
+      if (demandBasis === "EHV") return "EHV";
+      return "LV/HV";
+    }
+
+    function basisLabelForSiteSpecific(demandBasis) {
+      if (demandBasis === "HV") return "HV";
+      if (demandBasis === "EHV") return "EHV";
+      return "LV";
+    }
+
+    function collectLookup() {
+      const lat = parseFloat(document.getElementById("lat").value);
+      const lon = parseFloat(document.getElementById("lon").value);
+      const status = document.getElementById("status");
+      if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+        status.textContent = "Enter valid numeric latitude and longitude.";
+        return null;
+      }
+      if (!datasets.dno || !datasets.gsp || !datasets.gen) {
+        status.textContent = "Datasets not loaded yet.";
+        return null;
+      }
+      const pointWgs84 = [lon, lat];
+      const pointDno = proj4("EPSG:4326", "EPSG:27700", pointWgs84);
+      const dno = findContaining(pointDno, datasets.dno);
+      const gsp = findContaining(pointWgs84, datasets.gsp);
+      const gen = findContaining(pointWgs84, datasets.gen);
+      const demandZone = getDemandZone(gsp.GSPGroup);
+      return { lat, lon, dno, gsp, gen, demandZone };
+    }
+
+    function buildPresetList(archetype, lookup, demandBasis, capacity, capacityUnit) {
+      const out = [];
+      const demandZone = lookup.demandZone.zone ?? "N/A";
+      const generationZone = lookup.gen.layer || "N/A";
+      const basisDisplay = basisLabelForDisplay(demandBasis);
+      const siteSpecificBasis = basisLabelForSiteSpecific(demandBasis);
+
+      const lvHvBand = archetype.needsLvHvBand ? recommendBandByBasis(demandBasis, capacity, capacityUnit) : null;
+      const residualBand = archetype.needsResidualBand
+        ? (archetype.residualType === "distribution"
+        ? recommendBandByBasis(demandBasis, capacity, capacityUnit)
+            : recommendBandTDemand(capacity, capacityUnit))
+        : null;
+
+      for (const t of archetype.tariffs) {
+        if (t === "duos_site_specific_import") {
+          out.push(`${siteSpecificBasis} Site Specific - Band ${lvHvBand ?? "pending"} (imports)`);
+        }
+        if (t === "duos_no_residual_import") {
+          out.push(`${siteSpecificBasis} Site Specific No Residual (imports)`);
+        }
+        if (t === "duos_generation_site_specific_export") {
+          out.push(`${siteSpecificBasis} Generation Site Specific (exports)`);
+        }
+        if (t === "tnuos_residual") {
+          const suffix = archetype.residualType === "t_demand" ? " (T-Demand)" : "";
+          const basisSuffix = archetype.residualType === "distribution" ? ` [${basisDisplay}]` : "";
+          out.push(`TNUoS Residual${suffix} - Band ${residualBand ?? "pending"}${basisSuffix}`);
+        }
+        if (t === "tnuos_import_triads") {
+          out.push(`TNUoS Import (Triads) - Demand Zone ${demandZone}`);
+        }
+        if (t === "tnuos_embedded_export") {
+          out.push(`TNUoS Embedded Export - Demand Zone ${demandZone}`);
+        }
+        if (t === "tnuos_wider_generation") {
+          out.push(`TNUoS Wider Generation - ${generationZone}`);
+        }
+      }
+
+      return { list: out, lvHvBand, residualBand };
+    }
+
     async function loadData() {
       const status = document.getElementById("status");
       try {
@@ -292,7 +558,6 @@
           fetch("./data/slim_gsp_20251204.geojson").then(r => r.json()),
           fetch("./data/slim_tnuos_generation_zones.geojson").then(r => r.json()),
         ]);
-
         datasets.dno = prepareFeatures(dno);
         datasets.gsp = prepareFeatures(gsp);
         datasets.gen = prepareFeatures(gen);
@@ -303,39 +568,92 @@
     }
 
     document.getElementById("lookupBtn").addEventListener("click", () => {
-      const lat = parseFloat(document.getElementById("lat").value);
-      const lon = parseFloat(document.getElementById("lon").value);
       const status = document.getElementById("status");
-
-      if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
-        status.textContent = "Enter valid numeric latitude and longitude.";
-        return;
-      }
-      if (!datasets.dno || !datasets.gsp || !datasets.gen) {
-        status.textContent = "Datasets not loaded yet.";
-        return;
-      }
-
-      const pointWgs84 = [lon, lat];
-      const pointDno = proj4("EPSG:4326", "EPSG:27700", pointWgs84);
-
-      const dno = findContaining(pointDno, datasets.dno);
-      const gsp = findContaining(pointWgs84, datasets.gsp);
-      const gen = findContaining(pointWgs84, datasets.gen);
-
+      const lookup = collectLookup();
+      if (!lookup) return;
       renderResult([
-        ["Latitude", lat],
-        ["Longitude", lon],
-        ["DUoS region", dno.Area],
-        ["DUoS operator", dno.DNO_Full || dno.DNO],
-        ["TNUoS demand region", gsp.GSPGroup],
-        ["GSP code", gsp.GSPs],
-        ["TNUoS generation zone", gen.layer],
-      ], "Note: Demand and generation zones are parallel spatial lookups, not tariff-derived from each other.");
-
+        ["Latitude", lookup.lat],
+        ["Longitude", lookup.lon],
+        ["DUoS region", lookup.dno.Area],
+        ["DUoS operator", lookup.dno.DNO_Full || lookup.dno.DNO],
+        ["TNUoS demand GSP group", lookup.gsp.GSPGroup],
+        ["Demand zone", lookup.demandZone.zone ? `${lookup.demandZone.zone} (${lookup.demandZone.name})` : null],
+        ["GSP code", lookup.gsp.GSPs],
+        ["TNUoS generation zone", lookup.gen.layer],
+      ], "Note: Demand and generation zones are parallel spatial lookups.");
       status.textContent = "Lookup complete.";
     });
 
+    document.getElementById("recommendBtn").addEventListener("click", () => {
+      const status = document.getElementById("status");
+      const lookup = collectLookup();
+      if (!lookup) return;
+
+      const siteType = document.getElementById("siteType").value;
+      const archetype = SITE_ARCHETYPES[siteType];
+      const demandBasis = document.getElementById("demandBasis").value;
+      const capacity = parseFloat(document.getElementById("capacity").value);
+      const capacityUnit = document.getElementById("capacityUnit").value;
+      if (!archetype) {
+        status.textContent = "Select a valid site archetype.";
+        return;
+      }
+
+      const recommendation = buildPresetList(archetype, lookup, demandBasis, capacity, capacityUnit);
+      const rows = [
+        ["Site archetype", archetype.label],
+        ["DUoS region", lookup.dno.Area],
+        ["TNUoS demand zone", lookup.demandZone.zone ? `${lookup.demandZone.zone} (${lookup.demandZone.name})` : null],
+        ["TNUoS generation zone", lookup.gen.layer],
+        ["Input", Number.isFinite(capacity) ? `${capacity} ${capacityUnit}` : "Not supplied"],
+        ["Recommended charge set", recommendation.list.join("; ")],
+      ];
+
+      if (archetype.needsLvHvBand) {
+        rows.push([`${basisLabelForSiteSpecific(demandBasis)} Site Specific band`, recommendation.lvHvBand ? `Band ${recommendation.lvHvBand}` : "Band pending input"]);
+      }
+      if (archetype.needsResidualBand) {
+        rows.push(["TNUoS Residual band", recommendation.residualBand ? `Band ${recommendation.residualBand}` : "Band pending input"]);
+      }
+
+      renderResult(
+        rows,
+        "Export-side tariffs (Generation Site Specific and Embedded Export) should be modelled as income on the left-hand side of your commercial model."
+      );
+      status.textContent = "Recommendation complete.";
+    });
+
+    function syncInputVisibility() {
+      const siteType = document.getElementById("siteType").value;
+      const archetype = SITE_ARCHETYPES[siteType];
+      const demandBasisWrap = document.getElementById("demandBasisWrap");
+      const capacityUnit = document.getElementById("capacityUnit");
+      const needsBasis = !!(archetype && archetype.tariffs && archetype.tariffs.some(t => t.startsWith("duos_")));
+
+      if (needsBasis) {
+        demandBasisWrap.classList.remove("hidden");
+      } else {
+        demandBasisWrap.classList.add("hidden");
+      }
+
+      if (archetype && archetype.residualType === "t_demand") {
+        capacityUnit.value = "MWh";
+      }
+    }
+
+    document.getElementById("siteType" ).innerHTML = Object.entries(SITE_ARCHETYPES)
+      .map(([value, cfg]) => `<option value="${value}">${cfg.label}</option>`)
+      .join("");
+
+    document.getElementById("demandBasis").innerHTML = `
+      <option value="LV_NO_MIC">LV no MIC (kWh)</option>
+      <option value="LV_MIC">LV MIC (kVA)</option>
+      <option value="HV">HV (kVA)</option>
+      <option value="EHV">EHV (kVA)</option>
+    `;
+
+    document.getElementById("siteType").addEventListener("change", syncInputVisibility);
+    syncInputVisibility();
     loadData();
   </script>
 </body>
