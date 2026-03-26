@@ -1,0 +1,941 @@
+
+
+=== PAGE 1 ===
+1
+Network Tariffs in GB
+This page covers the main network tariffs in GB and how to use them in Gridcog
+This section explains the two major network charges you’ll see in the UK electricity
+market: Distribution Use of System charges (DUoS) and Transmission Network Use of
+System charges (TNUoS). These are non-commodity (non-energy) costs that help
+recover the cost of building, operating and maintaining the distribution and transmission
+electricity networks respectively.
+The table below provides an indicative view of which tariffs apply to different site types.
+Note that rules may change over time, so it’s recommended to verify against actual bills
+where possible.
+M ore information on each of these tariffs is provided below. 
+Summary Table
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 2 ===
+2
+1.Pure final-
+demand import
+site distribution-
+connected (no
+export)
+• LV/HV Site
+Specific – Band
+X
+• TNUoS Residual
+• TNUoS Import
+(Triads)
+e.g. commercial
+building, charge hub
+2.Pure final-
+demand import
+site
+transmission-
+connected (no
+export)
+•N/A
+• TNUoS Residual
+(T-Demand)
+• TNUoS Import
+(Triads)
+e.g. data centre, large
+industrial loads
+3.Stand-alone
+storage / non-
+final demand
+site distribution-
+connected
+• LV/HV No
+Residual for
+imports
+• LV/HV
+Generation Site
+Specific for
+exports
+• TNUoS Import
+(Triads) for
+imports [in
+reality avoidable
+for BESS]
+• TNUoS
+Embedded
+Export for
+exports 
+e.g. distribution BESS
+/ energy storage
+4.Stand-alone
+storage / non-
+final demand
+site
+transmission-
+connected
+•N/A
+• TNUoS Import
+(Triads) for
+imports [in
+reality avoidable
+for BESS]
+• Wider
+Generation
+TNUoS
+e.g. transmission
+BESS, pumped
+storage
+5.Distribution-
+connected
+generator only
+(<100 MW, no
+demand)
+• LV/HV
+Generation Site
+Specific
+• TNUoS
+Embedded
+Export(Triads)
+e.g. solar farm
+6.Transmission-
+connected
+generator /
+Distribution-
+Connected TEC
+>100MW
+•N/A • TNUoS Wider
+Generation e.g. onshore wind
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 3 ===
+3
+Note that any tariffs that are meant for exports (Generation Site Specific and Embedded
+Export) are to be placed on the left hand side of the commercial model, as income. This
+matches the + and - signs used while building the item in the library.
+7.Mixed final-
+demand +
+generation site
+Distribution
+Connected (BtM
+co-loc +
+generation)
+<100MW TEC
+• LV/HV Site
+Specific – Band
+X for imports
+• LV/HV
+Generation Site
+Specific for
+exports
+• TNUoS Residual
+• TNUoS Import
+(Triads)
+• TNUoS
+Embedded
+Export (Triads)
+e.g. industrial load +
+generation + BESS
+8.Mixed final-
+demand +
+generation site
+Transmission
+Connected (BtM
+co-location)
+•N/A
+• TNUoS Residual
+(T-Demand)
+• TNUoS Import
+(Triads)
+• TNUoS Wider
+Generation
+e.g. data centre +
+generation + BESS
+9.Co-located
+Renewables +
+BESS Import -
+Distribution
+• LV/HV No
+Residual for
+imports
+• LV/HV
+Generation Site
+Specific for
+exports
+• TNUoS Import
+(Triads) for
+imports (in
+reality avoidable
+for BESS)
+• TNUoS
+Embedded
+Export for
+exports 
+e.g. solar + BESS
+10.Co-located
+Renewables +
+BESS Import -
+Transmission
+•N/A
+• TNUoS Import
+(Triads) for
+imports (in
+reality avoidable
+for BESS)
+• TNUoS Wider
+Generation
+e.g. large renewables
++ BESS
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 4 ===
+4
+For other complex physical site setups with non-final demand this guidance from NESO
+is a useful resource and here is additional information on co-located setups
+. Note these
+network charges can be applied at the asset-level via submeters if you have separate
+BM Us for example onsite. 
+Distribution Use of System (DUoS) are applied by your Distribution Network Operator
+(DNO) and vary by location, voltage level, time of use, and site type.
+Example Commercial M odel Setup for a Standalone Battery in UKPN South East
+DUoS (Distribution Use of System)
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 5 ===
+5
+To find the right DNO for your postcode use the DNO Find my Network Operator
+. This will
+inform which DUoS and TNUoS charges your site must pay. 
+Applies to sites that consume energy for end-use (final demand).
+Includes:
+• Energy charge (£/kWh)
+◦ Varies by Red / Amber / Green time bands
+• Fixed charge (p/day)
+• Capacity charge (p/kVA/day)
+• Reactive power charge (p/kVArh)
+Voltage notes:
+LV/HV Site Specific – Band X 
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 6 ===
+6
+• LV →  sites connected at low voltage
+• HV →  sites connected at 11–33 kV (depending on DNO)
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 7 ===
+7
+The sites' band will depend on its Voltage connection, and on the M ax Import
+Connection (M IC)
+For small sites that don't have an M IC, the band is based on energy usage
+(kWh).
+Band notes: (expand)
+ 
+Unit Band Lower (>)Upper (<=)Lower (>)Upper 
+2021/22 to 2025/26 2021/22 to 2025/26 2026/27 to 2030/31 2026/27 to
+LV no M IC
+(kWh) Band 1 - 3,571 - 3,986
+Band 2 >3,571 12,553 >3,986 13,677
+Band 3 >12,553 25,279 >13,677 27,543
+Band 4 >25,279 ∞ >27,543 ∞
+LV M IC
+(kVA) Band 1 - 80 - 90
+Band 2 >80 150 >90 150
+Band 3 >150 231 >150 250
+Band 4 >231 ∞ >250 ∞
+HV (kVA) Band 1 - 422 - 500
+Band 2 >422 1,000 >500 1,100
+Band 3 >1,000 1,800 >1,100 2,000
+Band 4 >1,800 ∞ >2,000 ∞
+EHV (kVA) Band 1 - 5,000 - 3,500
+Band 2 >5,000 12,000 >3,500 11,000
+Band 3 >12,000 21,500 >11,000 20,000
+Band 4 >21,500 ∞ >20,000 ∞
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 8 ===
+8
+For non-final-demand sites such as battery storage (not consuming energy for own use).
+Includes:
+• Same structure as Final Demand tariffs
+• Lower residual component, meaning:
+◦ Lower fixed charges
+◦ Lower unit (energy) charges in many cases
+Used to avoid charging storage as if it were consumption.
+For distribution-connected generation that exports (solar, wind, batteries exporting).
+Example  of HV Site Specific tariff in the library
+LV/HV Site Specific – No Residual 
+Example  of HV Site Specific No Residual tariff in the library
+LV/HV Generation Site Specific (Exporting Sites)
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 9 ===
+9
+Includes:
+• Export energy charge (£/kWh)
+◦ Often negative →  a payment to the generator
+◦ Still uses Red/Amber/Green bands
+• Fixed charge (p/day)
+Reflects a generator’s impact on local distribution constraints.
+Extra High Voltage sites will not be eligible for any of the above tariffs and will have a
+custom tariff agreed with the DNO. Using the site's M PAN number, these rates can be
+found in the Schedules of Charges documents published by the DNOs.
+TNUoS are applied by the national electricity system operator (NESO) and recover the
+cost of building and maintaining the high-voltage transmission network. They vary by
+location (charging zone), whether the site is demand or generation, capacity/size of
+connection, and the charging year, and are typically levied on suppliers and passed
+through to end users. 
+Example  of HV Generation Site Specific tariff in the library
+EHV Sites
+TNUoS (Transmission Network Use of System)
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 10 ===
+10
+M ost TNUoS Charges are dependant on the network zone, whilst the wider generation
+tariffs are based upon the generation zone which is different to the DNO region. 
+For quick guide to TNUoS Charges see this handy NESO guide
+.
+In Gridcog: TNUoS Residual Charges
+Applies to sites that consume energy for end-use (final demand).
+Includes:
+• Fixed daily charge (p/day)
+Based on voltage level and band.
+No time-of-day or seasonal variation.
+Non-Locational Demand Residual Charge
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 11 ===
+11
+The sites' band will depend on its Voltage connection, and on the M ax Import
+Connection (M IC)
+For small sites that don't have an M IC, the band is based on energy usage
+(kWh).
+Band notes : (expand)
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 12 ===
+12
+ 
+Unit Band Lower (>)Upper (<=)Lower ₂  (>)Upper ₂
+2021/22 to 2025/26 2021/22 to 2025/26 2026/27 to 2030/31 2026/27 to
+LV no M IC
+(kWh) Band 1 - 3,571 - 3,986
+Band 2 >3,571 12,553 >3,986 13,677
+Band 3 >12,553 25,279 >13,677 27,543
+Band 4 >25,279 ∞ >27,543 ∞
+LV M IC
+(kVA) Band 1 - 80 - 90
+Band 2 >80 150 >90 150
+Band 3 >150 231 >150 250
+Band 4 >231 ∞ >250 ∞
+HV (kVA) Band 1 - 422 - 500
+Band 2 >422 1,000 >500 1,100
+Band 3 >1,000 1,800 >1,100 2,000
+Band 4 >1,800 ∞ >2,000 ∞
+EHV (kVA) Band 1 - 5,000 - 3,500
+Band 2 >5,000 12,000 >3,500 11,000
+Band 3 >12,000 21,500 >11,000 20,000
+Band 4 >21,500 ∞ >20,000 ∞
+TCS
+(M Wh) Band 1 - 33,548 - 25131
+Band 2 33,548 73,936 25,131 64,451
+Band 3 73,936 189,873 64,451 163,88
+Band 4 189,873 ∞ 163,880 ∞
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 13 ===
+13
+Transmission connected sites will need the T-Demand residual charge
+HH customers are charged according to the demand (M W) they take over the three
+Triad periods each year; the charge is levied through a £/kW tariff. 
+In Gridcog: TNUoS Import Charges
+Applies to importing sites that are subject to Triads.
+Includes:
+• Charge based on import during Triads (p/kW)
+Triads are defined as:
+• 3 × half-hour system peak periods
+• between November and
+February (inclusive)
+• Separated by ≥ 10 days
+Only applies where the site’s supplier and classification make it liable for Triad-based
+TNUoS charges.
+Example  of TNUoS Residual tariff in the library
+Half-Hourly Demand Charges (Import During Triads)
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 14 ===
+14
+Note that all batteries (distribution or transmission) are exposed to Half-Hourly Demand
+Chargescharges if theyimportduring a Triad. In reality only final-demand sites will
+import during triads. 
+Note that Northern Scotland, Southern Scotland, Northern, North West, Yorkshire, N
+Wales & M ersey do not have Half-Hourly Demand Charges.
+In Gridcog: TNUoS Embedded Export
+Embedded Export Tariffs are paid by NESO to suppliers and embedded generators for
+distribution-connected generators exporting to the grid. In most cases, NESO pays the
+supplier who
+then pays the embedded generator.
+Your export volume is the average of your generation output over the Triad periods
+Our standard library items uses Embedded Export tariffs uses ESO’s five-year regional
+Transmission Network Use of System (TNUoS) charges
+. We assume that they remain
+flat from year 6 onwards.
+Example  of TNUoS Import tariff in the library
+Embedded Export (Triad-Based Export Payments)
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 15 ===
+15
+Note that Northern Scotland, Southern Scotland, Northern, North West do not have EETs.
+Includes:
+• Payment (or charge) based on export during Triads
+Applies only to exporting sites eligible for embedded benefits.
+Not a standard library item - specific per generator guidance is provided below to setup
+for your specific site
+The Wider Generation Tariff is the main TNUoS charge applied to transmission-connected
+generators (and embedded generators ≥ 100 M W TEC). It reflects the generator’s use of
+the whole transmission system rather than just local connection assets. Assets greater
+than 100M W and connected at distribution-level will only be subject to the wider
+generation tariffs.
+Example  of TNUoS Embedded Export tariff in the library
+Wider Generation Tariffs
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 16 ===
+16
+Under today’s methodology, each generation zone has four tariff elements, which
+combine differently depending on generator type. The wider tariff is made up of:
+1.Peak Security Tariff
+2.Shared Year-Round Tariff
+3.Not-Shared Year-Round Tariff
+4.Adjustment Tariff
+Two of these may be multiplied by the generator’s Annual Load Factor (ALF), depending
+on whether the asset is intermittent or conventional.
+The formula for the Wider Generation is as follows 
+Conventional Carbon Generators
+(e.g. Biomass, CHP, Coal, Gas, Pumped Storage, Battery)
+Peak Element + [ Year Round Shared Element x ALF ] + [Year Round Not Shared Element x
+ALF] + Adjustment Tariff
+Conventional Low Carbon Generators
+(for example: Hydro, Nuclear)
+Peak Element + [ Year Round Shared Element x ALF ] + Year Round Not Shared Element  +
+Adjustment Tariff
+Intermittent Generators
+(for example: Wind, Wave, Tidal, Solar)
+[ Year Round Shared Element x ALF ] + Year Round Not Shared Element + Adjustment
+Tariff
+ALFs are used to scale the Shared Year-Round element of tariffs for each generator, and
+the Year Round Not Shared for Conventional Carbon generators, so that each has a tariff
+appropriate to its historical load factor.
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 17 ===
+17
+e.g. based on these charges batteries connecting in at the transmission network in
+Scotland will face charges; in contrast assets in Scotland connecting in at distribution
+level will avoid these. Batteries in the South West by contrast will see net benefit from
+these Wider Generation Tariffs
+Annual Load Factor from NESO
+ 's Five-Year View of TNUoS
+Tariffs for 2026/27 – 2030/31
+Annual Load Factor By Technology (expand)
+Technology Generic ALF (%)
+Battery 3.8884%
+Biomass 42.9869%
+CCGT_CHP 42.3027%
+Coal 29.0586%
+Gas_Oil 0.8252%
+Hydro 39.6894%
+Nuclear 55.6863%
+Offshore_Wind 48.2176%
+Onshore_Wind 41.5111%
+Pumped_Storage 9.4949%
+Reactive_Compensation 0.0000%
+Solar 10.8000%
+Tidal 13.2000%
+Wave 2.9000%
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 18 ===
+18
+Wider Generation Tariff per Generation Region (expand)
+Generation Wider Tariffs in 2026/27
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 19 ===
+19
+Zone Name System Peak
+Tariff (£/kW)
+Shared Year
+Round Tariff
+(£/kW)
+Not Shared
+Year Round
+Tariff (£/kW)
+Adjustment
+Tariff (£/kW)
+North
+Scotland 3.064973 28.42961 16.38866 -2.23144
+East
+Aberdeenshir
+e
+4.351353 17.23317 16.38866 -2.23144
+Western
+Highlands 3.081449 28.22489 16.28487 -2.23144
+Skye and
+Lochalsh -4.96846 28.22489 15.88969 -2.23144
+Eastern
+Grampian
+and Tayside
+5.063745 21.80893 12.25195 -2.23144
+Central
+Grampian 4.884967 22.19994 12.6439 -2.23144
+Argyll 4.127851 20.20401 23.91296 -2.23144
+The
+Trossachs 3.482386 20.20401 10.61215 -2.23144
+Stirlingshire
+and Fife 2.852331 19.35567 10.07253 -2.23144
+South West
+Scotlands 1.99015 18.54696 9.693199 -2.23144
+Lothian and
+Borders 3.566901 18.54696 3.424582 -2.23144
+Solway and
+Cheviot 1.876509 11.28206 5.883586 -2.23144
+North East
+England 3.988013 7.551269 3.817741 -2.23144
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 20 ===
+20
+North
+Lancashire
+and The
+Lakes
+2.010215 7.551269 -0.08553 -2.23144
+South
+Lancashire,
+Yorkshire and
+Humber
+5.031594 2.342314 0.625945 -2.23144
+North
+Midlands and
+North Wales
+3.717393 0.689317 -2.23144
+South
+Lincolnshire
+and North
+Norfolk
+0.120916 2.591365 -2.23144
+Mid Wales
+and The
+Midlands
+0.538499 3.302727 -2.23144
+Anglesey and
+Snowdonia 6.054 1.294987 -2.23144
+Pembrokeshi
+re 7.9832 -9.16886 -2.23144
+South Wales
+& Gloucester3.306105 10.03599 -2.23144
+Cotswold 0.944809 4.2329 13.59098 -2.23144
+Central
+London -4.13023 4.2329 6.815348 -2.23144
+Essex and
+Kent -3.43458 4.2329 -2.23144
+Oxfordshire,
+Surrey and
+Sussex
+-0.94189 3.750954 -2.23144
+Somerset
+and Wessex-3.51988 4.519946 -2.23144
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 21 ===
+21
+Generation Wider Tariffs in 2027/28
+West Devon
+and Cornwall-3.32375 13.76799 -2.23144
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 22 ===
+22
+Zone Name System Peak
+Tariff (£/kW)
+Shared Year
+Round Tariff
+(£/kW)
+Not Shared
+Year Round
+Tariff (£/kW)
+Adjustment
+Tariff (£/kW)
+North
+Scotland 3.5268 29.60564 19.34597 -2.61643
+East
+Aberdeenshir
+e
+6.154921 15.79355 19.34597 -2.61643
+Western
+Highlands 2.360197 26.92728 17.64588 -2.61643
+Skye and
+Lochalsh -5.81024 26.92728 17.24527 -2.61643
+Eastern
+Grampian
+and Tayside
+5.585642 21.99366 13.91445 -2.61643
+Central
+Grampian 5.389964 21.84434 13.73884 -2.61643
+Argyll 4.618902 19.97269 27.02374 -2.61643
+The
+Trossachs 3.896022 19.97269 11.50853 -2.61643
+Stirlingshire
+and Fife 3.542705 19.20066 10.95777 -2.61643
+South West
+Scotlands 2.493736 18.6767 10.6739 -2.61643
+Lothian and
+Borders 4.334974 18.6767 3.903921 -2.61643
+Solway and
+Cheviot 2.334365 11.61207 6.610433 -2.61643
+North East
+England 5.357886 7.55433 4.048902 -2.61643
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 23 ===
+23
+North
+Lancashire
+and The
+Lakes
+2.312481 7.55433 0.685179 -2.61643
+South
+Lancashire,
+Yorkshire and
+Humber
+5.782244 2.12717 0.272731 -2.61643
+North
+Midlands and
+North Wales
+3.865566 0.598605 -2.61643
+South
+Lincolnshire
+and North
+Norfolk
+0.722959 2.17839 -2.61643
+Mid Wales
+and The
+Midlands
+0.476606 2.974421 -2.61643
+Anglesey and
+Snowdonia 4.665381 0.949615 -2.61643
+Pembrokeshi
+re 5.257229 -11.712 -2.61643
+South Wales
+& Gloucester1.441643 11.88742 -2.61643
+Cotswold 0.709048 3.898146 13.57127 -2.61643
+Central
+London -4.27151 3.898146 6.908697 -2.61643
+Essex and
+Kent -3.60428 3.898146 -2.61643
+Oxfordshire,
+Surrey and
+Sussex
+-1.0455 3.810067 -2.61643
+Somerset
+and Wessex-3.45275 5.183991 -2.61643
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 24 ===
+24
+Generation Wider Tariffs in 2028/29
+West Devon
+and Cornwall-3.93447 14.27653 -2.61643
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 25 ===
+25
+Zone Name System Peak
+Tariff (£/kW)
+Shared Year
+Round Tariff
+(£/kW)
+Not Shared
+Year Round
+Tariff (£/kW)
+Adjustment
+Tariff (£/kW)
+North
+Scotland 3.465234 38.38735 28.18825 -3.07674
+East
+Aberdeenshir
+e
+4.867084 8.259951 27.93267 -3.07674
+Western
+Highlands 3.839246 25.00147 18.00806 -3.07674
+Skye and
+Lochalsh 3.748311 25.00147 25.90306 -3.07674
+Eastern
+Grampian
+and Tayside
+6.231035 21.12381 14.54547 -3.07674
+Central
+Grampian 5.583498 21.13562 14.56083 -3.07674
+Argyll 4.546294 19.27015 27.88275 -3.07674
+The
+Trossachs 3.708178 19.27015 12.1047 -3.07674
+Stirlingshire
+and Fife 4.282679 17.51387 10.68425 -3.07674
+South West
+Scotlands 2.126473 18.16548 11.02331 -3.07674
+Lothian and
+Borders 4.044085 18.16548 4.560002 -3.07674
+Solway and
+Cheviot 2.038637 11.16973 6.386732 -3.07674
+North East
+England 4.612641 7.780509 3.873933 -3.07674
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 26 ===
+26
+North
+Lancashire
+and The
+Lakes
+1.796319 7.780509 0.315571 -3.07674
+South
+Lancashire,
+Yorkshire and
+Humber
+5.739909 2.404097 0.351874 -3.07674
+North
+Midlands and
+North Wales
+4.033148 0.699557 0.015387 -3.07674
+South
+Lincolnshire
+and North
+Norfolk
+0.592599 1.882766 0.015387 -3.07674
+Mid Wales
+and The
+Midlands
+0.86685 2.649649 0.015387 -3.07674
+Anglesey and
+Snowdon 4.593465 1.22873 0.015387 -3.07674
+Pembrokeshi
+re 8.864785 -6.3065 -3.07674
+South Wales
+& Gloucester3.947014 7.419301 -3.07674
+Cotswold 2.608502 3.108723 11.17775 -3.07674
+Central
+London -4.54714 3.108723 6.738199 -3.07674
+Essex and
+Kent -3.99136 3.108723 -3.07674
+Oxfordshire,
+Surrey and
+Sussex
+-1.669 -4.62254 -3.07674
+Somerset
+and Wessex-4.38768 7.107035 -3.07674
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 27 ===
+27
+Generation Wider Tariffs in 2029/30
+West Devon
+and Cornwall1.490447 13.26709 -3.07674
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 28 ===
+28
+Zone Name System Peak
+Tariff (£/kW)
+Shared Year
+Round Tariff
+(£/kW)
+Not Shared
+Year Round
+Tariff (£/kW)
+Adjustment
+Tariff (£/kW)
+North
+Scotland 4.957249 58.29414 37.33249 -5.86856
+East
+Aberdeenshir
+e
+4.067684 33.68804 34.83045 -5.86856
+Western
+Highlands 5.546874 46.2126 25.42834 -5.86856
+Skye and
+Lochalsh 5.248789 46.2126 37.3323 -5.86856
+Eastern
+Grampian
+and Tayside
+5.106724 40.621 22.47073 -5.86856
+Central
+Grampian 6.21859 38.71371 21.05688 -5.86856
+Argyll 5.172259 39.19559 29.77887 -5.86856
+The
+Trossachs 4.116551 35.57727 18.70575 -5.86856
+Stirlingshire
+and Fife 3.918183 34.30115 18.03148 -5.86856
+South West
+Scotlands 2.70514 30.64004 16.79298 -5.86856
+Lothian and
+Borders 4.054377 30.64004 12.56086 -5.86856
+Solway and
+Cheviot 1.676155 18.01671 10.43117 -5.86856
+North East
+England 4.906533 10.15512 6.04719 -5.86856
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 29 ===
+29
+North
+Lancashire
+and The
+Lakes
+1.587337 10.15512 0.961055 -5.86856
+South
+Lancashire,
+Yorkshire and
+Humber
+5.541669 0.37019 0.304814 -5.86856
+North
+Midlands and
+North Wales
+3.773242 -0.97458 -0.0559 -5.86856
+South
+Lincolnshire
+and North
+Norfolk
+0.438823 0.576453 -0.02809 -5.86856
+Mid Wales
+and The
+Midlands
+0.679281 0.144132 0.001046 -5.86856
+Anglesey and
+Snowdon 4.694089 0.693955 -0.0559 -5.86856
+Pembrokeshi
+re 9.348548 -9.32284 -5.86856
+South Wales
+& Gloucester4.290857 10.52282 -5.86856
+Cotswold 2.948673 0.156206 11.01706 -5.86856
+Central
+London -4.47042 0.156206 6.611872 -5.86856
+Essex and
+Kent -3.90116 0.156206 -5.86856
+Oxfordshire,
+Surrey and
+Sussex
+-1.36563 -7.66707 -5.86856
+Somerset
+and Wessex-4.38562 -10.6965 -5.86856
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 30 ===
+30
+Generation Wider Tariffs in 2030/31
+West Devon
+and Cornwall-1.27578 -16.3645 -5.86856
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 31 ===
+31
+Zone Name System Peak
+Tariff (£/kW)
+Shared Year
+Round Tariff
+(£/kW)
+Not Shared
+Year Round
+Tariff (£/kW)
+Adjustment
+Tariff (£/kW)
+North
+Scotland 8.696164 68.34327 25.54125 -4.8285
+East
+Aberdeenshir
+e
+6.461708 45.99053 23.26834 -4.8285
+Western
+Highlands 9.724084 53.43058 17.35345 -4.8285
+Skye and
+Lochalsh 9.417649 53.43058 29.50084 -4.8285
+Eastern
+Grampian
+and Tayside
+8.360783 47.62209 15.32482 -4.8285
+Central
+Grampian 7.026964 42.9389 13.11786 -4.8285
+Argyll 9.867748 45.04332 27.13495 -4.8285
+The
+Trossachs 8.338758 41.51931 12.46368 -4.8285
+Stirlingshire
+and Fife 6.508404 40.44227 12.14993 -4.8285
+South West
+Scotlands 4.382653 37.40071 11.62287 -4.8285
+Lothian and
+Borders 3.612517 37.40071 6.607612 -4.8285
+Solway and
+Cheviot 2.161957 22.13832 7.389419 -4.8285
+North East
+England 4.864566 10.08454 3.573647 -4.8285
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 32 ===
+32
+North
+Lancashire
+and The
+Lakes
+1.951627 10.08454 0.870683 -4.8285
+South
+Lancashire,
+Yorkshire and
+Humber
+5.268582 0.290033 0.326401 -4.8285
+North
+Midlands and
+North Wales
+3.2858 -2.05522 0.117763 -4.8285
+South
+Lincolnshire
+and North
+Norfolk
+-0.86753 -0.2393 0.022226 -4.8285
+Mid Wales
+and The
+Midlands
+0.130328 0.256778 0.009944 -4.8285
+Anglesey and
+Snowdon 5.425857 2.332786 0.117763 -4.8285
+Pembrokeshi
+re 8.625351 -10.0483 -4.8285
+South Wales
+& Gloucester3.433317 11.78687 -4.8285
+Cotswold 3.32111 0.131618 11.09338 -4.8285
+Central
+London -5.29895 0.131618 6.517212 -4.8285
+Essex and
+Kent -3.83161 0.131618 -4.8285
+Oxfordshire,
+Surrey and
+Sussex
+-2.18883 -6.47407 -4.8285
+Somerset
+and Wessex1.614534 -7.83549 -4.8285
+26/03/2026, 18:12 Gridcog Docs
+
+=== PAGE 33 ===
+33
+• When creating custom tariffs as separate library items remember to assign imports
+as expenses, and exports as income within the Commercial M odel assignment.
+• If you add both export and import charges to the same library item and this item is
+assigned to the expense side in the commercial model the export charges should
+include a negative sign to ensure they are considered a "negative expense" [i.e.
+revenue]. 
+The rates and information on how the tariff elements add together can be found in 
+NESO's portal
+West Devon
+and Cornwall2.045231 -12.0483 -4.8285
+Custom Tariffs
+26/03/2026, 18:12 Gridcog Docs

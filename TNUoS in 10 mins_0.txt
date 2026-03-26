@@ -1,0 +1,643 @@
+
+
+=== PAGE 1 ===
+ 
+ 
+ 
+Public 
+ 
+1 
+This introductory guide to Transmission Network Use of System (TNUoS) charges will 
+cover: 
+• What the TNUoS charge is  
+• How and when generation and demand users pay these charges 
+• How TNUoS tariffs are calculated 
+ 
+ 
+Contents 
+What is TNUoS? ............................................................................................................................................................................. 2 
+Who pays TNUoS? ....................................................................................................................................................................... 4 
+TNUoS Demand Tariffs............................................................................................................................................................. 5 
+TNUoS Generation Tariffs..................................................................................................................................................... 10 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+TNUoS in 10 Minutes 
+July 2025  
+
+=== PAGE 2 ===
+ 
+ 
+ 
+Public 
+ 
+2 
+ 
+What is TNUoS? 
+All users of the GB electricity network pay to use it in some way. Generators use the 
+network to transport their electricity to where it is needed. Demand users use the 
+network to consume electricity when they need it. Users of the network pay for use of the 
+transmission system through the below charges: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Figures from Final TNUoS Tariffs for 2025/26 
+* Forecast for FY25/26, may change during year. 
+ 
+Transmission Network Use of System (TNUoS) charges recover the cost of installing and 
+maintaining the transmission network in England, Wales, Scotland and offshore. The 
+charging methodology is detailed in Section 14 of the Connection Use of System Code 
+(CUSC).  National Energy System Operator (NESO) recovers the revenue on behalf of  
+• Onshore TOs  
+• National Grid Electricity Transmission (NGET)  
+• Scottish Power Transmission  
+• Scottish Hydro Electricity Transmission  
+• Offshore transmission owners  
+• Other network schemes, for example Network Innovation Competition 
+(administered by Ofgem)  
+TNUoS 
+Transmission 
+Network Use of 
+System Charges 
+~ £5.1bn TO 
+Revenue
+ *
+ 
+Connection 
+Charges 
+Charges for 
+connecting to the 
+transmission 
+network (inc one-off 
++ cap cons) 
+~£400m TO Revenue
+*
+ 
+AAHEDC 
+Charges 
+Assistance for 
+Areas with High 
+Electricity 
+Distribution Costs 
+~ £112.4m SHEPD 
+Revenue
+ *
+ 
+BSUoS  
+Balancing 
+Services Use 
+of System 
+Charges 
+~ £3.5bn 
+Revenue
+ *
+ 
+
+=== PAGE 3 ===
+ 
+ 
+ 
+Public 
+ 
+3 
+The chart below shows the split in revenue between the different entities the 
+revenue is collected on behalf of. 
+ 
+Figures from Final TNUoS Tariffs for 2025/26 
+Note: figures have been rounded to the nearest £1m 
+ 
+ 
+ 
+ 
+Values in £m
+SHE Transmission, 
+£1192m
+Scottish Power 
+Transmission, 
+£545m
+Offshore TOs, £974m
+National Grid TO, 
+£2398m
+Other 
+(£21m)
+
+=== PAGE 4 ===
+ 
+ 
+ 
+Public 
+ 
+4 
+Who pays TNUoS? 
+TNUoS tariffs aim to be reflective of the cost of using the network, to help network users 
+make efficient decisions about where and when to use the network.  
+Tariffs are broken down in three ways:  
+1. The Locational charge (wider TNUoS) – calculated by the Transport model - this 
+reflects the incremental cost of power being added to the system at different 
+geographical points.  
+2. The Residual charge (wider TNUoS) – what is not recovered under the 
+Locational charge is recovered in this charge so that the Transmission Owners 
+recover their total allowed revenue.  
+3. Adjustment charge (ensure that the generation tariffs are compliant with EU 
+legislation (€2.50 gen cap)) 
+Generators who are connected to the transmission network and embedded generators 
+with >=100MW Transmission Entry Capacity (TEC) pay Generation TNUoS charges. 
+Generation TNUoS is charged on the basis of Transmission Entry Capacity (TEC). 
+Generators are also liable for Demand TNUoS if they take demand over the Triad periods. 
+All licenced suppliers are liable for TNUoS for their gross demand from the transmission 
+network. There are three categories of demand charges: 
+• Half Hourly (HH), metered demand over the Triad periods 
+• Non-Half Hourly (NHH), annual consumption between 4pm-7pm daily 
+• Embedded Export Tariff (EET), a credit for embedded generation over the Triad 
+periods.  All directly connected demand sites pay HH demand charges and 
+embedded generators (<100MW) which contracts directly with NESO can gain 
+Embedded Export payments.1 Any net liability for EET are only paid out to the 
+embedded generators/suppliers during the Initial & Final Demand reconciliation. 
+• Transmission demand residual (Final demand only) 
+ 
+ 
+1 Embedded generators which are not directly contracted with NESO may be paid for the generation 
+over the Triad periods by their supplier. 
+
+=== PAGE 5 ===
+ 
+ 
+ 
+Public 
+ 
+5 
+TNUoS Demand Tariffs 
+For TNUoS, there are three ‘types’ of demand:  
+• Half hourly settled (generally commercial)  
+• Non-half hourly (generally domestic, or smaller non-domestic premises)  
+• Transmission Demand Residual (£/site/day) 
+ 
+Half Hourly (HH) 
+HH customers are charged according to the demand (MW) they take over the three 
+Triad periods each year; the charge is levied through a £/kW tariff. Triads are defined as 
+the three half-hours with the highest net system demand, between November and 
+February (inclusive), separated by at least ten clear days. 
+The below figure demonstrates the three Triads recorded for 2024/25. 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PAGE 6 ===
+ 
+ 
+ 
+Public 
+ 
+6 
+TNUoS tariffs are set a year ahead and charges are reconciled based on actual usage at 
+the end of that financial year. Users are then billed monthly for this TNUoS charge. For all 
+consumers, there is a locational element to the charge (across 14 demand zones) plus a 
+residual. 
+ 
+ 
+ 
+        
+    
+ 
+Non-half hourly (NHH)  
+NHH charges are based on annual consumption between 4 and 7pm (in kWh), through a 
+pence/kWh tariff. Once the total revenue the HH Tariff will recover from demand has 
+been calculated, the NHH Tariff is calculated to recover the remaining revenue to ensure 
+the right amount is recovered. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+HH Demand 
+Tariff 
+Demand 
+Locational 
+(£/kW) 
+Residual 
+(£/site/Day 
+Residual Charge only applicable 
+to final demand sites 
+NHH 
+Demand 
+Tariff 
+(p/kWh) 
+Revenue 
+Required 
+per zone 
+Revenue 
+recovered 
+from 
+Gross HH 
+NHH 
+Volume 
+(kWh) 
+
+=== PAGE 7 ===
+ 
+ 
+ 
+Public 
+ 
+7 
+ 
+Embedded Export Tariff (EET) 
+The EET is another element of TNUoS. It was introduced as a new tariff under code 
+modifications CMP264/265. The tariff is paid to embedded generators based on their HH 
+metered generation export volumes during the Triads. The tariff is payable to exporting 
+HH demand customers and embedded generators (<100MW). 
+ 
+ 
+ 
+ 
+ 
+*Avoided Grid Supply Point (GSP) Infrastructure Credit. The AGIC is set at the start of the 
+price control period and is increased by RPI each year. It will be recalculated at the start 
+of the next price control period. The revenue paid out through the EET is recovered from 
+the locational demand, to ensure overall revenue recovery is correct. 
+ 
+Transmission Demand Residual 
+ The Targeted Charging Review (TCR) examined the ‘residual charges’ which recover the 
+remainder of the total network charges needed to fund network expenditure. Changes 
+were directed by Ofgem after the Targeted Charging Review (TCR) Significant Code 
+Review (SCR).  
+Demand residual to be charged at a fixed rate meaning (CMP336 and CMP343):  
+• Non-domestic user charges to be banded based on capacity or consumption 
+where relevant;  
+• Users to remain in band for duration of price control; 
+ • Domestic users to be charged a single tariff  
+ 
+The residual element of demand charges will be calculated on a £/Site/Day 
+methodology with sites allocated into a band. The only exception to this £/Site/Day 
+methodology are unmetered (UMS) sites which will be charged p/kWh - this 
+methodology is already used by Distribution Network Operators (DNO).  
+For the avoidance of doubt, an Unmetered Supply is any electronic equipment that 
+draws a current and is connected to the Distribution Network without a meter recording 
+Embedded 
+Export 
+Tariff 
+Demand 
+Locational 
+(£/kW) 
+AGIC* 
+(£2.79/kW) 
+
+=== PAGE 8 ===
+ 
+ 
+ 
+Public 
+ 
+8 
+its energy consumption. Unmetered Supplies (UMS) exist in the half hourly and non-half 
+hourly Supplier Volume Allocation (SVA) markets.  
+ 
+The bands are defined in the DCUSA and CUSC by percentiles.  
+ 
+At the beginning of each TO price control, NESO convert these percentiles in to ‘real’ 
+values. This includes DNO bands too as per our obligations as the ‘Banding Agent’ in 
+DCUSA Schedule 32. DNO bands based on Max Import Capacity (MIC) or Consumption 
+(kWh) for sites with no MIC. All Transmission bands based on Consumption (MWh). 
+These bands are the same across TNUoS and DUoS charges. DNO sites are subject to 
+both DUoS and TNUoS charges.  
+Transmission sites are only subject to TNUoS. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Lower Upper
+Domestic 93,047    38.1% 29,670,891       0.135043             
+LVN1 ≤  40% - ≤ 3,571 3,119            1.3% 867,477                0.154829                 
+LVN2 40 - 70% > 3,571 ≤ 12,553 5,504      2.3% 647,465           0.366046           
+LVN3 70 - 85% > 12,553 ≤  25,279 5,974          2.4% 338,163                0.760709                
+LVN4 > 85% > 25,279  ∞ 16,475     6.8% 342,973           2.068587            
+LV1 ≤  40% - ≤  80 7,159           2.9% 78,889                 3.907710                 
+LV2 40 - 70% > 80 ≤  150 10,633     4.4% 70,132               6.529117              
+LV3 70 - 85% > 150 ≤  231 6,647          2.7% 27,921                   10.251874                
+LV4 > 85% > 231  ∞ 17,798     7.3% 33,704             22.739548          
+HV1 ≤  40% - ≤  422 3,942          1.6% 7,776                    21.830361                
+HV2 40 - 70% > 422 ≤  1,000 11,038      4.5% 7,569                62.799637          
+HV3 70 - 85% > 1,000 ≤  1,800 8,789          3.6% 3,107                     121.795409              
+HV4 > 85% > 1,800  ∞ 25,152     10.3% 3,410                317.597969         
+EHV1 ≤  40% - ≤  5,000 1,683           0.7% 451                        160.765059            
+EHV2 40 - 70% > 5,000 ≤  12,000 4,543      1.9% 264                  741.786430         
+EHV3 70 - 85% > 12,000 ≤  21,500 4,719           1.9% 129                        1,576.232814           
+EHV4 > 85% > 21,500  ∞ 10,748     4.4% 119                    3,882.736230     
+T-Demand1 ≤  40% - ≤  33,548 481              0.2% 32                         647.798551             
+T-Demand2 40 - 70% > 33,548 ≤  73,936 956         0.4% 18                      2,287.643779     
+T-Demand3 70 - 93% > 73,936 ≤  189,873 1,897           0.8% 15                          5,446.380603        
+T-Demand4 > 93% > 189,873  ∞ 1,486       0.6% 5                       12,796.715359     
+Unmetered demand
+Unmetered p/kWh 2,267           0.9% 1.571791                   
+Total TDR (£m)                                                                   3,836
+kWh
+kVA
+MWh
+Site CountBand
+January Final TDR 
+Charge 
+(£/site/Day)
+ £/Site per Annum 
+Tariff Percentile
+Threshold (kWh/MWh or kVA)
+Consumpti
+on (GWh)
+Consumption 
+Proportion %
+total band 
+recovery 
+(from 3) by 
+the number 
+of sites and 
+days to 
+create a 
+£/site/day 
+tariff. 
+1. Work out the total value of the TDR 
+2. Work out the consumption and site count per band; 3. Smear the TDR across 
+bands based on 
+proportion of 
+consumption.  
+4. Divide the 
+total band 
+recovery 
+(from 3) by 
+the number of 
+sites and days 
+to create a 
+£/site/day 
+tariff. 
+
+=== PAGE 9 ===
+ 
+ 
+ 
+Public 
+ 
+9 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Within the charging year we take actual site counts where provided. The remaining we 
+forecast using the last day of the month site count * remaining days of the year.  
+For example:  
+Total site count days is 34 to end April.  
+Latest number of sites being supplied, based on actual data is 
+2 (based on actuals for 30th April 2024).    
+     
+Therefore, the forecast of total site count days is:             
+34 + (2 per day, for days with no actual data)  
+= 34 + (2 x (365-30))  
+= 34 + 670  
+= 704 
+ 
+        
+ 
+ 
+ 
+ 
+ 
+ 
+Transmission 
+Demand 
+Residual 
+Tariffs 
+Number 
+of Sites 
+in Band 
+Band 
+Charge 
+365 
+days 
+
+=== PAGE 10 ===
+ 
+ 
+ 
+Public 
+ 
+10 
+TNUoS Generation Tariffs 
+Generation TNUoS recovers charges from transmission connected generation and 
+embedded generation of >=100MW. The maximum revenue that can be recovered from 
+generators is set by EU regulation, at an average value of €2.50/MWh. 
+Generators are charged according to the greatest amount of Transmission Entry 
+Capacity (TEC) they hold each year. This is the maximum amount of power they can put 
+on the system at any one time. The wider tariff applies depending on the type of 
+generator and their location; generator types are split by intermittent, conventional low 
+carbon and conventional carbon. The wider tariffs are a £/kW tariff that differs between 
+each of the 27 generation zones. 
+The peak element of the tariff looks at network investment to secure peak demand. 
+Intermittent generators such as onshore and offshore wind do not pay this element. 
+The below figure details how the three wider tariffs are calculated 
+Conventional Carbon Generators 
+(e.g. Biomass, CHP, Coal, Gas, Pumped Storage, Battery) 
+ 
+ 
+ 
+Conventional Low Carbon Generators 
+(e.g. Hydro, Nuclear) 
+ 
+ 
+ 
+ 
+Peak 
+Element 
+Year 
+Round 
+Shared 
+Year Round 
+Not Shared 
+Element 
+Adjustment 
+Tariff 
+A
+L
+F 
+ 
+  
+ 
+Peak 
+Element 
+Year-
+Round 
+Shared 
+Element 
+Year 
+Round 
+Not 
+Shared 
+Element 
+A
+L
+F 
+ 
+  
+ 
+ 
+A
+L
+F 
+ 
+  
+Adjustment 
+Tariff 
+
+=== PAGE 11 ===
+ 
+ 
+ 
+Public 
+ 
+11 
+ 
+Intermittent Generators 
+(e.g. Wind, Wave, Tidal, Solar) 
+ 
+ 
+Annual Load Factors (ALFs) are calculated at power station level and give an 
+average measure (over five years) of a generator’s output compared to TEC 
+using: 
+• TEC 
+• Metered Flows 
+• Final Physical Notifications. 
+ 
+As part of generation tariffs, there are also local substation and circuit tariffs for 
+onshore and offshore generators.  
+ 
+If a transmission-connected generator is directly connected to a substation 
+defined as a Main Interconnected Transmission System (MITS) node, then they 
+will only need to pay the onshore local substation tariff and will usually not have 
+a local circuit tariff, depending on their connection agreement.   
+ 
+Local substation tariffs are charged on a £/kW basis.  All generators connected 
+to the transmission network will pay a local substation tariff.  Embedded 
+generators do not pay an onshore local substation tariff. 
+ 
+Where a transmission-connected generator is not directly connected to a MITS 
+substation, the onshore local circuit tariffs reflect the cost and flows on circuits 
+between its connection and the MITS. Local circuit tariffs are charged by £/kW 
+and can change as a result of system flows and RPI.  Embedded generators do 
+not pay an onshore local circuit tariff. 
+ 
+Year 
+Round 
+Shared 
+Element 
+Year 
+Round 
+Not 
+Shared 
+Element 
+Adjustment 
+Tariff 
+A
+L
+F 
+ 
+  
+ 
+
+
+=== PAGE 12 ===
+ 
+ 
+ 
+Public 
+ 
+12 
+Local offshore tariffs (substation, circuit and ETUoS2 if applicable) reflect the cost of 
+offshore networks connecting offshore generation. They are calculated at the beginning 
+of the price control period or upon the transfer of the ownership of the offshore 
+transmission assets from the generator to the offshore transmission owner (OFTO). The 
+local offshore tariffs are charged on a £/kW basis and are indexed by RPI each year. 
+The below diagram shows what is included in the local circuit charge for onshore and 
+offshore generators.3 
+ 
+ 
+ 
+ 
+Once the wider tariffs and the local substation and circuit tariffs have been calculated, if 
+all components have positive values, the sum of each of these components gives the 
+final tariffs, as shown below for offshore and onshore generators. The final tariffs used to 
+charge generators are usually specific to each individual generator. 
+ 
+ 
+ 
+ 
+ 
+ 
+2 Embedded Transmission Use of System charges. These apply only when an offshore generator 
+connects into the local distribution network to access the transmission network.  
+3 Please note: an OFTO network may connect directly to a MITS substation, rather than to a local 
+substation/local circuit. 
+
+
+=== PAGE 13 ===
+ 
+ 
+ 
+Public 
+ 
+13 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+This concludes the TNUoS in 10 minutes guide. If you would like further information, 
+please contact us by emailing TNUoS.Queries@neso.energy 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+total band 
+recovery 
+(from 3) by 
+the number 
+of sites and 
+days to 
+create a 
+£/site/day 
+tariff. 

@@ -1,0 +1,2672 @@
+
+
+=== PAGE 1 ===
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+Version 1.0 
+January 2026 
+Final TNUoS Tariffs for 
+2026/27 
+National Energy System Operator 
+
+=== PAGE 2 ===
+ 
+ 
+ 
+Public 
+ 
+ 
+2 
+Contents 
+Executive Summary ................................ ................................ ................................ .. 5 
+Charging Methodology Changes ................................ ................................ ...........8 
+Generation Tariffs ................................ ................................ ................................ .... 13 
+Generation Tariffs Summary................................................................................................. 14 
+Generation Wider Tariffs .......................................................................................................... 14 
+Changes to Wider Tariffs since the Draft Forecast................................................ 16 
+Onshore Local Substation Tariffs ....................................................................................... 18 
+Onshore Local Circuit Tariffs ................................................................................................. 19 
+Offshore Local Generation Tariffs ....................................................................................... 21 
+Demand Tariffs ................................ ................................ ................................ ......... 22 
+Demand Tariffs Summary ..................................................................................................... 23 
+Demand Residual Tariffs ......................................................................................................... 24 
+Half-Hourly Demand Tariffs .................................................................................................. 26 
+Half-Hourly Demand Tariffs for Transmission Connected Users with 
+Multiple DNO’s .................................................................................................................................. 27 
+Embedded Export Tariffs (EET) ............................................................................................ 28 
+Non-Half-Hourly Demand Tariffs ...................................................................................... 29 
+Overview of Data Inputs ................................ ................................ ........................  30 
+Inputs affecting the locational element of tariffs ................................................... 31 
+Contracted, Modelled and Chargeable TEC............................................................... 31 
+Adjustments for Interconnectors ........................................................................................ 31 
+Network Model ............................................................................................................................... 32 
+Expansion Constant and Inflation .................................................................................... 32 
+Locational Onshore Security Factor ................................................................................ 33 
+Onshore Local Substation Tariffs ...................................................................................... 33 
+Offshore Local Tariffs ................................................................................................................. 33 
+Allowed Revenues ....................................................................................................................... 33 
+Generation / Demand (G/D) Split .................................................................................... 35 
+Charging Bases for 2026/27 ................................................................................................. 39 
+
+=== PAGE 3 ===
+ 
+ 
+ 
+Public 
+ 
+ 
+3 
+Annual Load Factors .................................................................................................................. 40 
+Generation adjustment and demand residual ....................................................... 41 
+Tools and supporting information ................................ ................................ ...... 43 
+Appendix A: Background to TNUoS charging ................................ ...................  45 
+Background to TNUoS charging ........................................................................................ 46 
+Generation charging principles ........................................................................................ 46 
+Demand charging principles .............................................................................................. 50 
+Appendix B: Changes and proposed changes to the charging 
+methodology ................................ ................................ ................................ ............  52 
+Appendix C: Breakdown of locational HH and EE tariffs ................................ . 54 
+Appendix D: Annual Load Factors ................................ ................................ ....... 56 
+Appendix E: Contracted Generation ................................ ................................ ... 58 
+Appendix F: Transmission Company Revenues ................................ ..............  60 
+Transmission Owner revenue forecasts ....................................................................... 61 
+NESO TNUoS revenue pass-through items forecasts .......................................... 61 
+Onshore TOs (NGET, SPT and SHET) revenue forecast ....................................... 62 
+Offshore Transmission Owner revenue ........................................................................ 62 
+Interconnector adjustment .................................................................................................. 63 
+Appendix G: Generation Zones Map ................................ ................................ ... 68 
+Appendix H: Demand Zones Map ................................ ................................ ........ 70 
+Appendix I: Changes to TNUoS parameters ................................ ......................  72 
+Document Revision History ................................ ................................ ...................  74 
+ 
+List of Tables and Figures 
+Table 1 Summary of Generation Tariffs ........................................................................................................................... 14 
+Table 2 Generation Wider Tariffs ......................................................................................................................................... 16 
+Table 3 Generation Wider Tariff Changes ..................................................................................................................... 17 
+Table 4 Onshore Local Substation Tariffs ...................................................................................................................... 18 
+Table 5 Onshore Local Circuit Tariffs ................................................................................................................................ 19 
+Table 6 Circuits subject to one-off charges .............................................................................................................. 20 
+Table 7 Offshore local tariffs 2026/27 .............................................................................................................................. 21 
+Table 8 Summary of Demand Tariffs .............................................................................................................................. 23 
+Table 9 Demand Tariffs .............................................................................................................................................................. 24 
+Table 10 Non-Locational demand residual charges ........................................................................................... 25 
+
+=== PAGE 4 ===
+ 
+ 
+ 
+Public 
+ 
+ 
+4 
+Table 11 Half-Hourly Demand Tariffs................................................................................................................................. 26 
+Table 12 Demand tariffs for Transmission Connected users with multiple DNO's  ........................ 27 
+Table 13 Embedded Export Tariffs ...................................................................................................................................... 28 
+Table 14 Changes to Non-Half-Hourly demand tariffs ...................................................................................... 29 
+Table 15 Contracted, Modelled & Chargeable TEC ................................................................................................ 31 
+Table 16 Interconnectors ........................................................................................................................................................... 32 
+Table 17 Allowed Revenues ...................................................................................................................................................... 34 
+Table 18 Generation and demand revenue proportions ................................................................................. 35 
+Table 19 Generation revenue error margin calculation .................................................................................... 37 
+Table 20 Onshore local circuit tariff elements associated with pre-existing assets ................. 37 
+Table 21 Onshore local substation tariffs associated with pre-existing assets ............................. 39 
+Table 22 Charging Bases .......................................................................................................................................................... 40 
+Table 23 Residual & Adjustment components calculation ............................................................................ 42 
+Table 24 Summary of concluded CUSC modification proposals  ............................................................. 53 
+Table 25 Location elements of the HH demand tariff for 2026/27 ............................................................ 55 
+Table 26 Elements of the Embedded Export Tariff for 2026/27 .................................................................... 55 
+Table 27 Generic ALFs .................................................................................................................................................................. 57 
+Table 28 Contracted generation changes ................................................................................................................. 59 
+Table 29 NESO revenue breakdown ................................................................................................................................. 62 
+Table 30 NGET allowed revenue breakdown ............................................................................................................. 64 
+Table 31 SPT allowed revenue breakdown................................................................................................................... 65 
+Table 32 SHET allowed revenue breakdown .............................................................................................................. 66 
+Table 33 Offshore Revenues................................................................................................................................................... 67 
+ 
+Figure 1 Variation in generation wider zonal tariffs ............................................................................................... 17 
+Figure 2 Changes to gross Half-Hourly demand tariffs .................................................................................. 26 
+Figure 3 Embedded export tariff changes .................................................................................................................. 28 
+Figure 4 Changes to Non-Half-Hourly demand tariffs .................................................................................... 29 
+ 
+
+=== PAGE 5 ===
+ 
+Executive Summary 
+  
+
+=== PAGE 6 ===
+ 
+ 
+Executive Summary 
+Public 
+ 
+ 
+6 
+Executive Summary 
+Transmission Network Use of System (TNUoS) charges are designed to recover 
+the cost of installing and maintaining the transmission system in England, Wales, 
+Scotland, and offshore. They are applicable to transmission connected 
+generators and suppliers for use of the transmission networks. This document 
+contains the Final TNUoS Tariffs for 2026/27. 
+ 
+Under the National Energy System 
+Operator’s (NESO) Electricity System 
+Operator Licence condition E10 and 
+Connection and Use of System Code 
+(CUSC) paragraph 14.29, we publish the 
+Final Transmission Network Use of System 
+(TNUoS) tariffs for year 2026/27 on our 
+website1. 
+These tariffs will take effect from 1 April 
+2026, they have no impact on charging 
+year 2025/26. 
+Total revenues to be recovered 
+The total TNUoS revenue to be collected 
+for 2026/27 is £7.61bn, a decrease of 
+£44.87m since the Draft forecast. There 
+has been a net decrease of £9.97m in the 
+allowed revenue for the Onshore 
+Transmission Owners (ONTOs) based on 
+their January revenue submission as per 
+STCP24-1.  In addition, there has been a 
+£49.16m decrease in the adjustment 
+term and other passthrough items, offset 
+by a £14.27m increase in allowed 
+revenues for Offshore Transmission 
+Owners (OFTOs). 
+ 
+Generation tariffs 
+The total revenue to be recovered from 
+generators is forecast to be £1.23bn for 
+ 
+1 neso.energy/industry-
+information/charging/tnuos-charges  
+2026/27, an increase of £2.3m since the 
+Draft forecast. This is primarily driven by 
+an increase in expected revenue from 
+offshore local tariffs. 
+The generation charging base has been 
+updated to 101.6 GW based on our best 
+view on generation projects for 2026/27, 
+a decrease of 1.2 GW since the Draft 
+forecast. The average generation tariff is 
+£12.12/kW, an increase of £0.17/kW since 
+the Draft forecast due to the increase in 
+generation revenue to be collected and 
+the decrease in the charging base. 
+Demand tariffs 
+Revenue to be collected from demand 
+users is forecast to be £6.38bn for 
+2026/27, a £47m decrease compared to 
+the Draft forecast. The reduction in 
+demand revenue is the result of the 
+decrease in total TNUoS revenue to be 
+collected. 
+The TNUoS cost for the average domestic 
+household is £83.24 for 2026/2027 
+(accounting for 8.8% of the typical 
+annual electricity bill), a decrease of 
+£0.58 since the Draft forecast. 
+In 2026/27, it is forecast that £20.44m 
+would be payable to embedded 
+generators (<100 MW) through the 
+Embedded Export Tariff (EET), a decrease 
+
+=== PAGE 7 ===
+ 
+ 
+Executive Summary 
+Public 
+ 
+ 
+7 
+of £119k compared to the Draft forecast. 
+This is due to a reduction in the average 
+EET. The average EET is £3.05/kW, which is 
+a decrease of £0.02/kW since the Draft 
+Forecast. 
+The average gross HH demand tariff for 
+2026/27 is £2.79/kW, an increase of 
+£0.01/kW compared to the Draft forecast 
+and the average NHH demand tariff is 
+0.38p/kWh, an increase of 0.001p/kWh 
+since the Draft forecast. 
+Next TNUoS tariff publication 
+The timetable of TNUoS tariff forecasts for 
+2027/28 is available on our website2.  
+Our next TNUoS tariff publication will be 
+the initial forecast of 2027/28 TNUoS 
+tariffs, which will be published in April 
+2026. 
+Feedback 
+We welcome feedback on any aspect of 
+this document and the tariff setting 
+processes.  
+We are very aware that TNUoS charging 
+is undergoing transition and there will be 
+substantial changes to charging 
+mechanisms over the next few years, 
+either as a result of Ofgem’s charging 
+review or through CUSC modifications 
+raised from time to time.  
+We strongly encourage all parties 
+affected by the changes to the charging 
+regime to engage with the Charging 
+Futures Forum, or with the specific CUSC 
+modification workgroups to flag any 
+concerns and suggestions.  
+Please contact us if you have any further 
+suggestions as to how we can better 
+work with you to improve the tariff 
+forecasting process. 
+ 
+Our contact details: 
+Email: TNUoS.Queries@neso.energy 
+ 
+ 
+ 
+2 neso.energy/document/376486/download  
+
+=== PAGE 8 ===
+ 
+ 
+Charging Methodology 
+Changes 
+  
+
+=== PAGE 9 ===
+ 
+ 
+Charging Methodology Changes  
+Public 
+ 
+ 
+9 
+This Report 
+This report contains the Final TNUoS tariffs for the charging year 2026/27. 
+The TNUoS tariff setting methodology defined in the CUSC is subject to open governance. 
+We are obliged to comply with the latest approved CUSC changes, applicable from 1st 
+April 2026, in the Final Tariffs for 2026/27. 
+This section summarises any key changes to the methodology.  
+ 
+Charging Methodology Changes 
+CMP463: ‘Stabilising the Specific Onshore Expansion Factors from 1st April 2026’  has been 
+approved by Ofgem for implementation on 1 April 2026. This modification seeks to hold 
+Specific Onshore Expansion Factors at 2025/26 levels, to avoid large, unexpected 
+increases caused by the new price control, ahead of a larger more fundamental review of 
+TNUoS. 
+ 
+No other changes have been approved to the charging methodology this year. Approved 
+CUSC methodology changes that affect 2026/27 tariffs are summarised in the CUSC 
+modifications Table 24. 
+ 
+Reformed National Pricing programme and electricity network charging 
+ 
+REMA has concluded and in July 2025, Ofgem published an open letter3 outlining their 
+initial thinking on reforming network charging signals to align with the UK Government’s 
+decision to retain a single GB-wide electricity market4. 
+Please note that this ongoing work has not resulted in any changes to the methodology 
+used to calculate the 2026/27 Final tariffs. 
+ 
+TNUoS Task Force and electricity network charging 
+In May 2022, Ofgem published an open letter asking NESO to work with industry to 
+establish Task Force membership. Workstream analysis and defect identification has 
+resulted in a number of proposed CUSC changes which continue to go through the usual 
+CUSC modification process. Further detail regarding the priority areas and Task Force 
+meeting materials can be located on the NESO website. 
+ 
+3 ofgem.gov.uk/sites/default/files/2025-07/open-letter-reforming-network-charging-signals.pdf 
+4 gov.uk/government/publications/review-of-electricity-market-arrangements-rema-summer-update-
+2025/review-of-electricity-market-arrangements-rema-summer-update-2025-accessible-webpage 
+
+=== PAGE 10 ===
+ 
+ 
+Charging Methodology Changes  
+Public 
+ 
+ 
+10 
+Please note that this ongoing work has not resulted in any changes to the methodology 
+used to calculate the 2026/27 Final tariffs. 
+ 
+Changes due to the new Price Control period 
+In accordance with the CUSC, several parameters which affect the locational and non -
+locational elements of the tariff must be recalculated and reset in preparation for the new 
+price control, to apply from 1 April 2026.  
+Ofgem published an update to their Final RIIO-ET3 Determinations on 16 December 2025. 
+Using this, and input data from the onshore TOs, we have calculated the parameters and 
+tariffs, which have been used within this publication.  
+The key components which need to be addressed at the price control, and how they are 
+treated in this publication, are outlined in the following table. 
+Component Description Outcomes for 2026/27 
+onwards 
+Maximum Allowed 
+Revenue  
+The MAR for onshore TOs in 
+the new price control 
+period is determined 
+during the negotiations up 
+to the start of the price 
+control period.  
+The Final Tariffs are based 
+on the allowed revenues 
+which were submitted by 
+the Transmission Owners, 
+in line with STCP24-1 
+requirements. Please see 
+Allowed Revenues for 
+more information.  
+ 
+Generation zones  There are currently 27 
+generation zones. The 
+recalculation of zones 
+used to be linked to price 
+control but is currently 
+fixed, pending the 
+outcome of a CUSC 
+modification to change 
+the underlying 
+methodology. 
+The number of generation 
+zones remains at 27, 
+pending the outcome of 
+“CMP419: Generation 
+Zoning Methodology 
+Review”. 
+
+=== PAGE 11 ===
+ 
+ 
+Charging Methodology Changes  
+Public 
+ 
+ 
+11 
+Component Description Outcomes for 2026/27 
+onwards 
+Expansion Constant and 
+Factors 
+The Expansion Constant 
+represents the cost of 
+moving 1MW, 1km using 
+400kV OHL line. The 
+Expansion Factors 
+represent how many times 
+more expensive moving 
+1MW, 1km is using different 
+voltages and types of 
+circuit. 
+ 
+The Expansion Constant 
+continues to increase by 
+CPIH as per the CUSC, and 
+the expansion factors are 
+unchanged; pending the 
+outcome of “CMP315/375: 
+Expansion Constant & 
+Expansion Factor Review” 
+ 
+Following the approval of 
+CMP463 (Stabilising the 
+Specific Onshore 
+Expansion Factors), inputs 
+to the HVDC & Subsea Link 
+specific expansion factors 
+have been fixed at the 
+RIIO-ET2 levels. 
+ 
+Locational Onshore 
+Security Factor  
+The security factor has 
+been recalculated in 
+preparation for the start of 
+RIIO-ET3 period.  
+The Locational Onshore 
+Security Factor has been 
+recalculated as 1.75, this 
+will remain constant 
+throughout the RIIO-ET3 
+period. 
+ 
+Onshore Local Substation 
+Tariffs 
+Local Substation tariffs 
+have been recalculated in 
+preparation for the start of 
+the price control based on 
+TO asset costs. 
+The local substation tariffs 
+have been updated based 
+on onshore TO data and 
+Ofgem’s Final RIIO-ET3 
+Determinations. The 
+recalculated tariffs have 
+been used within this Final 
+Tariff publication. 
+ 
+
+=== PAGE 12 ===
+ 
+ 
+Charging Methodology Changes  
+Public 
+ 
+ 
+12 
+Component Description Outcomes for 2026/27 
+onwards 
+Offshore Local Tariffs  The elements for the 
+offshore tariffs will be 
+recalculated in 
+preparation for the start of 
+the price control, based on 
+updated forecasts of OFTO 
+revenue, and adjusting for 
+differences in actual OFTO 
+revenue to forecast 
+revenue in RIIO-ET2. 
+The offshore tariffs have 
+been recalculated to 
+adjust for differences in  
+actual OFTO revenue to 
+forecast revenue within 
+RIIO-T2. The Offshore  
+substation discount has 
+also been finalised, using, 
+data provided  
+to us by the TO’s and 
+Ofgem’s final RIIO-ET3 
+determinations. 
+ 
+Avoided GSP Infrastructure 
+Credit (AGIC) 
+The AGIC is a component 
+of the Embedded Export 
+Tariff, paid to ‘exporting 
+demand’ at the time of 
+Triad. It will be 
+recalculated based on the 
+most recent 20 schemes. 
+The AGIC has been 
+updated for Final Tariffs. 
+The updated value is  
+based on updated 
+scheme data provided  
+to us by the TO’s and 
+Ofgem’s final RIIO-ET3 
+determinations. 
+ 
+TDR Banding Thresholds The thresholds for the TDR 
+charging bands are 
+required to be 
+recalculated by the start 
+of the RIIO-ET3 price 
+control. They are 
+calculated based on the 
+voltage level and 
+percentiles to be 
+applicable during the 
+price control for DUoS and 
+TNUoS. 
+ 
+The RIIO-ET3 TDR Banding 
+Thresholds were 
+calculated and finalised 
+ahead of inclusion in the 
+Initial Tariffs, therefore 
+there have been no 
+changes to the banding 
+thresholds in this 
+publication. 
+Please refer to table TB in 
+the published tables excel 
+spreadsheet5 for the new 
+banding thresholds. 
+ 
+ 
+5 neso.energy/document/376341/download  
+
+=== PAGE 13 ===
+ 
+ 
+Generation Tariffs 
+Generation Wider Tariffs 
+Onshore Local Substation Tariffs 
+Onshore Local Circuit Tariffs 
+Offshore Local Tariffs 
+ 
+  
+
+=== PAGE 14 ===
+ 
+ 
+Generation Tariffs  
+Public 
+ 
+ 
+14 
+Generation Tariffs Summary 
+This section summarises our view of generation tariffs for 2026/27 and how these tariffs 
+were calculated. 
+Table 1 Summary of Generation Tariffs 
+ 
+*N.B. These generation average tariffs include local tariffs. 
+The average generation tariff is calculated by dividing the total revenue payable by 
+generation over the generation charging base in GW. These average tariffs include 
+revenues from local tariffs. 
+The generation adjustment is used to ensure generation tariffs are compliant with the 
+Limiting Regulation, which requires total TNUoS recovery from generators to be within the 
+range of €0-2.50/MWh on average. The adjustment tariff is currently negative to ensure 
+Generation Tariffs are compliant with the legislation. Charges for the “Connection 
+Exclusion” (meaning assets built for generation connection) are not included in the 
+€2.50/MWh cap, whereas TNUoS local charges associated with pre-existing assets are 
+included in the €2.50/MWh cap, henceforth known as the “gen cap”.  
+Average generation tariffs have increased by £0.17/kW, due to the increase in generation 
+revenue to be collected and the 1.2 GW decrease in the generation charging base, 
+compared to the Draft forecast. The generation adjustment has increased by £0.43/kW, 
+decreasing in magnitude, to become less negative; this is because the expected 
+decrease in revenue to be collected from wider tariffs outweighs the expected decrease in 
+charging base, meaning that less of an adjustment is required to decrease the overall 
+generation tariff, to ensure compliance with the €2.50/MWh cap. 
+ 
+Generation Wider Tariffs 
+The following section summarises the wider generation tariffs for 202 6/27. A brief 
+description of generation wider tariff structure can be found in Appendix A. 
+The wider tariffs are calculated depending on the generator type and made of four 
+components:  
+• the Peak tariff (not applicable to intermittent generators); 
+• the Year Round Shared tariff (applicable to all generators and multiplied by the 
+generator’s specific Annual Load Factor (ALF)); 
+Generation Tariffs 
+(£/kW)
+2026/27 Draft 2026/27 Final
+Change since 
+last forecast
+Adjustment 2.906397-       2.476760-       0.429637       
+Average Generation Tariff* 11.949165        12.117642        0.168477        
+
+=== PAGE 15 ===
+ 
+ 
+Generation Tariffs  
+Public 
+ 
+ 
+15 
+• the Year Round Not Shared tariff (applicable to all generators, multiplied by the 
+generator’s specific Annual Load Factor (ALF) for Conventional Carbon generators 
+only); 
+• the Adjustment tariff (applicable to all generators).  
+Annual Load Factors are explained in Appendix D. 
+The classifications of generator type are listed below: 
+Conventional Carbon Conventional Low Carbon Intermittent 
+Biomass 
+CCGT/CHP 
+Coal 
+OCGT/Oil 
+Pumped storage  
+Battery storage 
+Reactive Compensation 
+Nuclear 
+Hydro 
+Offshore wind 
+Onshore wind 
+Solar PV 
+Tidal 
+ 
+Each forecast, we publish example tariffs for a generator of each technology type using 
+an example ALF. The example ALFs we have used in this publication are: 
+• Conventional Carbon – 40%  
+• Conventional Low Carbon – 75% 
+• Intermittent – 45% 
+The ALFs used in these examples are for illustration only. Tariffs for individual generators 
+are calculated using their own ALFs where we have 3 or more years of data , or their own 
+data combined with the generic ALFs if we don’t. 
+  
+
+=== PAGE 16 ===
+ 
+ 
+Generation Tariffs  
+Public 
+ 
+ 
+16 
+Table 2 Generation Wider Tariffs 
+ 
+ 
+ 
+Changes to Wider Tariffs since the Draft Forecast 
+The following section provides details of the wider generation tariffs for 202 6/27 and 
+explains how these have changed since the Draft Forecast. We have compared the 
+example tariffs for Conventional Carbon generators with an ALF of 40%, Conventional Low 
+Carbon generators with an ALF of 75%, and Intermittent generators with an ALF of 45% for 
+illustration purposes only. 
+ 
+  
+Zone Zone Name (£/kW) (£/kW) (£/kW) (£/kW)
+Load Factor 
+(£/kW)
+Load Factor 
+(£/kW)
+Load Factor (£/kW)
+1 North Scotland 3.628060          26.532717            17.674559           2.476760-          18.834210           38.725397         27.137522                
+2 East Aberdeenshire 5.307833          14.646253           17.674559           2.476760-          15.759398          31.490322         21.788613                
+3 Western Highlands 3.677990          26.123017             17.385831            2.476760-          18.604769          38.179324         26.664429             
+4 Skye and Lochalsh 3.612174             26.123017             24.924783          2.476760-          21.554534          45.652460        34.203381               
+5 Eastern Grampian and Tayside 6.568239          20.511538            12.542262           2.476760-          17.312999            32.017395         19.295694              
+6 Central Grampian 5.878875          20.594053          12.650220           2.476760-          16.699824          31.497875         19.440784               
+7 Argyll 4.946318           19.010365            22.336904          2.476760-          19.008466          39.064236        28.414808              
+8 The Trossachs 4.213182            19.010365            10.548892          2.476760-          13.560125           26.543088        16.626796               
+9 Stirlingshire and Fife 3.459485          18.428090           10.073886           2.476760-          12.383515           24.877679         15.889767               
+10 South West Scotlands 2.724127            18.071712              9.859646           2.476760-          11.419910             23.660797         15.515156                 
+11 Lothian and Borders 3.972256          18.071712              3.245525            2.476760-          10.022391           18.294805         8.901035                 
+12 Solway and Cheviot 2.267394          10.990377            5.769218             2.476760-          6.494472           13.802635         8.238128                 
+13 North East England 5.317903           7.346053             3.552395            2.476760-          7.200522            11.903078          4.381359                 
+14 North Lancashire and The Lakes 2.097904          7.346053             0.189240             2.476760-          2.635261            5.319924           1.018204                  
+15 South Lancashire, Yorkshire and Humber 5.666724          2.322079             0.171306              2.476760-          4.187318              5.102829            1.260518-                  
+16 North Midlands and North Wales 3.735152            0.965658            -            2.476760-          1.644655            1.982636           2.042214-                 
+17 South Lincolnshire and North Norfolk 0.194059           3.127359              -            2.476760-          1.031757-              0.062818           1.069448-                
+18 Mid Wales and The Midlands 0.194313            4.707306             -            2.476760-          0.399525-           1.248033           0.358472-                
+19 Anglesey and Snowdon 5.275539          0.562440            -            2.476760-          3.023755            3.220609           2.223662-                
+20 Pembrokeshire 7.221420            8.116578-               -            2.476760-          1.498029            1.342774-            6.129220-                 
+21 South Wales & Gloucester 2.591993           9.044134-             -            2.476760-          3.502421-            6.667868-          6.546620-               
+22 Cotswold 0.162572           4.908322            13.506660-          2.476760-          5.753523-            12.139607-          13.774675-                
+23 Central London 4.192754-           4.908322            6.357476-            2.476760-          7.249176-             9.345749-          6.625491-                 
+24 Essex and Kent 3.370754-           4.908322            -            2.476760-          3.884185-            2.166273-            0.268015-                 
+25 Oxfordshire, Surrey and Sussex 1.335120-            1.530477-              0.136243-             2.476760-          4.478568-           5.095981-           3.301718-                  
+26 Somerset and Wessex 3.581527-           3.263601-              -            2.476760-          7.363727-            8.505988-          3.945380-                
+27 West Devon and Cornwall 4.327454-          13.295891-            -            2.476760-          12.122570-            16.776132-           8.459911-                  
+Example tariffs for a generator of each technology type
+Generation Tariffs 
+System Peak 
+Tariff
+Shared Year 
+Round Tariff
+Not Shared Year 
+Round Tariff
+Adjustment 
+Tariff
+Conventional 
+Carbon 
+40%
+Conventional 
+Low Carbon 
+75%
+Intermittent 
+45%
+
+=== PAGE 17 ===
+ 
+ 
+Generation Tariffs  
+Public 
+ 
+ 
+17 
+Table 3 Generation Wider Tariff Changes 
+ 
+ 
+Figure 1 Variation in generation wider zonal tariffs  
+ 
+ 
+Locational Changes 
+Locational tariffs have been impacted by the reduction in the Locational Onshore Security 
+Factor, the implementation of CMP463 and some minor revisions to the nodal demand 
+data. This means that there have been changes in the overall tariffs across each 
+generation zone and in general has resulted in a decrease to the North-South divide. In 
+particular, the implementation of CMP463 has resulted in a large decrease to tariffs in 
+2026/27 Draft
+2026/27 
+Final
+Change 2026/27 Draft 2026/27 Final Change 2026/27 Draft 2026/27 Final Change
+1 North Scotland 20.305263     18.834210   1.471053-       42.275278     38.725397    3.549881-     29.785212     27.137522      2.647690-   0.429637     
+2 East Aberdeenshire 16.400588     15.759398  0.641190-      33.415577      31.490322     1.925255-      23.414464     21.788613      1.625851-     0.429637     
+3 Western Highlands 20.385553     18.604769  1.780784-      42.418711        38.179324     4.239387-     29.879558    26.664429   3.215129-      0.429637     
+4 Skye and Lochalsh 23.349684     21.554534  1.795150-       49.928283    45.652460   4.275823-     37.455292    34.203381     3.251911-       0.429637     
+5 Eastern Grampian and Tayside 17.951169        17.312999   0.638170-      34.229992    32.017395     2.212597-      21.173031        19.295694    1.877337-      0.429637     
+6 Central Grampian 18.062404      16.699824 1.362580-      34.947331      31.497875     3.449456-    22.112003      19.440784     2.671219-      0.429637     
+7 Argyll 21.732399       19.008466 2.723933-     46.227305     39.064236    7.163069-      35.028039    28.414808    6.613231-      0.429637     
+8 The Trossachs 14.851193        13.560125   1.291068-       29.735545    26.543088   3.192457-      19.010448     16.626796     2.383652-    0.429637     
+9 Stirlingshire and Fife 13.402420      12.383515   1.018905-      27.431465      24.877679    2.553786-     17.720786      15.889767     1.831019-       0.429637     
+10 South West Scotlands 12.412375        11.419910     0.992465-    26.191213        23.660797    2.530416-      17.350715      15.515156       1.835559-    0.429637     
+11 Lothian and Borders 10.680255      10.022391   0.657864-    19.962865     18.294805    1.668060-     9.857003      8.901035       0.955968-   0.429637     
+12 Solway and Cheviot 6.859443       6.494472   0.364971-      15.008608     13.802635     1.205973-      9.045510      8.238128       0.807382-    0.429637     
+13 North East England 7.261425        7.200522   0.060903-    12.445492     11.903078      0.542414-     4.656630     4.381359       0.275271-     0.429637     
+14 North Lancashire and The Lakes 2.417441         2.635261    0.217820      5.195422       5.319924       0.124502      0.646487      1.018204        0.371717       0.429637     
+15 South Lancashire, Yorkshire and Humber 3.941750        4.187318     0.245568    4.992385      5.102829       0.110444      1.501290-        1.260518-        0.240772    0.429637     
+16 North Midlands and North Wales 1.151532          1.644655   0.493123      1.401412          1.982636       0.581224      2.585123-       2.042214-       0.542909   0.429637     
+17 South Lincolnshire and North Norfolk 1.367846-        1.031757-      0.336089    0.206246-      0.062818       0.269064    1.412911-          1.069448-      0.343463   0.429637     
+18 Mid Wales and The Midlands 0.728886-       0.399525-   0.329361      0.954492      1.248033       0.293541      0.742055-      0.358472-      0.383583   0.429637     
+19 Anglesey and Snowdon 2.367968       3.023755   0.655787     2.327215        3.220609      0.893394    2.958795-      2.223662-      0.735133     0.429637     
+20 Pembrokeshire 1.105634         1.498029    0.392395     1.752571-         1.342774-        0.409797     6.581232-       6.129220-       0.452012    0.429637     
+21 South Wales & Gloucester 3.921929-        3.502421-    0.419508     7.105363-        6.667868-      0.437495     6.999383-      6.546620-     0.452763    0.429637     
+22 Cotswold 6.184360-        5.753523-   0.430837     12.624948-     12.139607-      0.485341     14.309815-      13.774675-      0.535140    0.429637     
+23 Central London 7.654724-       7.249176-    0.405548    9.730648-      9.345749-      0.384899    7.035375-      6.625491-       0.409884   0.429637     
+24 Essex and Kent 4.273136-         3.884185-    0.388951     2.516733-        2.166273-       0.350460    0.648164-      0.268015-       0.380149    0.429637     
+25 Oxfordshire, Surrey and Sussex 4.883271-        4.478568-   0.404703     5.485268-      5.095981-      0.389287     3.710756-       3.301718-        0.409038   0.429637     
+26 Somerset and Wessex 7.788382-        7.363727-    0.424655    8.922298-      8.505988-     0.416310       4.364288-      3.945380-      0.418908    0.429637     
+27 West Devon and Cornwall 12.582659-      12.122570-   0.460089    17.255135-       16.776132-       0.479003     8.913866-       8.459911-        0.453955   0.429637     
+Conventional Carbon 40% Intermittent 45%
+Change in 
+Adjustment
+Conventional Low Carbon 75%
+Wider Generation Tariffs (£/kW)
+Zone NameZone
+
+
+=== PAGE 18 ===
+ 
+ 
+Generation Tariffs  
+Public 
+ 
+ 
+18 
+zone 7, due to its impact on the link specific expansion factors for the Western HVDC Link 
+and Crossaig subsea cable. 
+ 
+Adjustment Tariff Changes 
+The adjustment tariff is currently negative due to the wider tariffs causing the average 
+generation charge to breach the cap. 
+The adjustment tariff has increased by £0.43/kW since the Draft Forecast, decreasing in 
+magnitude, to become less negative. This is because the decrease in revenue expected to 
+be collected from wider tariffs outweighs the expected decrease to the charging base, 
+meaning that there is less of an adjustment required across each generator to ensure 
+charges are within the gen cap. For a full breakdown of the generation revenues, please 
+see Table 23. 
+ 
+Onshore Local Substation Tariffs 
+Onshore local substation tariffs reflect the cost of the first transmission substation that 
+each transmission connected generator connects to. They are recalculated in preparation 
+for the start of each price control, based on TO asset costs and then inflat ed each year by 
+the average May to October CPIH, for the rest of the price control period.  
+Onshore Local Substation tariffs have been updated as part of the RIIO -ET3 parameter 
+refresh. They have been updated based on onshore TO data and Ofgem’s Final RIIO -ET3 
+Determinations (as published 16 December), resulting in a decrease since Draft Tariffs . 
+Tariffs for subsequent years will then continue to be inflated in line with CPIH.  
+ 
+Table 4 Onshore Local Substation Tariffs 
+ 
+
+
+=== PAGE 19 ===
+ 
+ 
+Generation Tariffs  
+Public 
+ 
+ 
+19 
+ 
+Onshore Local Circuit Tariffs 
+Where a transmission-connected generator is not directly connected to the Main 
+Interconnected Transmission System (MITS), the onshore local circuit tariffs reflect the 
+cost and flows on circuits between its connection and the MITS. Local circuit tariffs ca n 
+change as a result of system power flows and inflation.  
+The 2026/27 onshore local circuit tariffs have been finalised. The updated tariffs are listed 
+below in Table 5.  A limited number of onshore local circuit tariffs have changed since 
+Draft Tariffs, due to the reduction in Locational Onshore Security Factor, the 
+implementation of CMP463 (Stabilising the Specific Onshore Expansion Factors) and a 
+further review of the local network. This has also resulted in two new local circuit tariffs 
+being included (Marston Vale and Yaxley). 
+ 
+Table 5 Onshore Local Circuit Tariffs 
+ 
+
+
+=== PAGE 20 ===
+ 
+ 
+Generation Tariffs  
+Public 
+ 
+ 
+20 
+ 
+As part of their connection offer, generators can agree to undertake one -off payments for 
+certain infrastructure cable assets, which affect the way they are modelled in the Transport 
+and Tariff model. This table shows the circuits which have been amended i n the model, to 
+account for the one -off charges that have already been applied to generators. For more 
+information, please see CUSC sections 2, paragraph 14.4 and 14.15.15. 
+Table 6 Circuits subject to one-off charges 
+ 
+ 
+  
+
+
+=== PAGE 21 ===
+ 
+ 
+Generation Tariffs  
+Public 
+ 
+ 
+21 
+Offshore Local Generation Tariffs 
+The offshore local tariffs (Substation, Circuit and Embedded Transmission Use of System) 
+reflect the cost of the offshore networks which connect offshore generation to the 
+mainland. They are calculated at the beginning of a price control or on transfer to the 
+Offshore Transmission Owner (OFTO). The tariffs are subsequently indexed each year, in 
+line with the revenue of the associated OFTO. 
+These offshore tariffs have been recalculated in preparation for the RIIO -ET3 period, to 
+adjust for any differences in the actual OFTO revenue when compared to the forecast 
+revenue used in RIIO-ET2 tariff setting. The Offshore substation discount has also been 
+updated for the RIIO-ET3 period. Since the Draft forecast, the latest OFTO revenue 
+submissions and updated inflation figures have been incorporated. 
+Offshore local generation tariffs for projects expected to transfer in 2025/26 or 2026/27 will 
+be confirmed once asset transfer has taken place and tariffs have been set.  
+ 
+Table 7 Offshore local tariffs 2026/27 
+Substation Circuit ETUoS Substation Circuit ETUoS Substation Circuit ETUoS
+Barrow 11.763294       62.266766    1.546169        11.800544          62.353306       1.548318        0.037250       0.086540      0.002149        
+Beatrice 10.333497     28.211142        -       10.338561          28.173956        -       0.005064      0.037186-       -       
+Burbo Bank Extension 15.000200     29.006632    -       15.078754         29.114438         -       0.078554      0.107806       -       
+Dudgeon 21.825453     34.263951     -       22.039112           34.557346       -       0.213659        0.293395       -       
+East Anglia 1 13.668366    57.735928    -       13.794649         58.160449        -       0.126283        0.424521        -       
+Galloper 22.649788    35.752884    -       22.714718           35.821692        -       0.064930      0.068808      -       
+Greater Gabbard 21.959926     50.882106     -       21.810479           50.495911         -       0.149447-        0.386195-       -       
+Gunfleet Sands I 25.607715      23.636706    4.417836       25.748620        23.745060       4.438088      0.140905        0.108354       0.020252       
+Gunfleet Sands II 25.607715      23.636706    4.417836       25.748620        23.745060       4.438088      0.140905        0.108354       0.020252       
+Gwynt y mor 33.526631     33.007445    -       33.795163         33.246524       -       0.268532      0.239079       -       
+Hornsea 1A 12.216411         38.285995    -       12.366525         38.668860      -       0.150114          0.382865      -       
+Hornsea 1B 12.216411         38.285995    -       12.366525         38.668860      -       0.150114          0.382865      -       
+Hornsea 1C 12.216411         38.285995    -       12.366525         38.668860      -       0.150114          0.382865      -       
+Hornsea 2A 10.013945      34.349998    -       11.581216             39.257213         -       1.567271         4.907215        -       
+Hornsea 2B 10.013945      34.349998    -       11.581216             39.257213         -       1.567271         4.907215        -       
+Hornsea 2C 10.013945      34.349998    -       11.581216             39.257213         -       1.567271         4.907215        -       
+Humber Gateway 19.297729      44.003831     -       19.350923         44.076959       -       0.053194        0.073128        -       
+Lincs 22.796279     86.664992    -       22.854684        86.806805      -       0.058405      0.141813          -       
+London Array 15.035493     51.677448     -       15.064079         51.706203        -       0.028586      0.028755       -       
+Moray East 12.388999     31.083805     -       12.496093         31.289336        -       0.107094        0.205531        -       
+Ormonde 36.166486    66.683028   0.531408       36.724993        67.654370       0.539149        0.558507      0.971342        0.007741        
+Race Bank 13.531499      37.566691     -       13.624728         37.759017         -       0.093229       0.192326        -       
+Rampion 11.732800       30.556215     -       11.851012             30.795892       -       0.118212          0.239677       -       
+Robin Rigg 0.818450-       44.785643    14.349035     0.798686-          44.793291         14.351485      0.019764        0.007648      0.002450       
+Robin Rigg West 0.818450-       44.785643    14.349035     0.798686-          44.793291         14.351485      0.019764        0.007648      0.002450       
+Seagreen 1 11.818580       21.472235      -       11.825189           21.449883        -       0.006609      0.022352-       -       
+Sheringham Shoal 34.648241     40.813652     0.887169       34.666415         40.811823         0.887129        0.018174         0.001829-        0.000040-      
+Thanet 26.640565    49.911157        1.201537         26.589531         49.782470       1.198439         0.051034-        0.128687-       0.003098-      
+Triton Knoll 10.168392      30.636167     -       11.584709          34.530373       -       1.416317          3.894206      -       
+Walney 1 31.455493     62.924738    -       31.485699         62.945098       -       0.030206      0.020360      -       
+Walney 2 32.376940    65.759704    -       32.453015         65.871256        -       0.076075       0.111552          -       
+Walney 3 14.034741       28.406161      -       14.172132            28.631120         -       0.137391         0.224959       -       
+Walney 4 14.034741       28.406161      -       14.172132            28.631120         -       0.137391         0.224959       -       
+West of Duddon Sands 12.070004      60.249830    -       12.191409            60.724975       -       0.121405         0.475145        -       
+Westermost Rough 24.624576    41.932538     -       24.816259         42.215878        -       0.191683        0.283340      -       
+Offshore Generator
+2026/27 Draft
+Tariff Component (£/kW)
+2026/27 Final
+Tariff Component (£/kW)
+Changes
+Tariff Component (£/kW)
+
+=== PAGE 22 ===
+ 
+ 
+ 
+Demand Tariffs 
+Demand Residual Tariffs 
+Half-Hourly (HH) Tariffs 
+Non-Half-Hourly (NHH) Tariffs 
+Embedded Export Tariffs (EET) 
+  
+
+=== PAGE 23 ===
+ 
+ 
+Demand Tariffs  
+ 
+Public 
+ 
+ 
+23 
+Demand Tariffs Summary 
+There are two types of demand, Half-Hourly (HH) and Non-Half-Hourly (NHH). This section 
+shows the tariffs for HH and NHH as well as the tariffs for Embedded Export (EET).  
+The demand residual standing charges make up the majority of the TNUoS demand 
+charge, in the form of a non-locational set of daily charges per site across the residual 
+charging bands. 
+ 
+Table 8 Summary of Demand Tariffs 
+ 
+Compared to the Draft forecast, both the average HH & NHH demand tariffs have seen an 
+increase. Revenue to be recovered through the demand residual is targeted to be £48m 
+lower than the Draft forecast, this is offset slightly by a small increase to the locational 
+revenue of £0.5m. 
+The average HH gross tariff is £2.79/kW, an increase of £0.01/kW compared to the Draft 
+Tariff Forecast. The average NHH tariff is 0.38p/kWh, an increase of 0.001p/kWh compared 
+to the Draft forecast. 
+The forecast Embedded Export Volume for 2026/27 has not changed since the Draft 
+forecast, so remains at 6.71 GW. The total credit paid out to embedded generators (<100 
+MW) is currently forecast to be £20.44m, a decrease of £119k since Draft Tariffs. The 
+average Embedded Export Tariff (EET) is now £3.05/kW, a decrease of £0.01/kW compared 
+to the Draft forecast. 
+Non-locational Banded Tariffs 2026/27 Draft 2026/27 Final Change
+Unmetered (p/kWh/annum) 2.587684           2.568147             0.019537-             
+Demand Residual (£m) 6,312.8                6,265.2               47.7-                     
+HH Tariffs (Locational) 2026/27 Draft 2026/27 Final Change
+Average Tariff (£/kW) 2.783829            2.793189             0.009360           
+EET 2026/27 Draft 2026/27 Final Change
+Average Tariff (£/kW) 3.062913             3.045116             0.017797-             
+AGIC (£/kW) 3.158116              3.143391              0.014725-             
+Embedded Export Volume (GW) 6.713095             6.713095             -            
+Total Credit (£m) 20.561626          20.442156          0.119470-             
+NHH Tariffs (locational) 2026/27 Draft 2026/27 Final Change
+Average (p/kWh) 0.380904           0.381869            0.000966           
+
+=== PAGE 24 ===
+ 
+ 
+Demand Tariffs  
+ 
+Public 
+ 
+ 
+24 
+Table 9 Demand Tariffs 
+ 
+ 
+Demand Residual Tariffs 
+Since the Draft forecast, we have not updated the site counts or consumption data which 
+are used to allocate the proportion of residual revenue to each charging band. 
+Consumption data uses actual data for October 2024 to September 2025 from the 
+Distribution Network Operators (DNO).  
+A breakdown of the banding thresholds, consumptions, consumption proportions and site 
+counts for the demand residual standing charges can be seen in Table TB of the 
+published tables excel spreadsheet6. The residual band thresholds will remain the same 
+for the duration of the RIIO-ET3 price control period. 
+Table 10 shows the demand residual tariffs by band. These tariffs will apply to final 
+demand sites in addition to the HH or NHH locational charges. 
+ 
+  
+ 
+6 Please see the Numerical Data section of ‘Tools and supporting information’ for the link to the published tables 
+excel spreadsheet. 
+
+
+=== PAGE 25 ===
+ 
+ 
+Demand Tariffs  
+ 
+Public 
+ 
+ 
+25 
+Table 10 Non-Locational demand residual charges 
+ 
+ 
+Transmission Demand Residual tariffs have decreased by 0.8% compared to the Draft 
+Tariffs, driven by the reduction in revenue to be collected.  
+ 
+ 
+Band 2026/27 Draft 2026/27 Final Change
+Domestic 0.224259                    0.222566                      (0.001693)             
+LV_NoMIC_1 0.241136                      0.239315                       (0.001821)              
+LV_NoMIC_2 0.591767                     0.587299                     (0.004468)           
+LV_NoMIC_3 1.251868                      1.242416                        (0.009452)            
+LV_NoMIC_4 3.487344                    3.461015                       (0.026329)            
+LV1 5.841502                     5.797398                      (0.044104)             
+LV2 11.599416                    11.511840                       (0.087576)            
+LV3 14.490779                   14.381374                      (0.109405)             
+LV4 38.470555                  38.180103                     (0.290452)            
+HV1 32.081262                   31.839048                    (0.242214)             
+HV2 118.044020                 117.152788                    (0.891232)             
+HV3 186.829065                185.418505                  (1.410560)              
+HV4 532.936002                528.912335                  (4.023667)            
+EHV1 327.952592                325.476550                 (2.476042)            
+EHV2 1,168.201395               1,159.381475                 (8.819920)             
+EHV3 2,532.047492             2,512.930533               (19.116959)            
+EHV4 5,741.736517               5,698.386405             (43.350112)            
+T-Demand1 1,412.614771                 1,401.949529                (10.665242)           
+T-Demand2 2,953.527974             2,931.228837                (22.299137)           
+T-Demand3 7,644.127018               7,586.413858               (57.713160)            
+T-Demand4 20,987.693775           20,829.236682            (158.457093)        
+Unmetered demand p/kWh p/kWh
+Unmetered 2.587684                    2.568147                       (0.019537)             
+Demand Residual 
+(£m)
+6312.83 6265.17 -47.66
+ Tariff - £/Site/Day 
+
+=== PAGE 26 ===
+ 
+ 
+Demand Tariffs  
+ 
+Public 
+ 
+ 
+26 
+Half-Hourly Demand Tariffs 
+Table 11 shows the gross HH demand tariffs for 2026/27, compared to the Draft forecast 
+publication. 
+Table 11 Half-Hourly Demand Tariffs 
+ 
+Figure 2 Changes to gross Half-Hourly demand tariffs 
+ 
+As shown in the figure above, there are fluctuations in tariffs for zones 8 through to 14. 
+These are due to the implementation of CMP463 (Stabilising the Specific Onshore 
+Expansion Factors), changes in Nodal demand and embedded generation forecasts. 
+Zones 1 to 7 are subject to the zero floor on demand tariffs. 
+
+
+=== PAGE 27 ===
+ 
+ 
+Demand Tariffs  
+ 
+Public 
+ 
+ 
+27 
+Half-Hourly Demand Tariffs for Transmission 
+Connected Users with Multiple DNO’s 
+Where a transmission site is connected at a Grid Supply Point which feeds multiple DNO 
+networks, Demand Tariffs (HH & EET) are derived from the average zonal tariffs from the 
+relevant DNO zones. We have created site specific tariffs for transmission connected users 
+for all GSPs at the boundaries of multiple DNO areas in 2026/27. 
+ 
+Table 12 Demand tariffs for Transmission Connected users with 
+multiple DNO's 
+  
+
+
+=== PAGE 28 ===
+ 
+ 
+Demand Tariffs  
+ 
+Public 
+ 
+ 
+28 
+Embedded Export Tariffs (EET) 
+ 
+Table 13 shows the Embedded Export tariffs for 2026/27, compared to the Draft forecast. 
+Table 13 Embedded Export Tariffs 
+ 
+Figure 3 Embedded export tariff changes 
+ 
+The average EET is £3.05/kW, a decrease of £0.02/kW since the Draft forecast. The 
+Embedded Export Volume is forecast to be 6.71 GW.  
+The amount of metered embedded generation produced at Triads by suppliers and 
+embedded generators (<100 MW) will determine the amount paid to them through the EET. 
+The money to be paid out through the EET is recovered via demand tariffs, which will affect 
+the price of HH and NHH demand residual tariffs.   
+
+
+=== PAGE 29 ===
+ 
+ 
+Demand Tariffs  
+ 
+Public 
+ 
+ 
+29 
+Non-Half-Hourly Demand Tariffs 
+Table 14 and Figure 4 show the changes in Non-Half-Hourly tariffs between the 2026/27 
+Draft forecast and the Final Tariffs. 
+Table 14 Changes to Non-Half-Hourly demand tariffs 
+ 
+Figure 4 Changes to Non-Half-Hourly demand tariffs 
+ 
+The average NHH tariff for 2026/27 is 0.38 p/kWh, a 0.001 p/kWh increase compared to the 
+Draft forecast. As mentioned above for the HH and Embedded tariffs, the locational 
+demand and embedded generation forecasts have caused fluctuations in the NHH zonal 
+tariffs. 
+
+
+=== PAGE 30 ===
+ 
+ 
+ 
+ 
+ 
+Overview of Data Inputs  
+  
+
+=== PAGE 31 ===
+ 
+ 
+Overview of Data Inputs  
+ 
+ 
+Public 
+ 
+ 
+31 
+This section explains the changes to the input data which fed into the Final Tariffs process. 
+Inputs affecting the locational element of tariffs 
+The locational elements of generation and demand tariffs are based upon:  
+• Contracted generation; 
+• Nodal demand and embedded generation 
+• Local and MITS circuits;  
+• Inflation; 
+• Locational security factor 
+• Expansion constant 
+ 
+Contracted, Modelled and Chargeable TEC 
+Contracted TEC is the volume of TEC with connection agreements for the 2026/27 period, 
+which can be found on the TEC register7.  The contracted TEC volumes are based on the 31 
+October 2025 TEC register.  
+Modelled Best View TEC is the amount of TEC we have entered into the Transport model to 
+calculate MW flows, which also includes interconnector TEC. For the Initial and August 
+forecasts, we forecast our best view of modelled TEC. However, for our December Draft 
+Tariffs and January Final Tariffs we use the contracted TEC position as published in the TEC 
+register as of 31 October 2025, in accordance with CUSC 14.15.6. 
+Chargeable TEC is our best view of the forecast volume of generation that will be 
+connected to the system during 2026/27 and liable to pay generation TNUoS charges. 
+Table 15 Contracted, Modelled & Chargeable TEC 
+ 
+ 
+Adjustments for Interconnectors 
+When modelling flows on the transmission system in order to set locational tariffs, 
+interconnector flows are not included in the Peak model but are included in the Year 
+Round model. Since interconnectors are not liable for generation or demand TNUoS 
+ 
+7 See the Registers, Reports and Updates section at neso.energy/industry-information/connections/reports-and-
+registers  
+Generation (GW) Initial August Draft Final
+Contracted TEC 127.61 125.56 120.14 120.14
+Modelled Best View TEC 123.65 111.17
+Chargeable TEC 109.99 97.45 102.88 101.64
+2026/27 Tariffs
+For input to locational tariffs post 31st 
+October please see Contracted TEC
+
+=== PAGE 32 ===
+ 
+ 
+Overview of Data Inputs  
+ 
+ 
+Public 
+ 
+ 
+32 
+charges, they are not included in the calculations of chargeable TEC for either the 
+generation or demand charging bases. 
+The table below reflects the contracted position of interconnectors for 202 6/27 as stated 
+in the interconnector register8 as of 31 October 2025. 
+Table 16 Interconnectors 
+ 
+ 
+Network Model 
+The network model comprises all onshore transmission substations and circuits. 
+Substations are represented by nodes, and circuits are “links” that connects the nodes to 
+form the onshore transmission network. The network model is based on Electricity Ten 
+Year Statement (ETYS) data, which can be found on NESO’s website 9. 
+In accordance with CUSC 14.15.10, we must use the ETYS network model data including 
+updates up to 31 October 2025. Due to a delay in the next ETYS publication, the network 
+model is still based on the 2024 ETYS data.  
+ 
+Expansion Constant and Inflation 
+The Expansion Constant (EC) is the annuitised value of the cost required to transport 1 MW 
+over 1 km. It is required to be reset at the start of each price control and then inflated with 
+agreed inflation methodology throughout the price control period. The 202 6/27 Expansion 
+Constant is £19.157575/MWkm. With the approval of CMP353 the current EC value is based 
+on the RIIO-ET1 value which was set in 2013/14 and will continue to increase in-line with 
+ 
+8 See the Registers, Reports and Updates section at neso.energy/industry-information/connections/reports-
+and-registers  
+9 neso.energy/publications/electricity-ten-year-statement-etys  
+
+
+=== PAGE 33 ===
+ 
+ 
+Overview of Data Inputs  
+ 
+ 
+Public 
+ 
+ 
+33 
+inflation each year. A review of the EC methodology and the expansion factors is ongoing 
+with the industry (CMP315/375), any impact will be included in our forecast publications 
+once the modification has concluded. 
+ 
+Locational Onshore Security Factor  
+The locational onshore security factor, (also called the global security factor), is applied to 
+locational tariffs. This parameter approximately represents the redundant network 
+capacity to secure energy flows under network contingencies. A guide to the onshore 
+security factor calculation is published on our website: 
+neso.energy/document/183406/download.  
+The locational onshore security factor has been recalculated ahead of the new price 
+control and is now set at 1.75 for the duration of RIIO-ET3. 
+ 
+Onshore Local Substation Tariffs 
+Onshore local substation tariffs are reviewed and updated at each price control as part of 
+the TNUoS tariff parameter refresh. Once set for the first year of that price control, the 
+tariffs are then indexed by the average May to October CPIH (actuals and forecast), as per 
+the CUSC requirements, for the subsequent years within that price control period.  
+For this 2026/27 Final Tariff publication, Onshore Local Substation tariffs have been 
+updated based on onshore TO data and Ofgem’s Final RIIO-ET3 Determinations. 
+ 
+Offshore Local Tariffs 
+Local offshore circuit tariffs, local offshore substation tariffs and ETUoS tariff s are indexed 
+in line with the revenue of the relevant OFTO. These tariffs have been recalculated for the 
+RIIO-ET3 period, to adjust for any differences in the actual OFTO revenue when compared 
+to the forecast revenue used in RIIO-ET2 tariff setting. 
+ 
+Allowed Revenues 
+The majority of the TNUoS charges look to recover the allowed revenue for the onshore 
+and offshore TOs in Great Britain. It also recovers some other revenue , for example, 
+Strategic Innovation Fund and Interconnector revenue recovery or redistribution.  
+For the Onshore TOs (ONTOs), National Grid Electricity Transmission (NGET), Scottish Power 
+Transmission (SPT), and Scottish Hydro Electric Transmission (SHET), the allowed revenues 
+are subject to Ofgem’s price control (the upcoming RIIO-ET3 period will run from 2026/27 – 
+2030/31.) Financial parameters including project spending profiles, rate of return and 
+inflation index are set at the beginning of each price control period. Onshore TO  allowed 
+
+=== PAGE 34 ===
+ 
+ 
+Overview of Data Inputs  
+ 
+ 
+Public 
+ 
+ 
+34 
+revenue figures are published annually on Ofgem’s website after the Annual Iteration 
+Process. (AIP). 
+The Onshore and Offshore TOs provide NESO with their revenue forecast under the agreed 
+timeline as specified in the STC (SO-TO Code). The 2026/27 revenue forecasts have been 
+based on Onshore and Offshore TOs’ final submissions in January 2026.   
+An overview of revenue to be recovered can be found in Table 17. For more details on the 
+TNUoS revenue breakdown, please refer to Appendix F: Transmission Company Revenues. 
+ 
+Table 17 Allowed Revenues 
+ 
+Please note these figures are rounded to one decimal place. 
+  
+£m Nominal
+Initial 
+Forecast
+August 
+Forecast
+December 
+Draft
+January 
+Final
+National Grid Electricity Transmission 2,590.0    4,053.4    3,287.0    3,287.0   
+Scottish Power Transmission 899.2        1,186.1        1,077.9      1,082.9    
+SHE Transmission 1,573.0     2,473.1      2,098.0    2,083.1    
+ Total TO Income from TNUoS         5,062.2           7,712.6        6,463.0       6,453.0 
+Other Pass-through from TNUoS 66.1           69.0          71.3            40.6         
+ Offshore (plus interconnector contribution 
+/ allowance) 
+1,111.3         1,137.3       1,121.3        1,117.1        
+ Total Other Income from TNUoS           1,177.4          1,206.3           1,192.6          1,157.7 
+ Total to Collect from TNUoS         6,239.6          8,918.9         7,655.6         7,610.7 
+2026/27 TNUoS Revenue
+TO Income from TNUoS
+ Other Income from TNUoS 
+
+=== PAGE 35 ===
+ 
+ 
+Overview of Data Inputs  
+ 
+ 
+Public 
+ 
+ 
+35 
+Generation / Demand (G/D) Split 
+The G/D split is shown in Table 18.  
+In line with the Limiting Regulation, the average TNUoS generation charge, excluding local 
+charges associated with Physical Assets Required for Connection (PARC), should be kept 
+within the range of €0–2.50/MWh. We have therefore calculated the expected local 
+charges associated with pre-existing assets and have included this amount when 
+considering the expected average TNUoS generation charges.  
+The majority of TNUoS local charges (including onshore and offshore local charges) fall 
+into the definition of Charges for PARC, however, a small part of the TNUoS onshore local 
+charges (£7.11m) are categorised as charges associated with pre-existing assets and are 
+therefore not PARC. This is a decrease of £0.81m to local charges associated with pre-
+existing assets since the Draft forecast. 
+ 
+Table 18 Generation and demand revenue proportions 
+ 
+ 
+
+
+=== PAGE 36 ===
+ 
+ 
+Overview of Data Inputs  
+ 
+ 
+Public 
+ 
+ 
+36 
+The “gen cap” 
+Paragraph 14.14.5 (vii) in the CUSC currently limits average annual generation use of 
+system charges to €0-2.5/MWh. The revenue that can be recovered from generation is 
+dependent on the €2.5/MWh limit, exchange rate and forecast output of chargeable 
+generation. An error margin is also applied to reflect revenue and output forecasting 
+accuracy. This revenue limit figure was referred to as the “gen cap” which is part of the UK 
+law (the “Limiting Regulation”). In this report, the term “gen cap” is used to refer to the 
+“upper limit of the Limiting Regulation” in the CUSC. 
+ 
+Exchange Rate 
+The exchange rate for gen cap calculation is based on the Economic and Fiscal Outlook 
+(EFO), published by the Office of Budgetary Responsibility (OBR), and published prior to 31 
+October. In this report, the figures were based on OBR’s March EFO10. This figure is finalised, 
+as per OBR’s March EFO, at €1.192525/£.  
+ 
+Generation Output 
+The forecast output of generation is 199.3 TWh and was finalised in the Five-Year View.  
+This figure is the average of the Future Energy Scenarios in the 2025 Future Energy 
+Scenarios (FES). 
+ 
+Error Margin 
+The error margin for 2026/27 tariffs was updated and finalised in the Five-Year View, 
+following publication of the outturn of 2024/25 data. This is derived from historical data in 
+the past five whole years (thus for year 2026/27, we use data from years 2020/21 – 
+2024/25).  
+ 
+  
+ 
+10 obr.uk/docs/dlm_uploads/OBR_Economic_and_fiscal_outlook_March_2025.pdf 
+
+=== PAGE 37 ===
+ 
+ 
+Overview of Data Inputs  
+ 
+ 
+Public 
+ 
+ 
+37 
+Table 19 Generation revenue error margin calculation 
+ 
+ 
+Onshore local charges associated with Pre-existing assets 
+We have published three sets of tariffs relating to pre-existing assets. These are TNUoS 
+local tariffs associated with pre-existing circuits and pre-existing substation bays, this 
+year we have also included a breakdown of all local assets and their respective 
+PARC/NONPARC components.   
+The onshore local circuit tariff reflects the impact of the generator on its local network 
+(before reaching the MITS – Main Interconnected Transmission System). If some of the 
+circuits in the local network existed prior to the generator applying for connec tion to the 
+transmission network, and the TO did not identify any need to reinforce these circuits in 
+order to provide adequate capacity for this generator, these circuits are deemed “pre -
+existing”, and the local circuit tariff elements that are associated with these pre-existing 
+assets are not charges associated with PARC.  
+ 
+ 
+Table 20 lists the onshore local circuit tariff elements associated with pre-existing assets; 
+it is only used for the purpose of calculating the gen cap.  
+ 
+Table 20 Onshore local circuit tariff elements associated with 
+pre-existing assets 
+
+
+=== PAGE 38 ===
+ 
+ 
+Overview of Data Inputs  
+ 
+ 
+Public 
+ 
+ 
+38 
+ 
+  
+
+
+=== PAGE 39 ===
+ 
+ 
+Overview of Data Inputs  
+ 
+ 
+Public 
+ 
+ 
+39 
+Onshore local substation tariffs reflect the cost of accommodating the generator at its 
+local substation. It is very rare for generators to have local substation tariff associated 
+with pre-existing assets, as usually each generator has triggered its own dedicated bay at 
+the local substation.  
+ 
+Table 21 lists the onshore local substation tariffs associated with pre-existing assets.  
+ 
+Table 21 Onshore local substation tariffs associated with pre-
+existing assets 
+ 
+ 
+ 
+Charging Bases for 2026/27 
+ 
+Generation 
+The forecast generation charging base is less than contracted TEC. It excludes 
+interconnectors, which are not chargeable, and generation that we do not expect to be 
+chargeable during the charging year due to closure, termination or delay in connection. It 
+also includes any generators that we believe may increase their TEC. 
+We are unable to break down our best view of generation as some of the information used 
+to derive it could be commercially sensitive.  
+The generation charging base for 2026/27 tariffs is forecast at 101.64 GW, which is a 
+decrease of 1.24 GW since the Draft forecast. It is based on our internal view of what 
+generation we expect to connect next financial year. 
+For the Final Tariffs, in line with the CUSC, we have used the contracted TEC position as of 
+31 October 2025 to set locational tariffs in the Transport model. Our best view has been 
+used to set the adjustment tariff in the Tariff model. 
+ 
+ 
+ 
+
+
+=== PAGE 40 ===
+ 
+ 
+Overview of Data Inputs  
+ 
+ 
+Public 
+ 
+ 
+40 
+ 
+Demand 
+Our forecasts of chargeable HH demand, NHH demand and embedded generation for 
+2026/27 have not been updated since the Draft Tariff forecast.  
+To forecast chargeable HH and NHH demand and EET volumes, we use a Monte Carlo 
+modelling approach. This incorporates our latest data including: 
+• Historical gross metered demand and embedded export volumes  
+• Weather patterns 
+• Future demand shifts 
+• Expected levels of renewable generation 
+With recent historical trends and forward-looking assumptions, demand volumes are 
+forecast to plateau over the next couple of years. Please refer to table TAA in the 
+published tables excel spreadsheet11 for a detailed breakdown of the demand charging 
+bases.  
+ 
+Table 22 Charging Bases 
+ 
+ 
+Annual Load Factors 
+The Annual Load Factors (ALFs) of each power station are required to calculate tariffs. For 
+final tariff publication, we have used the final version of the 2026/27 ALFs. ALFs are 
+explained in more detail in Appendix D of this report, and the full list of power station ALFs 
+are available on the NESO website12.    
+ 
+ 
+11 Please see the Numerical Data section of ‘Tools and supporting information’ for the link to the published tables 
+excel spreadsheet. 
+12 neso.energy/document/376351/download  
+
+
+=== PAGE 41 ===
+ 
+ 
+Overview of Data Inputs  
+ 
+ 
+Public 
+ 
+ 
+41 
+Generation adjustment and demand residual 
+Under the existing CUSC methodology, the adjustment and residual elements of tariffs are 
+calculated using the formulae below.  
+Adjustment Tariff = (Total Money collected from generators as determined by G/D split 
+less money recovered through locational tariffs) divided by the total chargeable TEC  
+𝐴𝐺 = 𝐺. 𝑅 − 𝑍𝐺
+𝐵𝐺
+ 
+Where:  
+AG is the adjustment tariff (£/kW) 
+G is the proportion of TNUoS revenue recovered from generation (the G/D split 
+percentage) 
+R is the total TNUoS revenue to be recovered (£m) 
+ZG is the TNUoS revenue recovered from generation locational tariffs (£m), including wider 
+zonal tariffs and project-specific local tariffs 
+BG is the generator charging base (GW) 
+AG cannot be positive and is capped at 0. 
+ 
+Demand Residual Charges 
+The demand residual revenue is recovered by a p/site/day charge on final demand users 
+(both HH and NHH), charges are based on the voltage and size of the site and came into 
+effect in April 2023. 
+Each final demand site is allocated to a residual charging band that is based on its 
+capacity or annual energy consumption. The charge is non-locational so all sites within 
+the same band pay the same demand residual tariff regardless of which demand zone 
+they are in.  
+Site counts have been forecast based on the latest trends in site counts being billed and 
+have been adjusted to reflect the new residual banding thresholds, and the re-banding 
+for RIIO-ET3 which will take effect from April 2026. 
+Demand customers are also liable for the locational elements of demand tariffs, based on 
+their Triad demand for HH demand or their aggregated annual consumption during 
+4-7pm each day for their NHH demand. 
+ 
+  
+
+=== PAGE 42 ===
+ 
+ 
+Overview of Data Inputs  
+ 
+ 
+Public 
+ 
+ 
+42 
+Table 23 Residual & Adjustment components calculation 
+
+
+=== PAGE 43 ===
+ 
+ 
+Tools and supporting 
+information 
+  
+
+=== PAGE 44 ===
+ 
+ 
+Tools and supporting information  
+Public 
+ 
+ 
+44 
+We would like to ensure that customers understand the current charging 
+arrangements and the reasons why tariffs change. If you have specific queries 
+on this publication, please contact us using the details below. Feedback on the 
+content and format of this publication is also welcome. We are particularly 
+interested to hear how accessible you find the report and if it provides the right 
+level of detail. 
+ 
+Charging webinars 
+We will be hosting a webinar for the Final 2026/2027 Tariffs on Thursday 12 February. We 
+will be sending out a communication to those who subscribe to our updates via the NESO 
+website, providing details on the upcoming webinar and how to register. For any 
+questions, please see our contact details below. 
+ 
+Charging model copies available 
+If you would like a copy of the model to be emailed to you, together with a user guide, 
+please contact us using the details below. Please note that, while the model is available 
+free of charge, it is provided under licence to restrict, among other things, its distribution 
+and commercial use. 
+ 
+Numerical data 
+All tables in this document can be downloaded as an Excel spreadsheet from our websit e: 
+neso.energy/document/376341/download   
+This data can also be accessed via our Data Portal: 
+neso.energy/data-portal/transmission-network-use-system-tnuos-tariffs  
+Please allow up to two weeks after the publication for the data portal to be updated.  
+ 
+Contact Us 
+We welcome feedback on any aspect of this document and the tariff setting processes.  
+Do let us know if you have any further suggestions as to how we can better work with you 
+to improve the tariff forecasting process. 
+Our contact details: 
+Email: TNUoS.Queries@neso.energy 
+ 
+ 
+
+=== PAGE 45 ===
+ 
+ 
+Appendix A: Background 
+to TNUoS charging 
+  
+
+=== PAGE 46 ===
+ 
+ 
+Appendix A: Background to TNUoS charging  
+Public 
+ 
+ 
+46 
+Background to TNUoS charging 
+NESO sets Transmission Network Use of System (TNUoS) tariffs for generators and 
+suppliers.  These tariffs serve two purposes: to reflect the transmission investment cost of 
+connecting at different locations and to recover the total allowed revenues of the o nshore 
+and offshore transmission owners.   
+To reflect the cost of connecting in different parts of the network, NESO determines a 
+locational component of TNUoS tariffs using two models of power flows on the 
+transmission system: Peak Demand and Year Round, where a change in demand or 
+generation increases power flows, tariffs increase to reflect the need to invest.  Si milarly, if 
+a change reduces flows on the network, tariffs are reduced. To calculate flows on the 
+network, information about the generation and demand connected to the network is 
+required in conjunction with the electrical characteristics of the circuits that link these.   
+The charging model includes information about the cost of investing in transmission 
+circuits based on different types of generic construction, for example, voltage and cable / 
+overhead line, and the costs incurred in different TO regions.  Onshore, these costs are 
+based on ‘standard’ conditions, which means that they reflect the cost of new assets at 
+current rather than historical cost, so they do not necessarily reflect the actual cost of 
+investment to connect a specific generator or demand site.   
+TNUoS tariffs consist of two components: locational based charges that vary by zone, and 
+non-locational or ‘residual’ charges. Residual charges ensure complete revenue recovery 
+for transmission owners (as per the Price Control framework). The TNUoS methodology 
+determines the proportion of revenue to be collected from demand and generation users. 
+For generators, the locational and adjustment tariff elements are combined into a single 
+zonal tariff, referred to as the wider zonal generation tariff. Demand charges for both Half 
+Hourly (HH) and Non-Half Hourly (NHH) customers are based on location and vary across 
+demand zones. Additionally, with the implementation of Transmission Demand Residual 
+bandings and allocation, a separate daily site charge applies to fin al demand based on 
+specific usage bands. 
+For generation customers, local tariffs are also calculated. These reflect the cost 
+associated with the transmission substation they connect to and, where a generator is not 
+connected to the Main Interconnected Transmission System (MITS), the cost of local 
+circuits that the generator uses to export onto the MITS. This allows the charges to reflect 
+the cost and design of local connections and vary from project to project. For offshore 
+generators, these local charges reflect approved revenue allowances.  
+ 
+Generation charging principles 
+Transmission connected generators (and embedded generators with TEC ≥ 100 MW) are 
+subject to the generation TNUoS charges.  
+The TNUoS tariff specific to each generator depends on many factors, including the 
+location, type of connection, connection voltage, plant type and volume of TEC 
+
+=== PAGE 47 ===
+ 
+ 
+Appendix A: Background to TNUoS charging  
+Public 
+ 
+ 
+47 
+(Transmission Entry Capacity) held by the generator.  The TEC figure is equal to the 
+maximum volume of MW the generator is allowed to export onto the transmission network.  
+Under the current methodology there are 27 generation zones, and each zone has four 
+tariffs. Liability for each tariff component is shown below: 
+TNUoS tariffs are made up of two general components, the Wider tariff, and local tariffs.   
+The Wider tariff is set to reflect the costs incurred by the generator for the use of the whole 
+system, whereas the local tariffs are for the use of assets in the immediate vicinity of the 
+connection site. 
+† Embedded network system charges are only payable by offshore generators whose host 
+OFTO are not directly connected to the onshore transmission network and are not 
+applicable to all generators. 
+ 
+The Wider tariff 
+The Wider tariff is made up of four components, two of which may be multiplied by the 
+generator’s specific Annual Load Factor (ALF), depending on the generator type.  
+ 
+Conventional Carbon Generators 
+(for example: Biomass, CHP, Coal, Gas, Pumped Storage, Battery) 
+ 
+ 
+  
+Peak 
+Element 
+Year 
+Round 
+Shared 
+Element
+Year Round 
+Not Shared 
+Element 
+Adjustment 
+Tariff 
+A
+L
+F 
+ 
+  
+ 
+Note: Additional Local Tariffs may be applicable to Offshore generators 
+ 
+A
+L
+F  
+  
+* Local Tariffs 
+Wider 
+Tariff 
+TNUoS 
+Generation 
+Tariff 
+  
+Local 
+Substation 
+Tariff * 
+Local 
+Circuit 
+Tariff * 
+Embedded 
+Network System 
+Charges *† 
+
+
+=== PAGE 48 ===
+ 
+ 
+Appendix A: Background to TNUoS charging  
+Public 
+ 
+ 
+48 
+Conventional Low Carbon Generators 
+(for example: Hydro, Nuclear) 
+ 
+Intermittent Generators 
+(for example: Wind, Wave, Tidal, Solar) 
+ 
+ 
+The Peak element reflects the cost of using the system at peak times.  This is only paid by 
+conventional and peaking generators; intermittent generators do not pay this element.  
+The Year Round Shared and Year Round Not Shared elements represent the proportion of 
+transmission network costs shared with other zones, and those specific to each particular 
+zone respectively. 
+ALFs are calculated annually using data available from the most recent charging year.  
+Any generator with fewer than three years of historical generation data will have any gaps 
+filled using the generic ALF calculated for that generator type.  
+The Adjustment Tariff is a flat rate for all generation zones which adds a non-locational 
+charge (which may be positive or negative) to the Wider TNUoS tariff, to ensure that the 
+correct amount of aggregate revenue is collected from generators as a whole.  
+The adjustment tariff is also used to ensure generator charges are compliant with the 
+Limiting Regulation. This requires total TNUoS recovery from generators to be within the 
+range of €0-2.50/MWh on average.  
+ 
+Local substation tariffs 
+A generator will have a charge depending on the first onshore substation on the 
+transmission system to which it connects.  The cost is based on the voltage of the 
+substation, whether there is a single or double (‘redundancy’) busbar, and the volume of 
+generation TEC connected at that substation. 
+Local onshore substation tariffs are set at the start of each TO financial regulatory period 
+and increased by CPIH for each year within the price control period.  
+ 
+Peak 
+Element 
+Year 
+Round 
+Shared  
+Element 
+Year 
+Round 
+Not 
+Shared 
+Element 
+A
+L
+F 
+ 
+  
+ 
+Year 
+Round 
+Shared 
+Element 
+Year 
+Round 
+Not 
+Shared 
+Element 
+Adjustment 
+Tariff 
+A
+L
+F 
+ 
+  
+ 
+Adjustment 
+Tariff 
+
+=== PAGE 49 ===
+ 
+ 
+Appendix A: Background to TNUoS charging  
+Public 
+ 
+ 
+49 
+Local circuit tariffs 
+If the first onshore substation which the generator connects to is categorised as a MITS 
+(Main Interconnected Transmission System) node in accordance with CUSC 14.15.33, then 
+there is no Local Circuit charge. Where the first onshore substation is not class ified as MITS 
+node, there will be a specific circuit charge for generators connected at that location.  
+ 
+Embedded network system charges 
+If a generator is not connected directly to the transmission network, they need to have a 
+BEGA13 if they want to export power onto the transmission system from the distribution 
+network using “firm” transmission network capacity. Generators will incur local DUoS 14 
+charges to be paid directly to the DNO (Distribution Network Owner) in that region, which 
+do not form part of TNUoS. 
+Transmission-connected offshore generators connecting to an embedded OFTO may 
+need to pay an Embedded Transmission Use of System charge through TNUoS tariffs to 
+cover DNO charges that form part of the OFTO’s tender revenue stream.  
+Click here to find out more about DNO regions. 
+ 
+Offshore local tariffs 
+Where an offshore generator’s transmission assets have been transferred to the 
+ownership of an OFTO (Offshore Transmission Owner), there will be additional Offshore 
+substation and Offshore circuit tariffs specific to that Offshore Generator.  
+ 
+Billing 
+Generation TNUoS is an annual liability, and costs are calculated on the highest level of 
+TEC held by the generator during the year.  (A TNUoS charging year runs from 1 April to 31 
+March).  As an example, this means that if a generator holds 100 MW in TEC from 1 April to 
+31 January, then 350 MW from 1 February to 31 March, the generator will be charged for 350  
+MW of TEC for that charging year. 
+The calculation for TNUoS generator monthly invoice is as follows:  
+ 
+((𝑇𝐸𝐶 ×  𝑇𝑁𝑈𝑜𝑆 𝑇𝑎𝑟𝑖𝑓𝑓) − 𝑇𝑁𝑈𝑜𝑆 𝑐ℎ𝑎𝑟𝑔𝑒𝑠 𝑎𝑙𝑟𝑒𝑎𝑑𝑦 𝑝𝑎𝑖𝑑)
+𝑁𝑢𝑚𝑏𝑒𝑟 𝑜𝑓 𝑚𝑜𝑛𝑡ℎ𝑠 𝑟𝑒𝑚𝑎𝑖𝑛𝑖𝑛𝑔 𝑖𝑛 𝑡ℎ𝑒 𝑐ℎ𝑎𝑟𝑔𝑖𝑛𝑔 𝑦𝑒𝑎𝑟  
+ 
+ 
+13 Bilateral Embedded Generation Agreement. For more information about connections, please visit our website: 
+neso.energy/industry-information/connections  
+14 Distribution Network Use of System charges 
+
+=== PAGE 50 ===
+ 
+ 
+Appendix A: Background to TNUoS charging  
+Public 
+ 
+ 
+50 
+All tariffs are in £/kW of contracted TEC held by the generator.  
+TNUoS charges are billed on the first of each calendar month. 
+Generators with negative TNUoS tariffs 
+Where a generator’s specific tariff is negative, the generator will be paid during the year 
+based on their highest TEC during that year.  After the end of the year there is a 
+reconciliation, when the true amount to be paid to the generator is recalculated.  
+The value used for this reconciliation is the average output of the individual generator 
+over the three settlement periods of highest output between 1 November and the end of 
+February of the relevant charging year.  Each settlement period must be separated  by at 
+least ten clear days.  Each peak is capped at the amount of TEC held by the generator, so 
+this number cannot be exceeded. 
+For more details, please see CUSC section 14.18.13–17. 
+ 
+Demand charging principles 
+Demand is charged in different ways depending on how the consumption is settled. HH 
+demand customers have applicable tariffs for gross HH demand and embedded export 
+volumes individually rather than being netted. NHH customers have another tariff which is 
+also applied to HH customers in measurement class F and G. Since April 2023, the TNUoS 
+demand residual is charged separately to all final demand. Where a transmission site has 
+a local GSP which connects to and feeds multiple DNO networks, Demand Tariffs wil l be 
+derived from the average zonal tariffs from the relevant DNO zones.  
+HH gross demand tariffs  
+HH gross demand tariffs are made up of locational charges which are currently charged 
+to customers on their metered output during the Triads.  Triads are the three half hour 
+settlement periods of highest net system demand between November and February 
+inclusive each year15.  They can occur on any day at any time, but each peak must be 
+separated by at least ten full days.  The final Triads are usually confirmed at the end of 
+March once final Elexon data is available, via the NESO website. The tariff is charged on a 
+£/kW basis. 
+There is a guide to Triads and HH charging available on our website 16. 
+Embedded Export Tariffs (EET) 
+The EET is paid to customers based on the HH metered export volume during the Triads 
+(the same Triad periods as explained in detail above). This tariff is payable to exporting HH 
+demand customers and embedded generators (<100 MW CVA registered).  
+ 
+15 neso.energy/industry-information/charging/tnuos-charges#Triads-data 
+16 neso.energy/document/130641/download  
+
+=== PAGE 51 ===
+ 
+ 
+Appendix A: Background to TNUoS charging  
+Public 
+ 
+ 
+51 
+This tariff contains the locational demand elements and an Avoided GSP Infrastructure 
+Credit. The final zonal EET is floored at £0/kW to avoid negative tariffs and is applied to the 
+metered Triad volumes of embedded exports for each demand zone. The money to be 
+paid out through the EET will be recovered through the demand residual tariffs.  
+Customers must submit forecasts for both HH gross demand and embedded export 
+volumes. Customers are billed against these forecast volumes, and a reconciliation of the 
+amounts paid against their actual metered output is performed once the final metering 
+data is available from Elexon (up to 16 months after the financial year in question).  
+For more information on forecasts and billing, please see our guide for new suppliers on 
+our website17. 
+Embedded generators (<100 MW CVA registered) will receive payment following the 
+reconciliation process for the amount of embedded export during Triads. SVA registered 
+generators are not paid directly by NESO.  Payments for embedded exports from SVA 
+registered embedded generators will be paid to their registered supplier.  
+Note: HH demand and embedded export is charged at the GSP group, where the 
+transmission network connects to the distribution network, or directly to the customer in 
+question. 
+NHH demand tariffs 
+NHH metered customers are charged based on their demand usage between 16:00 – 
+19:00 every day of the year. Suppliers must submit forecasts throughout the year of their 
+expected demand volumes in each demand zone. The tariff is charged on a p/kWh basis.  
+Suppliers are billed against these forecast volumes, and two reconciliations of the 
+amounts paid against their actual metered output take place, the second of which is once 
+the final metering data is available from Elexon up to 16 months after the financia l year in 
+question. 
+Demand residual tariffs 
+Final demand sites are charged based on the residual band they have been allocated to. 
+The demand residual standing charges now make up majority of the TNUoS demand 
+charge in the form of a set of daily charges per site in each of the residual charging 
+bands, this is a non-locational charge. 
+ 
+ 
+ 
+17 neso.energy/industry-information/charging/charging-documentation 
+
+=== PAGE 52 ===
+ 
+ 
+Appendix B: Changes 
+and proposed changes 
+to the charging 
+methodology 
+  
+
+=== PAGE 53 ===
+ 
+ 
+Appendix B: Changes and proposed changes to the charging methodology   
+Public 
+ 
+ 
+53 
+Changes and proposed changes to the charging methodology 
+The charging methodology can be changed through modifications to the CUSC and the 
+licence.  
+ 
+This section focuses on specific CUSC modifications which were implemented in the 
+TNUoS tariffs for financial year 2025/26.  
+More information about current modifications can be found at the following location:  
+neso.energy/industry-information/codes/connection-and-use-system-code-
+cusc/cusc-modifications 
+Only one modification which affects 2026/27 TNUoS tariffs has been approved, a summary 
+is shown below:  
+ 
+Table 24 Summary of concluded CUSC modification proposals 
+ 
+Modification directed for implementation: 
+Name Title Effect of proposed change Implementation 
+CMP463 Stabilising the Specific Onshore 
+Expansion Factors from 1 April 2026 
+Holds Specific Expansion Factors 
+at 2025/26 levels. 1 April 2026 
+
+=== PAGE 54 ===
+ 
+ 
+Appendix C: Breakdown 
+of locational HH and EE 
+tariffs 
+  
+
+=== PAGE 55 ===
+ 
+ 
+Appendix C: Breakdown of locational HH and EE tariffs  
+Public 
+ 
+ 
+55 
+Locational components of demand tariffs 
+The following tables show the locational components of the HH demand charge (Peak 
+and Year-Round) and the changes between forecast and final tariffs. 
+For the Embedded Export Tariffs (EET), the demand locational elements (peak security and 
+year-round) are added together. The AGIC is then also added, and the resulting tariff is 
+floored at zero to avoid negative tariffs (charges). 
+ 
+Table 25 Location elements of the HH demand tariff for 2026/27 
+ 
+ 
+Table 26 Elements of the Embedded Export Tariff for 2026/27 
+ 
+
+
+=== PAGE 56 ===
+ 
+ 
+Appendix D: Annual Load 
+Factors 
+  
+
+=== PAGE 57 ===
+ 
+ 
+Appendix D: Annual Load Factors  
+Public 
+ 
+ 
+57 
+ALFs 
+ALFs are used to scale the Shared Year-Round element of tariffs for each generator, and 
+the Year Round Not Shared for Conventional Carbon generators, so that each has a tariff 
+appropriate to its historical load factor. 
+For the purposes of this publication, we have used the final version of the 2026/27 ALFs, 
+which were calculated using Transmission Entry Capacity, metered output and Final 
+Physical Notifications from charging years 2020/21 to 2024/25. Generators which 
+commissioned after 1 April 2022 will have fewer than three complete years of data, so the 
+appropriate Generic ALF listed below is incorporated to create three complete years from 
+which the ALF can be calculated. Generators expected to commission during 202 6/27 also 
+use the Generic ALF (in whole or in combination with their actual data) until they have 
+three complete years’ worth of operational data to use in the calculations.  
+The specific and generic ALFs that will apply to the 2026/27 TNUoS Tariffs have been 
+published in the following places: 
+• Final Annual Load Factors for 2026/27 TNUoS Tariffs: 
+neso.energy/document/376346/download  
+• Specific ALFs in excel format: neso.energy/document/376351/download  
+ 
+Generic ALFs 
+Table 27 Generic ALFs 
+ 
+Please note: ALF figures for Wave and Tidal technology are generic figures published by 
+DESNZ due to insufficient metered data being available. 
+These Generic ALFs are calculated in accordance with CUSC 14.15.111. 
+Technology Generic ALF
+Battery 8.0542%
+Biomass 40.0724%
+CCGT_CHP 41.5400%
+Coal 7.5610%
+Gas_Oil 6.9166%
+Hydro 37.1713%
+Nuclear 60.9910%
+Offshore_Wind 47.1080%
+Onshore_Wind 39.6831%
+Pumped_Storage 10.9859%
+Reactive_Compensation 0.0000%
+Solar 16.8358%
+Tidal 14.1000%
+Wave 2.9000%
+
+=== PAGE 58 ===
+ 
+ 
+ 
+ 
+ 
+Appendix E: Contracted 
+Generation 
+  
+
+=== PAGE 59 ===
+ 
+ 
+Appendix E: Contracted Generation  
+ 
+ 
+ 
+Public 
+ 
+ 
+59 
+The contracted TEC volumes are used to set locational tariffs; however, we also model our 
+best view of contracted TEC which also feeds into the Tariff model to set the generation 
+adjustment tariff. We are unable to share our best view of contracted TEC in this report, as 
+they may be commercially sensitive.  
+The contracted generation used in the Transport model (affecting locational tariffs) was 
+fixed using the TEC register as of 31 October 2025, as required by the CUSC 14.15.6 and no 
+further changes to Contracted TEC have been made since the Draft forecast. 
+ 
+Table 28 Contracted generation changes 
+ 
+ 
+Power Station MW Change Node
+Generation 
+Zone
+There have been no contracted generation changes since the Draft Forecast
+
+=== PAGE 60 ===
+ 
+ 
+ 
+ 
+ 
+Appendix F: 
+Transmission Company 
+Revenues
+
+=== PAGE 61 ===
+ 
+Appendix F: Transmission Company Revenues  
+ 
+ 
+Transmission Owner revenue forecasts 
+The revenue forecast has been based on final data submissions received from Onshore 
+and Offshore TOs in January 2026. In addition, there are some pass-through items that 
+are to be collected by NESO via TNUoS charges, including the Strategic Innovation Fund 
+(SIF) and contributions made from Interconnectors. 
+Revenue for offshore transmission networks is included, with forecasts by NESO where the 
+Offshore Transmission Owner has yet to be appointed. 
+Notes: 
+All monies are quoted in millions of pounds, accurate to two decimal places and are in 
+nominal ‘money of the day’ prices unless stated otherwise. 
+All reasonable care has been taken in the preparation of these illustrative tables and the 
+data therein. NESO and TOs offer this data without prejudice and cannot be held 
+responsible for any loss that might be attributed to the use of this data.  Neither N ESO nor 
+TOs accept or assume responsibility for the use of this information by any person or any 
+person to whom this information is shown or any person to whom this information 
+otherwise becomes available. 
+ 
+NESO TNUoS revenue pass-through items forecasts 
+The allowed TNUoS revenue from the onshore TOs (National Grid Electricity Transmission, 
+Scottish Power Transmission and Scottish Hydro Electric Transmission) and OFTOs is 
+collected by NESO and passed through to those parties.  
+NESO also collects the Strategic Innovation Fund (SIF) and passes the money  through to 
+network licensees (including ONTOs, OFTOs and DNOs), in addition to a few other pass-
+through items. The revenue breakdown table below (Table 29) shows details of the pass-
+through TNUoS revenue items under NESO’s licence conditions.  
+Since the Draft forecast, there has been a net decrease in ONTO allowed revenues and 
+decreases in the adjustment term and other passthrough items. This has been offset by 
+an increase in the OFTO allowed revenues.  
+ 
+  
+
+=== PAGE 62 ===
+ 
+ 
+Appendix F: Transmission Company Revenues 
+Public 
+ 
+ 
+62 
+Table 29 NESO revenue breakdown 
+ 
+ 
+Onshore TOs (NGET, SPT and SHET) revenue forecast 
+The allowed revenue forecast for the three onshore TOs (National Grid Electricity 
+Transmission, Scottish Power Transmission and Scottish Hydro Electric Transmission) was 
+provided to us in January 2026, as required by STCP24-1. Total ONTO revenue is forecast to 
+be £6,453.02m, a £9.97m decrease since the Draft forecast. (NGET, £0.00, SPT +£4.95m, 
+SHET -£14.93m).  
+NGET allowed revenue is forecast in line with the allowed revenue as published in the RIIO-
+ET3 Final Determinations PCFM18,19. 
+SHET allowed revenue reflects the latest figures set out in Ofgem’s Final Determination 
+PCFM published on 16 December 2025, in addition to known updates discussed and 
+approved by Ofgem since the date of the Final Determinations publication  and reflects 
+the latest OBR inflationary increases and cost of debt updates. 
+SPT allowed revenue forecasts reflects the RIIO-ET3 final determination, with post final 
+determination adjustments agreed with Ofgem. 
+ 
+Offshore Transmission Owner revenue 
+The Offshore Transmission Owner revenue to be collected via TNUoS for 202 6/27 is 
+forecast to be £1.14bn, an increase of £14.3m since the Draft Forecast. Revenues have been 
+ 
+18Revised 16 December in their Statutory Consultation on the RIIO-3 Licence Drafting Modifications  
+ 
+19 ofgem.gov.uk/consultation/modifications-riio-3-licences-and-associated-documents 
+Term
+£m nominal
+Initial 
+Forecast
+August 
+Forecast
+December 
+Draft
+January 
+Final
+Embedded Offshore Pass-Through (OFETt) 0.67 0.67 0.67 0.67
+Network Innovation Competition Fund (NICFt) 0.00 0.00 0.00 0.00
+Strategic Innovation Fund (SIFt) 62.90 62.90 62.90 46.93
+The Adjustment Term (ADJt) 27.02 20.59 22.79 8.00
+Offshore Transmission Revenue (OFTOt) and Interconnectors Cap & Floor Revenue Adjustment 
+(TICFt)
+1,111.27 1,137.31 1,121.27 1,117.14
+Interconnectors Payment Term (ICPt) -71.88 -71.88 -71.88 -71.88
+Site Specific Charges Discrepancy (DISt) 0.00 0.00 0.00 0.00
+Termination Sums (TSt) 0.00 0.00 0.00 0.00
+NGET revenue pass-through (NGETTOt)* 2,590.04 4,053.45 3,287.05 3,287.05
+SPT revenue pass-through (TSPt) 899.17 1,186.05 1,077.93 1,082.88
+SHETL revenue pass-through (TSHt) 1,573.04 2,473.14 2,098.02 2,083.09
+NESO Bad debt (BDt) 0.03 -0.31 0.00 0.00
+NESO other pass-through items (LFt + ITCt etc) 47.35 57.00 56.84 56.84
+NESO legacy adjustment (LARt) 0.00 0.00 0.00 0.00
+Total 6,239.61 8,918.93 7,655.59 7,610.72
+NESO TNUoS Other Pass-Through
+
+=== PAGE 63 ===
+ 
+ 
+Appendix F: Transmission Company Revenues 
+Public 
+ 
+ 
+63 
+adjusted using updated revenue submissions provided by the OFTOs, in addition to the 
+latest RPI and CPI data (as part of the calculation of each OFTO’s inflation term, as defined 
+in the relevant OFTO licence). The 2026/27 forecast includes £130.4m of forecast revenue 
+(11% of total) for OFTOs yet to asset-transfer. 
+ 
+Interconnector adjustment 
+TNUoS charges can be adjusted by an amount (determined by Ofgem) to enable 
+recovery and/or redistribution of interconnector revenue in accordance with the Cap and 
+Floor regime, and redistribution of revenue through IFA’s Use of Revenues framework, and 
+Interconnectors’ Cap & Floor framework. 
+The Interconnector Adjustment forecast is based on figures submitted by Interconnectors 
+in January 2026.  
+
+=== PAGE 64 ===
+ 
+Appendix F: Transmission Company Revenues  
+ 
+ 
+Table 30 NGET allowed revenue breakdown  
+ 
+Notes: 
+• All monies are nominal 'money of the day' prices unless stated otherwise. 
+• Licensee forecasts and budgets are subject to change especially where they are influenced by external 
+stakeholders 
+ 
+• Initial forecast was as per the January 2025 STCP 24-1 submission 
+• August forecast was as per the RIIO-ET3 Draft Determinations PCFM 
+• December Draft forecast reflected the latest figures set out in Ofgem’s Final Determination PCFM 
+published on 16 December 2025 
+• January Final reflects the January 2026 STCP 24-1 submission 
+  
+Transmission Revenue Forecast
+All monies £m (nominal) unless stated otherwise
+Initial 
+Forecast
+August 
+Forecast
+December 
+Draft
+January 
+Final
+Inflation 2018/19  PI2018/19 283.31 - - -
+Inflation  PIt 380.53 - - -
+Opening Base Revenue Allowance (2018/19 prices) A1 Rt 1,928.32 - - -
+Price Control Financial Model Iteration Adjustment A2 ADJt 0.00 - - -
+[ADJRt = Rt * PIt / PI2018/19 + ADJt] A ADJRt      2,590.04  -  -  - 
+SONIA B1 It-1 4.13% - - -
+Allowed Revenue B2 ARt-1 2,397.89 - - -
+Recovered Revenue B4 RRt-1 2,397.89 - - -
+Correction Term [K t = (ARt-1 - RRt-1) * (1 + It-1 + 1.15%)] B Kt 0.00 - - -
+Legacy pass-through C1 LPt 0.00 - - -
+Legacy MOD C2 LMODt 0.00 - - -
+Legacy K correction C3 LKt 0.00 - - -
+Legacy TRU term C4 LTRUt 0.00 - - -
+Close out of the RIIO-ET1 stakeholder satisfaction output C5 LSSOt 0.00 - - -
+Close out of the RIIO-1 adjustment in respect of the Environmental Discretionary Reward SchemeC6 LEDRt 0.00 - - -
+Close out of the RIIO-ET1 Incentive in respect of the sulphur hexafluoride (SF6) gas emissions incentiveC7 LSFIt 0.00 - - -
+Close out of the RIIO-ET1 reliability incentive in respect of energy not suppliedC8 LRIt 0.00 - - -
+Close out of RIIO-1 Network Outputs C9 NOCOt 0.00 - - -
+Legacy Adjustment [LAR𝑡 = LPT𝑡  + LMODt + LKt + LTRUt + 
+NOCOt + LSSOt + LEDRt + LSFIt + LRIt]
+C LARt 0.00 - - -
+Site Rental Charges
+Total Allowed Revenue [AR t = ADJRt + Kt + LARt] D ARt 2,590.04 4,053.00 3,287.05 3,287.05
+National Grid Electricity Transmission
+
+=== PAGE 65 ===
+ 
+ 
+Appendix F: Transmission Company Revenues 
+Public 
+ 
+ 
+65 
+Table 31 SPT allowed revenue breakdown 
+ 
+. 
+Notes: 
+• All monies are nominal 'money of the day' prices unless stated otherwise. 
+• Licensee forecasts and budgets are subject to change especially where they are influenced by external 
+stakeholders 
+ 
+• Initial forecast was as per the January 2025 STCP 24-1 submission 
+• August forecast was as per the RIIO-ET3 Draft Determinations PCFM 
+• December Draft forecast reflected the latest figures set out in Ofgem’s Final Determination PCFM 
+published on 16 December 2025 
+• January Final reflects the January 2026 STCP 24-1 submission 
+  
+Transmission Revenue Forecast
+All monies £m (nominal) unless stated otherwise
+Initial 
+Forecast
+August 
+Forecast
+December 
+Draft
+January 
+Final
+Inflation 2018/19  PI2018/19 283.31 - - 352.84
+Inflation  PIt 380.53 - - 386.56
+Opening Base Revenue Allowance (2018/19 prices) A1 Rt 669.45 - - 978.55
+Price Control Financial Model Iteration Adjustment A2 ADJt 0.00 - - 0.00
+[ADJRt = Rt * PIt / PI2018/19 + ADJt] A ADJRt           899.17       1,072.08 
+SONIA B1 It-1 -
+Allowed Revenue B2 ARt-1 -
+Recovered Revenue B4 RRt-1 -
+Correction Term [K t = (ARt-1 - RRt-1) * (1 + It-1 + 1.15%)] B Kt 0.00 0.00
+Legacy pass-through C1 LPt 0.00 - - 0.00
+Legacy MOD C2 LMODt 0.00 - - 5.84
+Legacy K correction C3 LKt 0.00 - - 4.97
+Legacy TRU term C4 LTRUt 0.00 - - 0.00
+Close out of the RIIO-ET1 stakeholder satisfaction output C5 LSSOt 0.00 - - 0.00
+Close out of the RIIO-1 adjustment in respect of the Environmental Discretionary Reward SchemeC6 LEDRt 0.00 - - 0.00
+Close out of the RIIO-ET1 Incentive in respect of the sulphur hexafluoride (SF6) gas emissions incentiveC7 LSFIt 0.00 - - 0.00
+Close out of the RIIO-ET1 reliability incentive in respect of energy not suppliedC8 LRIt 0.00 - - 0.00
+Close out of RIIO-1 Network Outputs C9 NOCOt 0.00 - - 0.00
+Legacy Adjustment [LAR𝑡 = LPT𝑡  + LMODt + LKt + LTRUt + 
+NOCOt + LSSOt + LEDRt + LSFIt + LRIt]
+C LARt 0.00 10.80
+Site Rental Charges
+Total Allowed Revenue [AR t = ADJRt + Kt + LARt] D ARt 899.17 1,186.05 1,077.93 1,082.88
+Scottish Power Transmission
+
+=== PAGE 66 ===
+ 
+ 
+Appendix F: Transmission Company Revenues 
+Public 
+ 
+ 
+66 
+ 
+Table 32 SHET allowed revenue breakdown 
+ 
+ 
+Notes 
+• All monies are nominal 'money of the day' prices unless stated otherwise. 
+• Licensee forecasts and budgets are subject to change especially where they are influenced by external 
+stakeholders 
+ 
+• Initial forecast was as per the January 2025 STCP 24-1 submission 
+• August forecast was as per the RIIO-ET3 Draft Determinations PCFM 
+• December Draft forecast reflected the latest figures set out in Ofgem’s Final Determination PCFM 
+published on 16 December 2025 
+• January Final reflects the January 2026 STCP 24-1 submission 
+ 
+ 
+ 
+Transmission Revenue Forecast
+All monies £m (nominal) unless stated otherwise
+Initial 
+Forecast
+August 
+Forecast
+December 
+Draft
+January 
+Final
+Inflation 2018/19  PI2018/19 283.31 - - 283.31
+Inflation  PIt 380.53 - - 386.56
+Opening Base Revenue Allowance (2018/19 prices) A1 Rt 1,171.15 - - 1,514.74
+Price Control Financial Model Iteration Adjustment A2 ADJt 0.00 - - 0.00
+[ADJRt = Rt * PIt / PI2018/19 + ADJt] A ADJRt       1,573.04  -  -       2,066.77 
+SONIA B1 It-1 4.13% - - 4.03%
+Allowed Revenue B2 ARt-1 1,191.62 - - 1,183.42
+Recovered Revenue B4 RRt-1 1,191.62 - - 1,191.62
+Correction Term [K t = (ARt-1 - RRt-1) * (1 + It-1 + 1.15%)] B Kt 0.00 - - -8.62
+Legacy pass-through C1 LPt 0.00 - - 0.00
+Legacy MOD C2 LMODt 0.00 - - 24.94
+Legacy K correction C3 LKt 0.00 - - 0.00
+Legacy TRU term C4 LTRUt 0.00 - - 0.00
+Close out of the RIIO-ET1 stakeholder satisfaction output C5 LSSOt 0.00 - - 0.00
+Close out of the RIIO-1 adjustment in respect of the Environmental Discretionary Reward SchemeC6 LEDRt 0.00 - - 0.00
+Close out of the RIIO-ET1 Incentive in respect of the sulphur hexafluoride (SF6) gas emissions incentiveC7 LSFIt 0.00 - - 0.00
+Close out of the RIIO-ET1 reliability incentive in respect of energy not suppliedC8 LRIt 0.00 - - 0.00
+Close out of RIIO-1 Network Outputs C9 NOCOt 0.00 - - 0.00
+Legacy Adjustment [LAR𝑡 = LPT𝑡  + LMODt + LKt + LTRUt + 
+NOCOt + LSSOt + LEDRt + LSFIt + LRIt]
+C LARt 0.00 - - 24.94
+Site Rental Charges
+Total Allowed Revenue [AR t = ADJRt + Kt + LARt] D ARt 1,573.04 2,473.14 2,098.02 2,083.09
+SHE Transmission
+
+=== PAGE 67 ===
+ 
+Appendix F: Transmission Company Revenues  
+ 
+ 
+ 
+Table 33 Offshore Revenues 
+ 
+ 
+Notes: 
+ 
+• Licensee forecasts and budgets are subject to change especially where they are influenced by external 
+stakeholders. 
+• Greyed out cells are either calculated or not applicable in the year concerned due to the way the 
+licence formulae are constructed. 
+• Network Innovation Competition (NIC) & Strategic Innovation Fund (SIF) payments are not included as 
+they do not form part of OFTO Revenue. 
+• All monies are nominal 'money of the day' prices unless stated otherwise. 
+Offshore Transmission Revenue Forecast (£m)
+Regulatory Year 2021/22 2022/23 2023/24 2024/25 2025/26 2026/27 Notes
+Barrow 6.7 7.0 7.8 8.5 8.8 9.2 Current revenues plus indexation
+Gunfleet 8.4 8.7 9.7 10.7 11.1 11.6 Current revenues plus indexation
+Walney 1 15.3 15.6 17.8 19.4 20.3 21.1 Current revenues plus indexation
+Robin Rigg 9.4 9.8 10.9 12.0 12.4 12.9 Current revenues plus indexation
+Walney 2 15.1 16.3 18.3 20.0 20.9 21.8 Current revenues plus indexation
+Sheringham Shoal 23.4 24.2 26.7 29.5 30.0 32.1 Current revenues plus indexation
+Ormonde 14.1 14.7 16.2 17.9 18.6 19.1 Current revenues plus indexation
+Greater Gabbard 32.1 33.2 37.0 38.8 41.6 43.8 Current revenues plus indexation
+London Array 44.7 46.8 52.6 57.3 59.1 61.7 Current revenues plus indexation
+Thanet 20.8 21.6 24.0 26.3 27.4 28.2 Current revenues plus indexation
+Lincs 30.0 32.5 34.0 40.9 40.1 42.1 Current revenues plus indexation
+Gwynt y mor 32.9 39.8 37.6 37.4 78.8 75.7 Current revenues plus indexation
+West of Duddon Sands 25.3 25.5 28.5 30.3 32.3 33.7 Current revenues plus indexation
+Humber Gateway 14.4 13.3 15.0 16.6 17.4 17.8 Current revenues plus indexation
+Westermost Rough 14.1 14.7 16.5 18.0 18.6 19.5 Current revenues plus indexation
+Burbo Bank Extension 14.1 14.7 16.4 17.7 18.4 19.3 Current revenues plus indexation
+Dudgeon 19.6 20.8 22.6 24.9 26.2 27.5 Current revenues plus indexation
+Race Bank 27.4 28.9 32.5 35.4 36.5 38.1 Current revenues plus indexation
+Galloper 17.1 17.8 20.1 21.9 22.5 23.5 Current revenues plus indexation
+Walney 3 13.5 14.1 15.9 17.3 17.8 18.6 Current revenues plus indexation
+Walney 4 13.5 14.1 15.9 17.3 17.8 18.6 Current revenues plus indexation
+Hornsea 1A 18.4 20.6 22.2 22.9 24.6 Current revenues plus indexation
+Hornsea 1B 18.4 20.6 22.2 22.9 24.6 Current revenues plus indexation
+Hornsea 1C 18.4 20.6 22.2 22.9 24.6 Current revenues plus indexation
+Beatrice 21.1 24.4 25.7 26.5 28.1 Current revenues plus indexation
+Rampion 15.5 17.4 19.7 20.3 21.3 Current revenues plus indexation
+East Anglia 1 47.4 51.8 54.8 57.3 Current revenues plus indexation
+Hornsea 2A 25.3 27.3 28.4 Current revenues plus indexation
+Hornsea 2B 25.3 27.3 28.4 Current revenues plus indexation
+Hornsea 2C 25.3 27.3 28.4 Current revenues plus indexation
+Triton Knoll 41.3 42.7 46.6 Current revenues plus indexation
+Moray East 28.2 50.0 52.6 Current revenues plus indexation
+Seagreen 1 44.5 Draft revenues plus indexation
+Forecast to asset transfer to OFTO in 2025/26 0.0 NESO Forecast
+Forecast to asset transfer to OFTO in 2026/27 130.4 NESO Forecast
+Offshore Transmission Pass-Through 549.0 594.3 765.6 879.8 1,010.9 1,135.5  
+Year
+89.6
+137.1
+138.768.3
+52.6
+
+=== PAGE 68 ===
+ 
+ 
+Appendix G: Generation 
+Zones Map 
+  
+
+=== PAGE 69 ===
+ 
+ 
+Appendix G: Generation Zones Map 
+Public 
+ 
+ 
+69 
+ 
+Geographical map as of 1 April 2025 
+Please note that this map has been redrawn to show the existing zones on a higher 
+quality, more recent ETYS map; it does not represent a re-zoning exercise. For the most up 
+to date maps, please refer to Electricity Ten Year Statement 2024 Appendix A. 
+
+
+=== PAGE 70 ===
+ 
+ 
+Appendix H: Demand 
+Zones Map 
+  
+
+=== PAGE 71 ===
+ 
+ 
+Appendix H: Demand Zones Map  
+Public 
+ 
+ 
+71 
+ 
+ 
+Geographical map as of 1 April 2025
+
+
+=== PAGE 72 ===
+ 
+ 
+Appendix I: Changes to 
+TNUoS parameters 
+  
+
+=== PAGE 73 ===
+ 
+ 
+Appendix I: Changes to TNUoS parameters  
+Public 
+ 
+ 
+73 
+The following table summarises the various inputs to the tariff calculations, indicating 
+which updates are provided in each forecast during the year. Purple highlighting indicates 
+that parameters are fixed from that forecast onwards. 
+ 
+2026/27 TNUoS Tariff Forecast 
+ April 
+2025 
+August 
+2025 
+Draft Tariffs 
+December 2025 
+Final Tariffs 
+January 2026 
+Methodology Open to industry governance 
+LOCATIONAL 
+DNO/DCC 
+Demand Data 
+Initial update using previous year’s 
+data source Week 24 updated Week 24 Finalised 
+Contracted TEC Latest TEC 
+Register 
+Latest TEC 
+Register 
+TEC Register Frozen 
+on 31 October 
+ 
+Network Model 
+Initial update using previous year’s 
+data source (except local circuit 
+changes which are updated 
+quarterly) 
+Latest version 
+based on ETYS 
+ 
+Inflation Forecast Actual 
+RESIDUAL / ADJUSTMENT 
+OFTO Revenue 
+(part of allowed 
+revenue) 
+Forecast Forecast Forecast From OFTOs & NESO 
+best view 
+Allowed Revenue 
+(non OFTO 
+changes) 
+Initial update 
+using previous 
+year’s data 
+source 
+Update financial 
+parameters Latest TO forecasts From ONTOs 
+Demand 
+Charging Bases 
+(including TDR 
+site counts) 
+Initial update 
+using previous 
+year’s data 
+source 
+Revised forecast Revised forecast Revised by exception 
+Consumption 
+Data (by TDR 
+charging band) 
+Previous year’s data source 
+DNO/IDNO 
+consumption 
+update received 
+ 
+Generation 
+Charging Base NESO best view NESO best view NESO best view NESO final  
+best view 
+Generation ALFs Previous year’s data source Draft ALFs 
+published Final ALFs published 
+Generation 
+Revenue 
+(G/D split) 
+Forecast Forecast Forecast Generation revenue 
+£m fixed 
+ 
+
+=== PAGE 74 ===
+ 
+ 
+Document Revision 
+History 
+  
+
+=== PAGE 75 ===
+ 
+ 
+Document Revision History  
+Public 
+ 
+ 
+75 
+Document Revision History 
+ 
+Version Number Date of Issue Notes 
+1.0 30 January 2026 Publication of Final TNUoS Tariffs for 2026/27 
+ 
+ 
+
+=== PAGE 76 ===
+ 
+ 
+ 
+ 
+National Energy System Operator  
+Faraday House  
+Warwick Technology Park  
+Gallows Hill  
+Warwick  
+CV34 6DA  
+TNUoS.Queries@neso.energy 
+www.neso.energy 
