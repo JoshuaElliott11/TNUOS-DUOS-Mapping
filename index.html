@@ -315,20 +315,84 @@
     };
 
     const DEMAND_ZONE_FROM_GSP_GROUP = {
-      _A: { zone: 1, name: "Northern Scotland" },
-      _B: { zone: 2, name: "Southern Scotland" },
-      _C: { zone: 3, name: "Northern" },
-      _D: { zone: 4, name: "North West" },
-      _E: { zone: 5, name: "Yorkshire" },
-      _F: { zone: 6, name: "N Wales & Mersey" },
-      _G: { zone: 7, name: "East Midlands" },
-      _H: { zone: 8, name: "Midlands" },
-      _J: { zone: 9, name: "Eastern" },
+      _A: { zone: 9, name: "Eastern" },
+      _B: { zone: 7, name: "East Midlands" },
+      _C: { zone: 12, name: "London" },
+      _D: { zone: 6, name: "N Wales & Mersey" },
+      _E: { zone: 8, name: "Midlands" },
+      _F: { zone: 3, name: "Northern" },
+      _G: { zone: 4, name: "North West" },
+      _H: { zone: 13, name: "Southern" },
+      _J: { zone: 11, name: "South East" },
       _K: { zone: 10, name: "South Wales" },
-      _L: { zone: 11, name: "South East" },
-      _M: { zone: 12, name: "London" },
-      _N: { zone: 13, name: "Southern" },
-      _P: { zone: 14, name: "South Western" },
+      _L: { zone: 14, name: "South Western" },
+      _M: { zone: 5, name: "Yorkshire" },
+      _N: { zone: 2, name: "Southern Scotland" },
+      _P: { zone: 1, name: "Northern Scotland" },
+    };
+
+    const GRANULAR_DUOS_OPERATOR_BY_REGION = {
+      "East England": "UKPN (EPN)",
+      "London": "UKPN (LPN)",
+      "South East England": "UKPN (SPN)",
+      "North Scotland": "SSEN (SHEPD)",
+      "Southern England": "SSEN (SEPD)",
+      "North Wales, Merseyside and Cheshire": "SPEN (SPM / SP Manweb)",
+      "South and Central Scotland": "SPEN (SPD / SP Distribution)",
+      "North East England": "Northern Powergrid (NPgN)",
+      "Yorkshire": "Northern Powergrid (NPgY)",
+      "North West England": "ENWL",
+      "East Midlands": "NGED (EMEB)",
+      "West Midlands": "NGED (WEBM)",
+      "South Wales": "NGED (SWALES)",
+      "South West England": "NGED (SWEST)",
+    };
+
+    const DEMAND_ZONE_FROM_GRANULAR_DUOS = {
+      "UKPN (EPN)": 9,
+      "UKPN (LPN)": 12,
+      "UKPN (SPN)": 11,
+      "SSEN (SHEPD)": 1,
+      "SSEN (SEPD)": 13,
+      "SPEN (SPM / SP Manweb)": 6,
+      "SPEN (SPD / SP Distribution)": 2,
+      "Northern Powergrid (NPgN)": 3,
+      "Northern Powergrid (NPgY)": 5,
+      "ENWL": 4,
+      "NGED (EMEB)": 7,
+      "NGED (WEBM)": 8,
+      "NGED (SWALES)": 10,
+      "NGED (SWEST)": 14,
+    };
+
+    const TNUOS_GENERATION_ZONE_NAMES = {
+      GZ1: "North Scotland",
+      GZ2: "East Aberdeenshire",
+      GZ3: "Western Highlands",
+      GZ4: "Skye and Lochalsh",
+      GZ5: "Eastern Grampian and Tayside",
+      GZ6: "Central Grampian",
+      GZ7: "Argyll",
+      GZ8: "The Trossachs",
+      GZ9: "Stirlingshire and Fife",
+      GZ10: "South West Scotlands",
+      GZ11: "Lothian and Borders",
+      GZ12: "Solway and Cheviot",
+      GZ13: "North East England",
+      GZ14: "North Lancashire and The Lakes",
+      GZ15: "South Lancashire, Yorkshire and Humber",
+      GZ16: "North Midlands and North Wales",
+      GZ17: "South Lincolnshire and North Norfolk",
+      GZ18: "Mid Wales and The Midlands",
+      GZ19: "Anglesey and Snowdon",
+      GZ20: "Pembrokeshire",
+      GZ21: "South Wales & Gloucester",
+      GZ22: "Cotswold",
+      GZ23: "Central London",
+      GZ24: "Essex and Kent",
+      GZ25: "Oxfordshire, Surrey and Sussex",
+      GZ26: "Somerset and Wessex",
+      GZ27: "West Devon and Cornwall",
     };
 
     const datasets = { dno: null, gsp: null, gen: null };
@@ -426,6 +490,12 @@
       return DEMAND_ZONE_FROM_GSP_GROUP[gspGroup] || { zone: null, name: null };
     }
 
+    function getGenerationZoneLabel(genLayer) {
+      if (!genLayer) return null;
+      const name = TNUOS_GENERATION_ZONE_NAMES[genLayer];
+      return name ? `${genLayer} (${name})` : genLayer;
+    }
+
     function recommendBandByBasis(demandBasis, value, unit) {
       if (!Number.isFinite(value)) return null;
 
@@ -504,13 +574,26 @@
       const gsp = findContaining(pointWgs84, datasets.gsp);
       const gen = findContaining(pointWgs84, datasets.gen);
       const demandZone = getDemandZone(gsp.GSPGroup);
-      return { lat, lon, dno, gsp, gen, demandZone };
+      const granularDuosOperator = GRANULAR_DUOS_OPERATOR_BY_REGION[dno.Area] || null;
+      const expectedDemandZoneFromGranular = granularDuosOperator
+        ? DEMAND_ZONE_FROM_GRANULAR_DUOS[granularDuosOperator] || null
+        : null;
+      return {
+        lat,
+        lon,
+        dno,
+        gsp,
+        gen,
+        demandZone,
+        granularDuosOperator,
+        expectedDemandZoneFromGranular,
+      };
     }
 
     function buildPresetList(archetype, lookup, demandBasis, capacity, capacityUnit) {
       const out = [];
       const demandZone = lookup.demandZone.zone ?? "N/A";
-      const generationZone = lookup.gen.layer || "N/A";
+      const generationZone = getGenerationZoneLabel(lookup.gen.layer) || "N/A";
       const basisDisplay = basisLabelForDisplay(demandBasis);
       const siteSpecificBasis = basisLabelForSiteSpecific(demandBasis);
 
@@ -576,10 +659,12 @@
         ["Longitude", lookup.lon],
         ["DUoS region", lookup.dno.Area],
         ["DUoS operator", lookup.dno.DNO_Full || lookup.dno.DNO],
+        ["DUoS granular operator", lookup.granularDuosOperator],
         ["TNUoS demand GSP group", lookup.gsp.GSPGroup],
         ["Demand zone", lookup.demandZone.zone ? `${lookup.demandZone.zone} (${lookup.demandZone.name})` : null],
+        ["Demand zone from granular DUoS map", lookup.expectedDemandZoneFromGranular],
         ["GSP code", lookup.gsp.GSPs],
-        ["TNUoS generation zone", lookup.gen.layer],
+        ["TNUoS generation zone", getGenerationZoneLabel(lookup.gen.layer)],
       ], "Note: Demand and generation zones are parallel spatial lookups.");
       status.textContent = "Lookup complete.";
     });
@@ -603,11 +688,23 @@
       const rows = [
         ["Site archetype", archetype.label],
         ["DUoS region", lookup.dno.Area],
+        ["DUoS granular operator", lookup.granularDuosOperator],
         ["TNUoS demand zone", lookup.demandZone.zone ? `${lookup.demandZone.zone} (${lookup.demandZone.name})` : null],
-        ["TNUoS generation zone", lookup.gen.layer],
+        ["TNUoS generation zone", getGenerationZoneLabel(lookup.gen.layer)],
         ["Input", Number.isFinite(capacity) ? `${capacity} ${capacityUnit}` : "Not supplied"],
         ["Recommended charge set", recommendation.list.join("; ")],
       ];
+
+      if (
+        Number.isFinite(lookup.expectedDemandZoneFromGranular) &&
+        Number.isFinite(lookup.demandZone.zone) &&
+        lookup.expectedDemandZoneFromGranular !== lookup.demandZone.zone
+      ) {
+        rows.push([
+          "Mapping check",
+          `Warning: granular DUoS maps to demand zone ${lookup.expectedDemandZoneFromGranular}, but polygon lookup returned ${lookup.demandZone.zone}`,
+        ]);
+      }
 
       if (archetype.needsLvHvBand) {
         rows.push([`${basisLabelForSiteSpecific(demandBasis)} Site Specific band`, recommendation.lvHvBand ? `Band ${recommendation.lvHvBand}` : "Band pending input"]);
