@@ -1,9 +1,12 @@
 # Python
 __pycache__/
 *.pyc
+*.pyo
 .venv/
+venv/
+.pytest_cache/
 
-# Raw (non-slim) large files — kept locally but not needed in the repo
+# Raw (non-slim) large files - kept locally but not needed in the repo
 # (the slim_ versions are committed instead)
 data/dno_20240503.geojson
 data/gsp_20251204.geojson
@@ -15,4 +18,11 @@ sample_input.*
 sample_output.*
 single_coordinate_input.xlsx
 single_coordinate_output.xlsx
+
+# OS / editors
+.DS_Store
 desktop.ini
+Thumbs.db
+.vscode/
+.idea/
+*.swp
