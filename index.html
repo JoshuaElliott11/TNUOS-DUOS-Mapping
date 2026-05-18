@@ -440,6 +440,47 @@
     flex: 0 0 12px;
   }
 
+  /* Permanent labels for DUoS / Gen overlays */
+  .leaflet-tooltip.region-label {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    text-align: center;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .leaflet-tooltip.region-label::before { display: none; }
+  .region-label-text {
+    font-weight: 700;
+    font-size: 11.5px;
+    line-height: 1.15;
+    text-shadow:
+      0 0 3px rgba(255,255,255,0.95),
+      0 0 6px rgba(255,255,255,0.85),
+      1px 1px 0 rgba(255,255,255,0.95),
+      -1px -1px 0 rgba(255,255,255,0.95),
+      1px -1px 0 rgba(255,255,255,0.95),
+      -1px 1px 0 rgba(255,255,255,0.95);
+  }
+  .region-label-sub {
+    font-weight: 500;
+    font-size: 9.5px;
+    line-height: 1.15;
+    margin-top: 1px;
+    color: var(--ink-2);
+    text-shadow:
+      0 0 3px rgba(255,255,255,0.95),
+      1px 1px 0 rgba(255,255,255,0.9),
+      -1px -1px 0 rgba(255,255,255,0.9),
+      1px -1px 0 rgba(255,255,255,0.9),
+      -1px 1px 0 rgba(255,255,255,0.9);
+  }
+  .region-label.dno  .region-label-text { color: #0e7490; }
+  .region-label.gen  .region-label-text { color: #6d28d9; }
+
   /* Toast */
   .toast {
     position: fixed; bottom: 24px; right: 24px;
@@ -591,7 +632,7 @@
         <div class="result-card-body">
           <ul class="tariff-list" id="tariff-list"></ul>
           <div id="tariff-warning"></div>
-          <p class="note">Export-side lines (Generation Site Specific, Embedded Export) sit as income, not cost. Band suggestions are illustrative; cross-check against the live charging methodology before using them in production.</p>
+          <p class="note">Band suggestions are illustrative; cross-check against the live charging methodology before using them in production.</p>
         </div>
       </div>
     </div>
@@ -982,8 +1023,8 @@
     const gen = lookup.gen;
 
     const baseStyle = (color) => ({
-      color, weight: 2, opacity: 0.85,
-      fillColor: color, fillOpacity: 0.08, dashArray: null,
+      color, weight: 3, opacity: 1,
+      fillColor: color, fillOpacity: 0.22, dashArray: null,
     });
 
     if (dno && dno.geometry) {
@@ -1060,6 +1101,24 @@
     return null;
   }
 
+  function labelForFeature(layerName, props) {
+    if (!props) return null;
+    if (layerName === "dno") {
+      const area = props.Area || "";
+      if (!area) return null;
+      return `<div class="region-label-text">${escapeHtml(area)}</div>`;
+    }
+    if (layerName === "gen") {
+      const code = props.layer || "";
+      if (!code) return null;
+      const name = TNUOS_GENERATION_ZONE_NAMES[code] || "";
+      return name
+        ? `<div class="region-label-text">${escapeHtml(code)}</div><div class="region-label-sub">${escapeHtml(name)}</div>`
+        : `<div class="region-label-text">${escapeHtml(code)}</div>`;
+    }
+    return null;
+  }
+
   function addAllLayer(layerName) {
     if (allLayers[layerName]) return;
     if (!datasets.dno || !datasets.gsp || !datasets.gen) return;
@@ -1077,11 +1136,28 @@
     const color = LAYER_COLOURS[layerName];
     const dashArray = LAYER_DASH[layerName];
 
+    // Stronger style than before so the overlay actually reads on the basemap.
+    // DUoS and gen polygons each get a permanent centred label.
+    const style = layerName === "gsp"
+      ? { color, weight: 1.5, opacity: 0.75, fillColor: color, fillOpacity: 0.12, dashArray }
+      : { color, weight: 2,   opacity: 0.9,  fillColor: color, fillOpacity: 0.18, dashArray };
+
     allLayers[layerName] = L.geoJSON(fc, {
-      style: { color, weight: 1, opacity: 0.55, fillColor: color, fillOpacity: 0.04, dashArray },
+      style,
       onEachFeature: (feature, layer) => {
-        const html = popupForFeature(layerName, feature.properties);
-        if (html) layer.bindPopup(html);
+        const popupHtml = popupForFeature(layerName, feature.properties);
+        if (popupHtml) layer.bindPopup(popupHtml);
+
+        const labelHtml = labelForFeature(layerName, feature.properties);
+        if (labelHtml) {
+          layer.bindTooltip(labelHtml, {
+            permanent: true,
+            direction: "center",
+            sticky: false,
+            opacity: 1,
+            className: `region-label ${layerName}`,
+          });
+        }
       },
     }).addTo(map);
 
