@@ -944,6 +944,7 @@
 
   // "Show all" overlay layers
   const allLayers = { dno: null, gsp: null, gen: null };
+  const allLabels = { dno: null, gen: null }; // demand zones intentionally unlabelled
   let reprojectedDnoFc = null; // cached after first render
 
   function setStatus(text, state) {
@@ -1105,8 +1106,9 @@
     if (!props) return null;
     if (layerName === "dno") {
       const area = props.Area || "";
-      if (!area) return null;
-      return `<div class="region-label-text">${escapeHtml(area)}</div>`;
+      const op = GRANULAR_DUOS_OPERATOR_BY_REGION[area] || props.DNO_Full || props.DNO || "";
+      if (!op) return null;
+      return `<div class="region-label-text">${escapeHtml(op)}</div>`;
     }
     if (layerName === "gen") {
       const code = props.layer || "";
@@ -1115,6 +1117,59 @@
       return name
         ? `<div class="region-label-text">${escapeHtml(code)}</div><div class="region-label-sub">${escapeHtml(name)}</div>`
         : `<div class="region-label-text">${escapeHtml(code)}</div>`;
+    }
+    return null;
+  }
+
+  // Area-weighted centroid for accurate, in-polygon label placement.
+  // Leaflet's default tooltip position uses the bounding-box centre, which
+  // sits outside the polygon for irregular shapes (Scotland's archipelago,
+  // for example), so we compute the centroid ourselves.
+  function polygonCentroid(ring) {
+    const n = ring.length;
+    let a = 0, cx = 0, cy = 0;
+    for (let i = 0; i < n; i++) {
+      const [x1, y1] = ring[i];
+      const [x2, y2] = ring[(i + 1) % n];
+      const cross = x1 * y2 - x2 * y1;
+      a += cross;
+      cx += (x1 + x2) * cross;
+      cy += (y1 + y2) * cross;
+    }
+    if (a === 0) {
+      let sx = 0, sy = 0;
+      for (const [x, y] of ring) { sx += x; sy += y; }
+      return [sx / n, sy / n];
+    }
+    return [cx / (3 * a), cy / (3 * a)];
+  }
+
+  function ringSignedArea(ring) {
+    const n = ring.length;
+    let a = 0;
+    for (let i = 0; i < n; i++) {
+      const [x1, y1] = ring[i];
+      const [x2, y2] = ring[(i + 1) % n];
+      a += x1 * y2 - x2 * y1;
+    }
+    return Math.abs(a / 2);
+  }
+
+  function geometryCentroid(geometry) {
+    if (!geometry) return null;
+    if (geometry.type === "Polygon") {
+      return polygonCentroid(geometry.coordinates[0]);
+    }
+    if (geometry.type === "MultiPolygon") {
+      // Use the centroid of the largest outer ring (most visually significant
+      // for archipelagic features like SSEN SHEPD).
+      let best = null, bestArea = -1;
+      for (const poly of geometry.coordinates) {
+        const ring = poly[0];
+        const area = ringSignedArea(ring);
+        if (area > bestArea) { bestArea = area; best = ring; }
+      }
+      return best ? polygonCentroid(best) : null;
     }
     return null;
   }
@@ -1147,19 +1202,31 @@
       onEachFeature: (feature, layer) => {
         const popupHtml = popupForFeature(layerName, feature.properties);
         if (popupHtml) layer.bindPopup(popupHtml);
-
-        const labelHtml = labelForFeature(layerName, feature.properties);
-        if (labelHtml) {
-          layer.bindTooltip(labelHtml, {
-            permanent: true,
-            direction: "center",
-            sticky: false,
-            opacity: 1,
-            className: `region-label ${layerName}`,
-          });
-        }
       },
     }).addTo(map);
+
+    // Standalone, centroid-positioned labels (DUoS, Gen only). Standalone
+    // L.tooltip instances let us pin labels to the area-weighted centroid
+    // rather than the polygon's bounding-box centre.
+    if (layerName === "dno" || layerName === "gen") {
+      const group = L.layerGroup();
+      fc.features.forEach(feature => {
+        const html = labelForFeature(layerName, feature.properties);
+        if (!html) return;
+        const c = geometryCentroid(feature.geometry);
+        if (!c) return;
+        const tip = L.tooltip({
+          permanent: true,
+          direction: "center",
+          opacity: 1,
+          interactive: false,
+          className: `region-label ${layerName}`,
+        }).setLatLng([c[1], c[0]]).setContent(html);
+        group.addLayer(tip);
+      });
+      group.addTo(map);
+      allLabels[layerName] = group;
+    }
 
     // Keep matched layers on top so the highlight remains visible.
     if (dnoLayer) dnoLayer.bringToFront();
@@ -1172,6 +1239,10 @@
     if (allLayers[layerName]) {
       map.removeLayer(allLayers[layerName]);
       allLayers[layerName] = null;
+    }
+    if (allLabels[layerName]) {
+      map.removeLayer(allLabels[layerName]);
+      allLabels[layerName] = null;
     }
   }
 
