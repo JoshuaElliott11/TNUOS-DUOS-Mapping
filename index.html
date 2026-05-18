@@ -1,757 +1,1159 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DUoS + TNUoS Coordinate Lookup</title>
-  <meta name="robots" content="noindex">
-  <style>
-    :root {
-      --charcoal: #1f1f23;
-      --purple: #8d2eff;
-      --pink: #ff00a8;
-      --green: #76f5d8;
-      --blue: #0c1c73;
-      --bg: var(--charcoal);
-      --panel: rgba(12, 28, 115, 0.86);
-      --ink: #ffffff;
-      --line: rgba(118, 245, 216, 0.34);
-      --input-bg: rgba(31, 31, 35, 0.9);
-      --input-line: rgba(118, 245, 216, 0.55);
-      --status: #d8d8e6;
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TNUoS + DUoS Region Lookup</title>
+<meta name="description" content="Map-based lookup of GB network charge regions: DUoS licence area, TNUoS demand zone, and TNUoS generation zone for any site by latitude and longitude.">
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+<style>
+  :root {
+    --bg:           #f8fafc;
+    --surface:      #ffffff;
+    --surface-2:    #f1f5f9;
+    --ink:          #0f172a;
+    --ink-2:        #334155;
+    --ink-3:        #64748b;
+    --ink-4:        #94a3b8;
+    --line:         #e2e8f0;
+    --line-strong:  #cbd5e1;
+
+    --primary:      #4f46e5;
+    --primary-hov:  #4338ca;
+    --primary-tint: #eef2ff;
+
+    --success:      #059669;
+    --success-tint: #ecfdf5;
+    --warn:         #d97706;
+    --warn-tint:    #fffbeb;
+    --danger:       #dc2626;
+    --danger-tint:  #fef2f2;
+
+    --duos:         #0891b2;
+    --duos-tint:    #ecfeff;
+    --tnuos:        #7c3aed;
+    --tnuos-tint:   #f5f3ff;
+
+    --map-dno:      #0891b2;
+    --map-demand:   #d97706;
+    --map-gen:      #7c3aed;
+
+    --radius-sm:    6px;
+    --radius:       10px;
+    --radius-lg:    14px;
+
+    --shadow-sm:    0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow:       0 4px 16px rgba(15, 23, 42, 0.06);
+    --shadow-lg:    0 12px 40px rgba(15, 23, 42, 0.10);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+
+  /* Header */
+  header.app-header {
+    height: 60px;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px;
+    position: sticky; top: 0; z-index: 30;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-logo {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+    color: white;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: 14px; letter-spacing: -0.02em;
+  }
+  .brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+  .brand-name { font-weight: 600; font-size: 14px; color: var(--ink); }
+  .brand-sub  { font-size: 12px; color: var(--ink-3); }
+  .header-actions { display: flex; align-items: center; gap: 8px; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 14px;
+    font-size: 13px; font-weight: 500; font-family: inherit;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--surface); color: var(--ink-2);
+    cursor: pointer;
+    transition: all 150ms ease;
+    text-decoration: none;
+  }
+  .btn:hover { border-color: var(--ink-4); color: var(--ink); background: var(--surface-2); }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--primary); color: white; border-color: var(--primary); }
+  .btn-primary:hover { background: var(--primary-hov); border-color: var(--primary-hov); color: white; }
+  .btn-icon { width: 32px; height: 32px; padding: 0; justify-content: center; }
+  .btn-block { width: 100%; justify-content: center; padding: 10px 14px; font-weight: 500; }
+  .btn[disabled] { opacity: 0.5; pointer-events: none; }
+
+  /* Layout */
+  .layout {
+    display: grid;
+    grid-template-columns: 480px 1fr;
+    height: calc(100vh - 60px);
+    overflow: hidden;
+  }
+  @media (max-width: 1100px) {
+    .layout { grid-template-columns: 420px 1fr; }
+  }
+  @media (max-width: 880px) {
+    .layout {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 60vh;
+      height: auto; overflow: visible;
     }
+  }
 
-    * { box-sizing: border-box; }
+  /* Left panel */
+  .panel {
+    background: var(--surface);
+    border-right: 1px solid var(--line);
+    overflow-y: auto;
+    padding: 28px 28px 60px;
+  }
+  @media (max-width: 880px) {
+    .panel { border-right: 0; border-bottom: 1px solid var(--line); padding: 24px 20px 40px; }
+  }
 
-    body {
-      margin: 0;
-      font-family: "Sharp Sans Semibold", "Sharp Sans", "Segoe UI Semibold", "Segoe UI", Tahoma, sans-serif;
-      font-weight: 600;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 8% 8%, rgba(141, 46, 255, 0.4) 0, transparent 34%),
-        radial-gradient(circle at 92% 10%, rgba(255, 0, 168, 0.32) 0, transparent 36%),
-        radial-gradient(circle at 15% 92%, rgba(118, 245, 216, 0.24) 0, transparent 35%),
-        radial-gradient(circle at 85% 88%, rgba(12, 28, 115, 0.55) 0, transparent 42%),
-        var(--bg);
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-    }
+  .panel h1 {
+    margin: 0 0 6px;
+    font-size: 22px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 1.2;
+  }
+  .panel .lede {
+    margin: 0 0 24px;
+    color: var(--ink-3); font-size: 13px;
+  }
 
-    .card {
-      width: min(900px, 100%);
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 16px 42px rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(4px);
-    }
+  /* Form sections */
+  .section { margin-bottom: 22px; }
+  .section-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--ink-3);
+  }
+  .section-meta { font-size: 11px; color: var(--ink-4); font-family: 'JetBrains Mono', monospace; }
 
-    h1 {
-      margin: 0 0 12px;
-      font-size: clamp(1.4rem, 2.5vw, 2rem);
-      color: var(--green);
-    }
+  .field { margin-bottom: 10px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label {
+    display: block;
+    font-size: 12px; font-weight: 500; color: var(--ink-2);
+    margin-bottom: 4px;
+  }
+  .field input,
+  .field select {
+    width: 100%;
+    padding: 9px 11px;
+    font-size: 13px; font-family: inherit;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+  .field input:hover, .field select:hover { border-color: var(--line-strong); }
+  .field input:focus, .field select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-tint);
+  }
+  .field input::placeholder { color: var(--ink-4); }
 
-    p {
-      margin: 0 0 18px;
-      line-height: 1.45;
-    }
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .pair {
+    display: grid;
+    grid-template-columns: 1.7fr 1fr;
+    gap: 6px;
+  }
 
-    .section-title {
-      margin: 18px 0 10px;
-      color: var(--green);
-      letter-spacing: 0.02em;
-      font-size: 0.95rem;
-      text-transform: uppercase;
-    }
+  .hint-text {
+    font-size: 12px; color: var(--ink-3);
+    margin-top: 6px; line-height: 1.45;
+  }
+  .hint-text kbd {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-bottom-width: 2px;
+    border-radius: 3px;
+    padding: 1px 4px;
+    color: var(--ink-2);
+    margin: 0 2px;
+  }
 
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 4px;
+  }
 
-    label {
-      font-size: 0.9rem;
-      display: block;
-      margin-bottom: 6px;
-    }
+  /* Status strip */
+  .status-strip {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    font-size: 12px; color: var(--ink-2);
+    margin: 18px 0 0;
+  }
+  .status-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--ink-4);
+    transition: background-color 200ms ease;
+    flex: 0 0 7px;
+  }
+  .status-dot.ready { background: var(--success); }
+  .status-dot.error { background: var(--danger); }
+  .status-dot.busy  { background: var(--warn); }
 
-    input,
-    select {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid var(--input-line);
-      border-radius: 10px;
-      font-size: 1rem;
-      font-family: inherit;
-      font-weight: 600;
-      color: var(--ink);
-      background: var(--input-bg);
-    }
+  /* Results */
+  .result-section { margin-top: 26px; display: none; }
+  .result-section.visible { display: block; animation: slide-in 240ms ease-out; }
+  @keyframes slide-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
-    input::placeholder {
-      color: rgba(255, 255, 255, 0.65);
-    }
+  .result-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .result-card-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface-2);
+  }
+  .result-card-title {
+    font-size: 13px; font-weight: 600; color: var(--ink);
+  }
+  .result-card-body { padding: 14px 16px; }
 
-    input:focus,
-    select:focus {
-      outline: none;
-      border-color: var(--pink);
-      box-shadow: 0 0 0 3px rgba(255, 0, 168, 0.25);
-    }
+  .kv-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .kv {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 10px;
+    align-items: baseline;
+    font-size: 13px;
+  }
+  .kv .k { color: var(--ink-3); font-size: 12px; font-weight: 500; }
+  .kv .v { color: var(--ink); font-weight: 500; word-break: break-word; }
+  .kv .v.muted { color: var(--ink-4); font-style: italic; font-weight: 400; }
+  @media (max-width: 420px) {
+    .kv { grid-template-columns: 1fr; gap: 2px; }
+  }
 
-    .button-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 4px;
-    }
+  /* Tariff list */
+  .tariff-list { list-style: none; padding: 0; margin: 0; }
+  .tariff-item {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+  }
+  .tariff-item:first-child { padding-top: 0; }
+  .tariff-item:last-child { border-bottom: 0; padding-bottom: 0; }
 
-    button {
-      border: 0;
-      border-radius: 10px;
-      padding: 10px 14px;
-      font-size: 1rem;
-      font-family: inherit;
-      font-weight: 600;
-      cursor: pointer;
-      background: linear-gradient(120deg, var(--purple), var(--pink));
-      color: white;
-    }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 10.5px; font-weight: 600;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-family: 'JetBrains Mono', monospace;
+    text-align: center;
+  }
+  .badge.duos  { background: var(--duos-tint);  color: var(--duos); }
+  .badge.tnuos { background: var(--tnuos-tint); color: var(--tnuos); }
 
-    button.secondary {
-      background: linear-gradient(120deg, #2f377a, #1d2452);
-      border: 1px solid rgba(118, 245, 216, 0.25);
-    }
+  .tariff-label {
+    font-size: 13px; font-weight: 500; color: var(--ink);
+    line-height: 1.4;
+  }
+  .tariff-meta {
+    font-size: 11.5px; color: var(--ink-3);
+    font-family: 'JetBrains Mono', monospace;
+    white-space: nowrap;
+  }
 
-    button:hover { filter: brightness(1.05); }
+  .alert {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 10px 12px;
+    background: var(--warn-tint);
+    border: 1px solid #fde68a;
+    border-radius: var(--radius-sm);
+    font-size: 12.5px; color: #78350f;
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+  .alert .alert-icon {
+    width: 16px; height: 16px; flex: 0 0 16px; margin-top: 2px;
+    color: var(--warn);
+  }
+  .alert b { font-weight: 600; }
 
-    .status {
-      margin-top: 12px;
-      color: var(--status);
-      font-size: 0.9rem;
-    }
+  .note {
+    font-size: 12px; color: var(--ink-3);
+    margin-top: 10px; line-height: 1.5;
+  }
 
-    .result {
-      margin-top: 18px;
-      padding: 14px;
-      border-radius: 12px;
-      background: rgba(31, 31, 35, 0.84);
-      border: 1px solid var(--line);
-      display: none;
-    }
+  /* Right panel: map */
+  .map-panel { position: relative; overflow: hidden; }
+  #map { width: 100%; height: 100%; background: #e7eef5; }
+  @media (max-width: 880px) {
+    .map-panel { min-height: 60vh; }
+  }
 
-    .result-row {
-      display: grid;
-      grid-template-columns: 250px 1fr;
-      gap: 10px;
-      padding: 6px 0;
-      border-bottom: 1px dashed rgba(118, 245, 216, 0.26);
-    }
+  .map-overlay {
+    position: absolute;
+    bottom: 16px; left: 16px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    font-size: 12px;
+    box-shadow: var(--shadow);
+    z-index: 500;
+    max-width: 280px;
+    display: none;
+  }
+  .map-overlay.visible { display: block; }
+  .map-legend {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--ink-2);
+  }
+  .legend-swatch {
+    width: 14px; height: 14px;
+    border-radius: 3px;
+    border: 2px solid;
+    background: rgba(255,255,255,0.4);
+  }
 
-    .result-row:last-child { border-bottom: none; }
-    .k { font-weight: 600; }
-    .v { color: #ffffff; }
+  .map-hint {
+    position: absolute;
+    top: 16px; left: 16px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    font-size: 12px; color: var(--ink-2);
+    box-shadow: var(--shadow-sm);
+    z-index: 500;
+  }
+  .map-hint b { color: var(--ink); font-weight: 600; }
 
-    .warn {
-      margin-top: 10px;
-      color: var(--green);
-      font-weight: 600;
-    }
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--ink);
+    color: white;
+    padding: 12px 18px;
+    border-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 500;
+    box-shadow: var(--shadow-lg);
+    opacity: 0; transform: translateY(6px);
+    pointer-events: none;
+    transition: all 220ms ease;
+    z-index: 1000;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
 
-    .hidden {
-      display: none;
-    }
+  /* Leaflet tweaks */
+  .leaflet-container { font-family: inherit; }
+  .leaflet-popup-content-wrapper {
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow);
+  }
+  .leaflet-popup-content { font-size: 12.5px; margin: 10px 14px; }
+  .leaflet-control-attribution { font-size: 10.5px; }
 
-    @media (max-width: 640px) {
-      .row { grid-template-columns: 1fr; }
-      .result-row { grid-template-columns: 1fr; }
-      .button-row button { width: 100%; }
-    }
-  </style>
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+    padding: 16px 28px;
+    font-size: 11.5px;
+    color: var(--ink-3);
+    line-height: 1.55;
+  }
+  .footer a { color: var(--ink-2); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 2px; }
+  .footer a:hover { color: var(--ink); }
+  @media (max-width: 880px) {
+    .footer { padding: 14px 20px; }
+  }
+</style>
 </head>
 <body>
-  <main class="card">
-    <h1>DUoS + TNUoS Lookup + Tariff Recommender</h1>
-    <p>Select a site archetype, add location and capacity, and the tool will tell you which DUoS/TNUoS tariff presets and residual band inputs to include.</p>
 
-    <div class="section-title">Location</div>
-    <div class="row">
-      <div>
-        <label for="lat">Latitude</label>
-        <input id="lat" type="number" step="any" placeholder="e.g. 52.2053">
-      </div>
-      <div>
-        <label for="lon">Longitude</label>
-        <input id="lon" type="number" step="any" placeholder="e.g. 0.1218">
-      </div>
+<header class="app-header">
+  <div class="brand">
+    <div class="brand-logo">N</div>
+    <div class="brand-text">
+      <span class="brand-name">Network Charges, Region Lookup</span>
+      <span class="brand-sub">DUoS and TNUoS, by coordinate, GB</span>
     </div>
+  </div>
+  <div class="header-actions">
+    <a class="btn" href="https://github.com/JoshuaElliott11/TNUOS-DUOS-Mapping" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</header>
 
-    <div class="section-title">Site Setup</div>
-    <div class="row">
-      <div>
-        <label for="siteType">Site archetype</label>
-        <select id="siteType">
-          <option value="dist_import_final">1. Pure final-demand import site distribution-connected (no export)</option>
-          <option value="trans_import_final">2. Pure final-demand import site transmission-connected (no export)</option>
-          <option value="dist_import_export">3. Distribution-connected import + export site (final-demand plus embedded export)</option>
-          <option value="dist_export_only">4. Distribution-connected export-led site (embedded export only)</option>
-          <option value="trans_generation_export">5. Pure transmission-connected generation/export site</option>
-          <option value="dist_storage_bidirectional">6. Distribution-connected bidirectional storage/energy site (import and export)</option>
-          <option value="trans_storage_bidirectional">7. Transmission-connected bidirectional storage/energy site (import and export)</option>
-        </select>
+<div class="layout">
+
+  <aside class="panel">
+    <h1>Find a site's network regions</h1>
+    <p class="lede">Click on the map or enter coordinates to identify the DUoS licence area, TNUoS demand zone, and TNUoS generation zone. Add a site type and capacity for a recommended tariff set.</p>
+
+    <div class="section">
+      <div class="section-head">
+        <span class="section-title">Location</span>
+        <span class="section-meta">WGS84</span>
       </div>
-      <div id="demandBasisWrap">
-        <label for="demandBasis">Band basis</label>
-        <select id="demandBasis"></select>
-      </div>
-    </div>
-
-    <div class="section-title">Connection / Usage Input</div>
-    <div class="row">
-      <div>
-        <label for="capacity">Capacity / annual quantity</label>
-        <input id="capacity" type="number" step="any" placeholder="e.g. 120">
-      </div>
-      <div>
-        <label for="capacityUnit">Input unit</label>
-        <select id="capacityUnit">
-          <option value="kVA">kVA</option>
-          <option value="kW">kW</option>
-          <option value="kWh">kWh/year</option>
-          <option value="MWh">MWh/year</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="button-row">
-      <button id="lookupBtn" class="secondary">Lookup Regions</button>
-      <button id="recommendBtn">Recommend Tariffs</button>
-    </div>
-
-    <div class="status" id="status">Loading datasets...</div>
-    <section class="result" id="result"></section>
-  </main>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.11.0/proj4.js"></script>
-  <script>
-    const SITE_ARCHETYPES = {
-      pure_final_dist: {
-        label: "1. Pure final-demand import site distribution-connected (no export)",
-        needsLvHvBand: true,
-        needsResidualBand: true,
-        residualType: "distribution",
-        tariffs: ["duos_site_specific_import", "tnuos_residual", "tnuos_import_triads"],
-      },
-      pure_final_trans: {
-        label: "2. Pure final-demand import site transmission-connected (no export)",
-        needsLvHvBand: false,
-        needsResidualBand: true,
-        residualType: "t_demand",
-        tariffs: ["tnuos_residual", "tnuos_import_triads"],
-      },
-      standalone_storage_dist: {
-        label: "3. Stand-alone storage / non-final demand site distribution-connected",
-        needsLvHvBand: false,
-        needsResidualBand: false,
-        residualType: "none",
-        tariffs: ["duos_no_residual_import", "duos_generation_site_specific_export", "tnuos_import_triads", "tnuos_embedded_export"],
-      },
-      standalone_storage_trans: {
-        label: "4. Stand-alone storage / non-final demand site transmission-connected",
-        needsLvHvBand: false,
-        needsResidualBand: false,
-        residualType: "none",
-        tariffs: ["tnuos_import_triads", "tnuos_wider_generation"],
-      },
-      dist_generator_only: {
-        label: "5. Distribution-connected generator only (<100 MW, no demand)",
-        needsLvHvBand: false,
-        needsResidualBand: false,
-        residualType: "none",
-        tariffs: ["duos_generation_site_specific_export", "tnuos_embedded_export"],
-      },
-      trans_generator_only: {
-        label: "6. Transmission-connected generator / Distribution-Connected TEC >100 MW",
-        needsLvHvBand: false,
-        needsResidualBand: false,
-        residualType: "none",
-        tariffs: ["tnuos_wider_generation"],
-      },
-      mixed_dist: {
-        label: "7. Mixed final-demand + generation site Distribution Connected (BtM co-loc + generation) <100MW TEC",
-        needsLvHvBand: true,
-        needsResidualBand: true,
-        residualType: "distribution",
-        tariffs: ["duos_site_specific_import", "duos_generation_site_specific_export", "tnuos_residual", "tnuos_import_triads", "tnuos_embedded_export"],
-      },
-      mixed_trans: {
-        label: "8. Mixed final-demand + generation site Transmission Connected (BtM co-location)",
-        needsLvHvBand: false,
-        needsResidualBand: true,
-        residualType: "t_demand",
-        tariffs: ["tnuos_residual", "tnuos_import_triads", "tnuos_wider_generation"],
-      },
-      colocated_dist: {
-        label: "9. Co-located Renewables + BESS Import - Distribution",
-        needsLvHvBand: false,
-        needsResidualBand: false,
-        residualType: "none",
-        tariffs: ["duos_no_residual_import", "duos_generation_site_specific_export", "tnuos_import_triads", "tnuos_embedded_export"],
-      },
-      colocated_trans: {
-        label: "10. Co-located Renewables + BESS Import - Transmission",
-        needsLvHvBand: false,
-        needsResidualBand: false,
-        residualType: "none",
-        tariffs: ["tnuos_import_triads", "tnuos_wider_generation"],
-      },
-    };
-
-    const DEMAND_ZONE_FROM_GSP_GROUP = {
-      _A: { zone: 9, name: "Eastern" },
-      _B: { zone: 7, name: "East Midlands" },
-      _C: { zone: 12, name: "London" },
-      _D: { zone: 6, name: "N Wales & Mersey" },
-      _E: { zone: 8, name: "Midlands" },
-      _F: { zone: 3, name: "Northern" },
-      _G: { zone: 4, name: "North West" },
-      _H: { zone: 13, name: "Southern" },
-      _J: { zone: 11, name: "South East" },
-      _K: { zone: 10, name: "South Wales" },
-      _L: { zone: 14, name: "South Western" },
-      _M: { zone: 5, name: "Yorkshire" },
-      _N: { zone: 2, name: "Southern Scotland" },
-      _P: { zone: 1, name: "Northern Scotland" },
-    };
-
-    const GRANULAR_DUOS_OPERATOR_BY_REGION = {
-      "East England": "UKPN (EPN)",
-      "London": "UKPN (LPN)",
-      "South East England": "UKPN (SPN)",
-      "North Scotland": "SSEN (SHEPD)",
-      "Southern England": "SSEN (SEPD)",
-      "North Wales, Merseyside and Cheshire": "SPEN (SPM / SP Manweb)",
-      "South and Central Scotland": "SPEN (SPD / SP Distribution)",
-      "North East England": "Northern Powergrid (NPgN)",
-      "Yorkshire": "Northern Powergrid (NPgY)",
-      "North West England": "ENWL",
-      "East Midlands": "NGED (EMEB)",
-      "West Midlands": "NGED (WEBM)",
-      "South Wales": "NGED (SWALES)",
-      "South West England": "NGED (SWEST)",
-    };
-
-    const DEMAND_ZONE_FROM_GRANULAR_DUOS = {
-      "UKPN (EPN)": 9,
-      "UKPN (LPN)": 12,
-      "UKPN (SPN)": 11,
-      "SSEN (SHEPD)": 1,
-      "SSEN (SEPD)": 13,
-      "SPEN (SPM / SP Manweb)": 6,
-      "SPEN (SPD / SP Distribution)": 2,
-      "Northern Powergrid (NPgN)": 3,
-      "Northern Powergrid (NPgY)": 5,
-      "ENWL": 4,
-      "NGED (EMEB)": 7,
-      "NGED (WEBM)": 8,
-      "NGED (SWALES)": 10,
-      "NGED (SWEST)": 14,
-    };
-
-    const TNUOS_GENERATION_ZONE_NAMES = {
-      GZ1: "North Scotland",
-      GZ2: "East Aberdeenshire",
-      GZ3: "Western Highlands",
-      GZ4: "Skye and Lochalsh",
-      GZ5: "Eastern Grampian and Tayside",
-      GZ6: "Central Grampian",
-      GZ7: "Argyll",
-      GZ8: "The Trossachs",
-      GZ9: "Stirlingshire and Fife",
-      GZ10: "South West Scotlands",
-      GZ11: "Lothian and Borders",
-      GZ12: "Solway and Cheviot",
-      GZ13: "North East England",
-      GZ14: "North Lancashire and The Lakes",
-      GZ15: "South Lancashire, Yorkshire and Humber",
-      GZ16: "North Midlands and North Wales",
-      GZ17: "South Lincolnshire and North Norfolk",
-      GZ18: "Mid Wales and The Midlands",
-      GZ19: "Anglesey and Snowdon",
-      GZ20: "Pembrokeshire",
-      GZ21: "South Wales & Gloucester",
-      GZ22: "Cotswold",
-      GZ23: "Central London",
-      GZ24: "Essex and Kent",
-      GZ25: "Oxfordshire, Surrey and Sussex",
-      GZ26: "Somerset and Wessex",
-      GZ27: "West Devon and Cornwall",
-    };
-
-    const datasets = { dno: null, gsp: null, gen: null };
-
-    proj4.defs(
-      "EPSG:27700",
-      "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 +units=m +no_defs"
-    );
-
-    function bboxFromRing(ring) {
-      let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-      for (const p of ring) {
-        const x = p[0];
-        const y = p[1];
-        if (x < minX) minX = x;
-        if (x > maxX) maxX = x;
-        if (y < minY) minY = y;
-        if (y > maxY) maxY = y;
-      }
-      return [minX, minY, maxX, maxY];
-    }
-
-    function pointInRing(point, ring) {
-      const x = point[0];
-      const y = point[1];
-      let inside = false;
-      for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
-        const xi = ring[i][0], yi = ring[i][1];
-        const xj = ring[j][0], yj = ring[j][1];
-        const intersect = ((yi > y) !== (yj > y)) &&
-          (x < (xj - xi) * (y - yi) / ((yj - yi) || 1e-20) + xi);
-        if (intersect) inside = !inside;
-      }
-      return inside;
-    }
-
-    function pointInPolygon(point, polygon) {
-      if (!polygon || polygon.length === 0) return false;
-      if (!pointInRing(point, polygon[0])) return false;
-      for (let i = 1; i < polygon.length; i++) {
-        if (pointInRing(point, polygon[i])) return false;
-      }
-      return true;
-    }
-
-    function toPolygons(geometry) {
-      if (!geometry || !geometry.coordinates || geometry.coordinates.length === 0) return [];
-      if (geometry.type === "Polygon") return [geometry.coordinates];
-      if (geometry.type === "MultiPolygon") return geometry.coordinates;
-      return [];
-    }
-
-    function prepareFeatures(featureCollection) {
-      const out = [];
-      for (const feature of featureCollection.features || []) {
-        const polygons = toPolygons(feature.geometry);
-        if (polygons.length === 0) continue;
-        const bboxes = polygons
-          .filter(poly => poly && poly.length > 0 && poly[0].length > 0)
-          .map(poly => bboxFromRing(poly[0]));
-        if (bboxes.length === 0) continue;
-
-        const minX = Math.min(...bboxes.map(b => b[0]));
-        const minY = Math.min(...bboxes.map(b => b[1]));
-        const maxX = Math.max(...bboxes.map(b => b[2]));
-        const maxY = Math.max(...bboxes.map(b => b[3]));
-        out.push({ properties: feature.properties || {}, polygons, bbox: [minX, minY, maxX, maxY] });
-      }
-      return out;
-    }
-
-    function findContaining(point, preparedFeatures) {
-      for (const item of preparedFeatures) {
-        const [minX, minY, maxX, maxY] = item.bbox;
-        if (point[0] < minX || point[0] > maxX || point[1] < minY || point[1] > maxY) continue;
-        for (const polygon of item.polygons) {
-          if (pointInPolygon(point, polygon)) return item.properties;
-        }
-      }
-      return {};
-    }
-
-    function renderResult(rows, warning) {
-      const result = document.getElementById("result");
-      result.style.display = "block";
-      result.innerHTML = rows.map(([k, v]) => `
-        <div class="result-row">
-          <div class="k">${k}</div>
-          <div class="v">${v ?? "Not found"}</div>
+      <div class="field-row">
+        <div class="field">
+          <label for="lat">Latitude</label>
+          <input id="lat" type="number" step="any" placeholder="52.2053" inputmode="decimal" autocomplete="off">
         </div>
-      `).join("") + (warning ? `<div class="warn">${warning}</div>` : "");
+        <div class="field">
+          <label for="lon">Longitude</label>
+          <input id="lon" type="number" step="any" placeholder="0.1218" inputmode="decimal" autocomplete="off">
+        </div>
+      </div>
+      <p class="hint-text">Tip: click anywhere on the map to drop a pin, or drag the existing pin to move it.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <span class="section-title">Site setup</span>
+      </div>
+      <div class="field">
+        <label for="siteType">Site archetype</label>
+        <select id="siteType"></select>
+      </div>
+      <div class="field" id="demandBasisWrap">
+        <label for="demandBasis">Band basis</label>
+        <select id="demandBasis">
+          <option value="LV_NO_MIC">LV, no MIC (kWh)</option>
+          <option value="LV_MIC">LV, MIC (kVA)</option>
+          <option value="HV">HV (kVA)</option>
+          <option value="EHV">EHV (kVA)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <span class="section-title">Capacity or annual energy</span>
+      </div>
+      <div class="field">
+        <label for="capacity">Quantity</label>
+        <div class="pair">
+          <input id="capacity" type="number" step="any" placeholder="120" inputmode="decimal" autocomplete="off">
+          <select id="capacityUnit">
+            <option value="kVA">kVA</option>
+            <option value="kW">kW</option>
+            <option value="kWh">kWh / yr</option>
+            <option value="MWh">MWh / yr</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-block" id="btn-lookup" type="button">Region only</button>
+      <button class="btn btn-primary btn-block" id="btn-recommend" type="button">Recommend tariffs</button>
+    </div>
+
+    <div class="status-strip">
+      <span class="status-dot busy" id="status-dot"></span>
+      <span id="status-text">Loading boundary datasets...</span>
+    </div>
+
+    <!-- Region summary card -->
+    <div class="result-section" id="region-section">
+      <div class="result-card">
+        <div class="result-card-head">
+          <span class="result-card-title">Region summary</span>
+        </div>
+        <div class="result-card-body">
+          <div class="kv-grid" id="region-kv"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tariff card -->
+    <div class="result-section" id="tariff-section">
+      <div class="result-card">
+        <div class="result-card-head">
+          <span class="result-card-title">Recommended tariff lines</span>
+        </div>
+        <div class="result-card-body">
+          <ul class="tariff-list" id="tariff-list"></ul>
+          <div id="tariff-warning"></div>
+          <p class="note">Export-side lines (Generation Site Specific, Embedded Export) sit as income, not cost. Band suggestions are illustrative; cross-check against the live charging methodology before using them in production.</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <section class="map-panel">
+    <div id="map"></div>
+    <div class="map-hint"><b>Click the map</b> to set a coordinate, or drag the pin.</div>
+    <div class="map-overlay" id="map-legend">
+      <div class="map-legend">
+        <div class="legend-item"><span class="legend-swatch" style="border-color: var(--map-dno);"></span> DUoS licence area</div>
+        <div class="legend-item"><span class="legend-swatch" style="border-color: var(--map-demand);"></span> TNUoS demand zone (GSP group)</div>
+        <div class="legend-item"><span class="legend-swatch" style="border-color: var(--map-gen);"></span> TNUoS generation zone</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <b style="color: var(--ink-2);">Not authoritative.</b> What the bill actually follows is the DUoS region your MPAN is registered to, not the polygon a coordinate falls inside. See <a href="DISCLAIMER.md">DISCLAIMER</a> and the <a href="https://github.com/JoshuaElliott11/TNUOS-DUOS-Mapping" target="_blank" rel="noopener">repository</a> for full context. Boundary data from public NESO publications.
+</footer>
+
+<div class="toast" id="toast">Done</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.11.0/proj4.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<script>
+  // ============================================================
+  // Reference data
+  // ============================================================
+  const SITE_ARCHETYPES = {
+    dist_import_final: {
+      label: "Distribution-connected pure demand (no export)",
+      needsLvHvBand: true, needsResidualBand: true, residualType: "distribution",
+      tariffs: ["duos_site_specific_import", "tnuos_residual", "tnuos_import_triads"],
+    },
+    trans_import_final: {
+      label: "Transmission-connected pure demand (no export)",
+      needsLvHvBand: false, needsResidualBand: true, residualType: "t_demand",
+      tariffs: ["tnuos_residual", "tnuos_import_triads"],
+    },
+    dist_import_export: {
+      label: "Distribution-connected import + export (final demand plus embedded export)",
+      needsLvHvBand: true, needsResidualBand: true, residualType: "distribution",
+      tariffs: ["duos_site_specific_import", "duos_generation_site_specific_export", "tnuos_residual", "tnuos_import_triads", "tnuos_embedded_export"],
+    },
+    dist_export_only: {
+      label: "Distribution-connected export-led (embedded export only)",
+      needsLvHvBand: false, needsResidualBand: false, residualType: "none",
+      tariffs: ["duos_generation_site_specific_export", "tnuos_embedded_export"],
+    },
+    trans_generation_export: {
+      label: "Transmission-connected generation / export",
+      needsLvHvBand: false, needsResidualBand: false, residualType: "none",
+      tariffs: ["tnuos_wider_generation"],
+    },
+    dist_storage_bidirectional: {
+      label: "Distribution-connected bidirectional storage / energy",
+      needsLvHvBand: false, needsResidualBand: false, residualType: "none",
+      tariffs: ["duos_no_residual_import", "duos_generation_site_specific_export", "tnuos_import_triads", "tnuos_embedded_export"],
+    },
+    trans_storage_bidirectional: {
+      label: "Transmission-connected bidirectional storage / energy",
+      needsLvHvBand: false, needsResidualBand: false, residualType: "none",
+      tariffs: ["tnuos_import_triads", "tnuos_wider_generation"],
+    },
+  };
+
+  const DEMAND_ZONE_FROM_GSP_GROUP = {
+    _A: { zone: 9,  name: "Eastern" },
+    _B: { zone: 7,  name: "East Midlands" },
+    _C: { zone: 12, name: "London" },
+    _D: { zone: 6,  name: "N Wales and Mersey" },
+    _E: { zone: 8,  name: "Midlands" },
+    _F: { zone: 3,  name: "Northern" },
+    _G: { zone: 4,  name: "North West" },
+    _H: { zone: 13, name: "Southern" },
+    _J: { zone: 11, name: "South East" },
+    _K: { zone: 10, name: "South Wales" },
+    _L: { zone: 14, name: "South Western" },
+    _M: { zone: 5,  name: "Yorkshire" },
+    _N: { zone: 2,  name: "Southern Scotland" },
+    _P: { zone: 1,  name: "Northern Scotland" },
+  };
+
+  const GRANULAR_DUOS_OPERATOR_BY_REGION = {
+    "East England": "UKPN (EPN)",
+    "London": "UKPN (LPN)",
+    "South East England": "UKPN (SPN)",
+    "North Scotland": "SSEN (SHEPD)",
+    "Southern England": "SSEN (SEPD)",
+    "North Wales, Merseyside and Cheshire": "SPEN (SPM / SP Manweb)",
+    "South and Central Scotland": "SPEN (SPD / SP Distribution)",
+    "North East England": "Northern Powergrid (NPgN)",
+    "Yorkshire": "Northern Powergrid (NPgY)",
+    "North West England": "ENWL",
+    "East Midlands": "NGED (EMEB)",
+    "West Midlands": "NGED (WEBM)",
+    "South Wales": "NGED (SWALES)",
+    "South West England": "NGED (SWEST)",
+  };
+
+  const DEMAND_ZONE_FROM_GRANULAR_DUOS = {
+    "UKPN (EPN)": 9, "UKPN (LPN)": 12, "UKPN (SPN)": 11,
+    "SSEN (SHEPD)": 1, "SSEN (SEPD)": 13,
+    "SPEN (SPM / SP Manweb)": 6, "SPEN (SPD / SP Distribution)": 2,
+    "Northern Powergrid (NPgN)": 3, "Northern Powergrid (NPgY)": 5,
+    "ENWL": 4,
+    "NGED (EMEB)": 7, "NGED (WEBM)": 8, "NGED (SWALES)": 10, "NGED (SWEST)": 14,
+  };
+
+  const TNUOS_GENERATION_ZONE_NAMES = {
+    GZ1: "North Scotland", GZ2: "East Aberdeenshire", GZ3: "Western Highlands",
+    GZ4: "Skye and Lochalsh", GZ5: "Eastern Grampian and Tayside", GZ6: "Central Grampian",
+    GZ7: "Argyll", GZ8: "The Trossachs", GZ9: "Stirlingshire and Fife",
+    GZ10: "South West Scotland", GZ11: "Lothian and Borders", GZ12: "Solway and Cheviot",
+    GZ13: "North East England", GZ14: "North Lancashire and The Lakes",
+    GZ15: "South Lancashire, Yorkshire and Humber", GZ16: "North Midlands and North Wales",
+    GZ17: "South Lincolnshire and North Norfolk", GZ18: "Mid Wales and The Midlands",
+    GZ19: "Anglesey and Snowdon", GZ20: "Pembrokeshire", GZ21: "South Wales and Gloucester",
+    GZ22: "Cotswold", GZ23: "Central London", GZ24: "Essex and Kent",
+    GZ25: "Oxfordshire, Surrey and Sussex", GZ26: "Somerset and Wessex",
+    GZ27: "West Devon and Cornwall",
+  };
+
+  const TARIFF_KIND = {
+    duos_site_specific_import:            { tag: "DUoS",  short: "Site Specific (import)" },
+    duos_no_residual_import:              { tag: "DUoS",  short: "Site Specific, no residual (import)" },
+    duos_generation_site_specific_export: { tag: "DUoS",  short: "Generation Site Specific (export)" },
+    tnuos_residual:                       { tag: "TNUoS", short: "Residual" },
+    tnuos_import_triads:                  { tag: "TNUoS", short: "Import (Triads)" },
+    tnuos_embedded_export:                { tag: "TNUoS", short: "Embedded Export" },
+    tnuos_wider_generation:               { tag: "TNUoS", short: "Wider Generation" },
+  };
+
+  // ============================================================
+  // Spatial helpers
+  // ============================================================
+  proj4.defs(
+    "EPSG:27700",
+    "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 +units=m +no_defs"
+  );
+
+  function bboxFromRing(ring) {
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    for (const p of ring) {
+      if (p[0] < minX) minX = p[0]; if (p[0] > maxX) maxX = p[0];
+      if (p[1] < minY) minY = p[1]; if (p[1] > maxY) maxY = p[1];
     }
-
-    function getDemandZone(gspGroup) {
-      return DEMAND_ZONE_FROM_GSP_GROUP[gspGroup] || { zone: null, name: null };
+    return [minX, minY, maxX, maxY];
+  }
+  function pointInRing(point, ring) {
+    const x = point[0], y = point[1];
+    let inside = false;
+    for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+      const xi = ring[i][0], yi = ring[i][1];
+      const xj = ring[j][0], yj = ring[j][1];
+      const intersect = ((yi > y) !== (yj > y)) &&
+        (x < (xj - xi) * (y - yi) / ((yj - yi) || 1e-20) + xi);
+      if (intersect) inside = !inside;
     }
-
-    function getGenerationZoneLabel(genLayer) {
-      if (!genLayer) return null;
-      const name = TNUOS_GENERATION_ZONE_NAMES[genLayer];
-      return name ? `${genLayer} (${name})` : genLayer;
+    return inside;
+  }
+  function pointInPolygon(point, polygon) {
+    if (!polygon || polygon.length === 0) return false;
+    if (!pointInRing(point, polygon[0])) return false;
+    for (let i = 1; i < polygon.length; i++) if (pointInRing(point, polygon[i])) return false;
+    return true;
+  }
+  function toPolygons(geometry) {
+    if (!geometry || !geometry.coordinates || geometry.coordinates.length === 0) return [];
+    if (geometry.type === "Polygon") return [geometry.coordinates];
+    if (geometry.type === "MultiPolygon") return geometry.coordinates;
+    return [];
+  }
+  function prepareFeatures(featureCollection) {
+    const out = [];
+    for (const feature of featureCollection.features || []) {
+      const polygons = toPolygons(feature.geometry);
+      if (polygons.length === 0) continue;
+      const bboxes = polygons.filter(p => p && p.length > 0 && p[0].length > 0).map(p => bboxFromRing(p[0]));
+      if (bboxes.length === 0) continue;
+      const minX = Math.min(...bboxes.map(b => b[0]));
+      const minY = Math.min(...bboxes.map(b => b[1]));
+      const maxX = Math.max(...bboxes.map(b => b[2]));
+      const maxY = Math.max(...bboxes.map(b => b[3]));
+      out.push({
+        properties: feature.properties || {},
+        geometry: feature.geometry,
+        polygons,
+        bbox: [minX, minY, maxX, maxY],
+      });
     }
-
-    function recommendBandByBasis(demandBasis, value, unit) {
-      if (!Number.isFinite(value)) return null;
-
-      if (demandBasis === "LV_NO_MIC") {
-        const annualKwh = unit === "MWh" ? value * 1000 : value;
-        if (!Number.isFinite(annualKwh)) return null;
-        if (annualKwh <= 3986) return 1;
-        if (annualKwh <= 13677) return 2;
-        if (annualKwh <= 27543) return 3;
-        return 4;
+    return out;
+  }
+  function findContaining(point, preparedFeatures) {
+    for (const item of preparedFeatures) {
+      const [minX, minY, maxX, maxY] = item.bbox;
+      if (point[0] < minX || point[0] > maxX || point[1] < minY || point[1] > maxY) continue;
+      for (const polygon of item.polygons) {
+        if (pointInPolygon(point, polygon)) return item;
       }
-
-      if (demandBasis === "LV_MIC") {
-        if (value <= 90) return 1;
-        if (value <= 150) return 2;
-        if (value <= 250) return 3;
-        return 4;
-      }
-
-      if (demandBasis === "HV") {
-        if (value <= 500) return 1;
-        if (value <= 1100) return 2;
-        if (value <= 2000) return 3;
-        return 4;
-      }
-
-      if (demandBasis === "EHV") {
-        if (value <= 3500) return 1;
-        if (value <= 11000) return 2;
-        if (value <= 20000) return 3;
-        return 4;
-      }
-
-      return null;
     }
+    return null;
+  }
 
-    function recommendBandTDemand(value, unit) {
-      if (!Number.isFinite(value)) return null;
-      const mwh = unit === "kWh" ? value / 1000 : value;
-      if (!Number.isFinite(mwh)) return null;
-      if (mwh <= 25131) return 1;
-      if (mwh <= 64451) return 2;
-      if (mwh <= 163880) return 3;
-      return 4;
+  // Reproject EPSG:27700 GeoJSON geometry to WGS84 for Leaflet display
+  function reprojectGeometryToWgs84(geometry) {
+    const project = ring => ring.map(([x, y]) => proj4("EPSG:27700", "EPSG:4326", [x, y]));
+    if (geometry.type === "Polygon") {
+      return { type: "Polygon", coordinates: geometry.coordinates.map(project) };
     }
-
-    function basisLabelForDisplay(demandBasis) {
-      if (demandBasis === "LV_NO_MIC") return "LV no MIC";
-      if (demandBasis === "LV_MIC") return "LV";
-      if (demandBasis === "HV") return "HV";
-      if (demandBasis === "EHV") return "EHV";
-      return "LV/HV";
-    }
-
-    function basisLabelForSiteSpecific(demandBasis) {
-      if (demandBasis === "HV") return "HV";
-      if (demandBasis === "EHV") return "EHV";
-      return "LV";
-    }
-
-    function collectLookup() {
-      const lat = parseFloat(document.getElementById("lat").value);
-      const lon = parseFloat(document.getElementById("lon").value);
-      const status = document.getElementById("status");
-      if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
-        status.textContent = "Enter valid numeric latitude and longitude.";
-        return null;
-      }
-      if (!datasets.dno || !datasets.gsp || !datasets.gen) {
-        status.textContent = "Datasets not loaded yet.";
-        return null;
-      }
-      const pointWgs84 = [lon, lat];
-      const pointDno = proj4("EPSG:4326", "EPSG:27700", pointWgs84);
-      const dno = findContaining(pointDno, datasets.dno);
-      const gsp = findContaining(pointWgs84, datasets.gsp);
-      const gen = findContaining(pointWgs84, datasets.gen);
-      const demandZone = getDemandZone(gsp.GSPGroup);
-      const granularDuosOperator = GRANULAR_DUOS_OPERATOR_BY_REGION[dno.Area] || null;
-      const expectedDemandZoneFromGranular = granularDuosOperator
-        ? DEMAND_ZONE_FROM_GRANULAR_DUOS[granularDuosOperator] || null
-        : null;
+    if (geometry.type === "MultiPolygon") {
       return {
-        lat,
-        lon,
-        dno,
-        gsp,
-        gen,
-        demandZone,
-        granularDuosOperator,
-        expectedDemandZoneFromGranular,
+        type: "MultiPolygon",
+        coordinates: geometry.coordinates.map(polygon => polygon.map(project)),
       };
     }
+    return geometry;
+  }
 
-    function buildPresetList(archetype, lookup, demandBasis, capacity, capacityUnit) {
-      const out = [];
-      const demandZone = lookup.demandZone.zone ?? "N/A";
-      const generationZone = getGenerationZoneLabel(lookup.gen.layer) || "N/A";
-      const basisDisplay = basisLabelForDisplay(demandBasis);
-      const siteSpecificBasis = basisLabelForSiteSpecific(demandBasis);
+  // ============================================================
+  // Tariff band logic
+  // ============================================================
+  function recommendBandByBasis(demandBasis, value, unit) {
+    if (!Number.isFinite(value)) return null;
+    if (demandBasis === "LV_NO_MIC") {
+      const kwh = unit === "MWh" ? value * 1000 : value;
+      if (kwh <= 3986) return 1; if (kwh <= 13677) return 2; if (kwh <= 27543) return 3; return 4;
+    }
+    if (demandBasis === "LV_MIC") {
+      if (value <= 90) return 1; if (value <= 150) return 2; if (value <= 250) return 3; return 4;
+    }
+    if (demandBasis === "HV") {
+      if (value <= 500) return 1; if (value <= 1100) return 2; if (value <= 2000) return 3; return 4;
+    }
+    if (demandBasis === "EHV") {
+      if (value <= 3500) return 1; if (value <= 11000) return 2; if (value <= 20000) return 3; return 4;
+    }
+    return null;
+  }
+  function recommendBandTDemand(value, unit) {
+    if (!Number.isFinite(value)) return null;
+    const mwh = unit === "kWh" ? value / 1000 : value;
+    if (mwh <= 25131) return 1; if (mwh <= 64451) return 2; if (mwh <= 163880) return 3; return 4;
+  }
+  function basisLabelForDisplay(b) {
+    if (b === "LV_NO_MIC") return "LV, no MIC";
+    if (b === "LV_MIC") return "LV";
+    if (b === "HV") return "HV";
+    if (b === "EHV") return "EHV";
+    return "LV / HV";
+  }
+  function basisLabelForSiteSpecific(b) {
+    if (b === "HV") return "HV";
+    if (b === "EHV") return "EHV";
+    return "LV";
+  }
 
-      const lvHvBand = archetype.needsLvHvBand ? recommendBandByBasis(demandBasis, capacity, capacityUnit) : null;
-      const residualBand = archetype.needsResidualBand
-        ? (archetype.residualType === "distribution"
+  // ============================================================
+  // State
+  // ============================================================
+  const datasets = { dno: null, gsp: null, gen: null };
+  let map = null;
+  let marker = null;
+  let dnoLayer = null;
+  let gspLayer = null;
+  let genLayer = null;
+
+  function setStatus(text, state) {
+    document.getElementById("status-text").textContent = text;
+    const dot = document.getElementById("status-dot");
+    dot.classList.remove("ready", "error", "busy");
+    if (state) dot.classList.add(state);
+  }
+  function toast(text) {
+    const t = document.getElementById("toast");
+    t.textContent = text;
+    t.classList.add("show");
+    clearTimeout(toast._h);
+    toast._h = setTimeout(() => t.classList.remove("show"), 2200);
+  }
+  function escapeHtml(s) {
+    if (s === null || s === undefined) return "";
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
+
+  // ============================================================
+  // Map
+  // ============================================================
+  function initMap() {
+    map = L.map("map", {
+      zoomControl: true,
+      attributionControl: true,
+    }).setView([54.5, -3], 5.5);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 18,
+      minZoom: 4,
+    }).addTo(map);
+
+    map.on("click", (e) => {
+      setCoords(e.latlng.lat, e.latlng.lng);
+    });
+  }
+
+  function setCoords(lat, lon, opts = {}) {
+    const latInput = document.getElementById("lat");
+    const lonInput = document.getElementById("lon");
+    latInput.value = lat.toFixed(6);
+    lonInput.value = lon.toFixed(6);
+    placeMarker(lat, lon);
+    if (opts.run) handleRecommend();
+  }
+
+  function placeMarker(lat, lon) {
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) return;
+    const latlng = [lat, lon];
+    if (marker) {
+      marker.setLatLng(latlng);
+    } else {
+      marker = L.marker(latlng, { draggable: true }).addTo(map);
+      marker.on("dragend", () => {
+        const p = marker.getLatLng();
+        document.getElementById("lat").value = p.lat.toFixed(6);
+        document.getElementById("lon").value = p.lng.toFixed(6);
+      });
+    }
+  }
+
+  function clearMatchLayers() {
+    if (dnoLayer) { map.removeLayer(dnoLayer); dnoLayer = null; }
+    if (gspLayer) { map.removeLayer(gspLayer); gspLayer = null; }
+    if (genLayer) { map.removeLayer(genLayer); genLayer = null; }
+    document.getElementById("map-legend").classList.remove("visible");
+  }
+
+  function drawMatchedRegions(lookup) {
+    clearMatchLayers();
+
+    const dno = lookup.dno;
+    const gsp = lookup.gsp;
+    const gen = lookup.gen;
+
+    const baseStyle = (color) => ({
+      color, weight: 2, opacity: 0.85,
+      fillColor: color, fillOpacity: 0.08, dashArray: null,
+    });
+
+    if (dno && dno.geometry) {
+      const wgs = reprojectGeometryToWgs84(dno.geometry);
+      dnoLayer = L.geoJSON(wgs, { style: baseStyle("#0891b2") })
+        .bindPopup(`<b>DUoS</b><br>${escapeHtml(dno.properties.Area || "")}<br><span style="color:#64748b;">${escapeHtml(dno.properties.DNO_Full || dno.properties.DNO || "")}</span>`)
+        .addTo(map);
+    }
+    if (gsp && gsp.geometry) {
+      gspLayer = L.geoJSON(gsp.geometry, { style: { ...baseStyle("#d97706"), dashArray: "4 3" } })
+        .bindPopup(`<b>TNUoS demand zone (GSP group)</b><br>${escapeHtml(gsp.properties.GSPGroup || "")}`)
+        .addTo(map);
+    }
+    if (gen && gen.geometry) {
+      genLayer = L.geoJSON(gen.geometry, { style: { ...baseStyle("#7c3aed"), dashArray: "1 4" } })
+        .bindPopup(`<b>TNUoS generation zone</b><br>${escapeHtml(gen.properties.layer || "")}`)
+        .addTo(map);
+    }
+
+    const bounds = [];
+    if (dnoLayer) bounds.push(dnoLayer.getBounds());
+    if (gspLayer) bounds.push(gspLayer.getBounds());
+    if (genLayer) bounds.push(genLayer.getBounds());
+    if (bounds.length) {
+      const merged = bounds.reduce((acc, b) => acc ? acc.extend(b) : b, null);
+      map.fitBounds(merged, { padding: [40, 40], maxZoom: 9 });
+    }
+
+    document.getElementById("map-legend").classList.add("visible");
+  }
+
+  // ============================================================
+  // Lookup
+  // ============================================================
+  function getDemandZone(gspGroup) {
+    return DEMAND_ZONE_FROM_GSP_GROUP[gspGroup] || { zone: null, name: null };
+  }
+  function getGenerationZoneLabel(genLayer) {
+    if (!genLayer) return null;
+    const name = TNUOS_GENERATION_ZONE_NAMES[genLayer];
+    return name ? `${genLayer}, ${name}` : genLayer;
+  }
+
+  function runLookup() {
+    const lat = parseFloat(document.getElementById("lat").value);
+    const lon = parseFloat(document.getElementById("lon").value);
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+      setStatus("Enter a valid latitude and longitude.", "error");
+      return null;
+    }
+    if (!datasets.dno || !datasets.gsp || !datasets.gen) {
+      setStatus("Boundary datasets are still loading.", "busy");
+      return null;
+    }
+    const pointWgs84 = [lon, lat];
+    const pointDno = proj4("EPSG:4326", "EPSG:27700", pointWgs84);
+    const dno = findContaining(pointDno, datasets.dno);
+    const gsp = findContaining(pointWgs84, datasets.gsp);
+    const gen = findContaining(pointWgs84, datasets.gen);
+
+    const dnoProps = (dno && dno.properties) || {};
+    const gspProps = (gsp && gsp.properties) || {};
+
+    const demandZone = getDemandZone(gspProps.GSPGroup);
+    const granularDuosOperator = GRANULAR_DUOS_OPERATOR_BY_REGION[dnoProps.Area] || null;
+    const expectedDemandZoneFromGranular = granularDuosOperator
+      ? DEMAND_ZONE_FROM_GRANULAR_DUOS[granularDuosOperator] || null
+      : null;
+
+    return {
+      lat, lon,
+      dno, gsp, gen,
+      demandZone, granularDuosOperator, expectedDemandZoneFromGranular,
+    };
+  }
+
+  // ============================================================
+  // Render
+  // ============================================================
+  function renderRegionSummary(lookup) {
+    const dnoP = (lookup.dno && lookup.dno.properties) || {};
+    const gspP = (lookup.gsp && lookup.gsp.properties) || {};
+    const genP = (lookup.gen && lookup.gen.properties) || {};
+    const genLabel = getGenerationZoneLabel(genP.layer);
+
+    const rows = [
+      ["Coordinates", `<span class="mono">${lookup.lat.toFixed(4)}, ${lookup.lon.toFixed(4)}</span>`],
+      ["DUoS region", escapeHtml(dnoP.Area)],
+      ["DUoS operator", escapeHtml(dnoP.DNO_Full || dnoP.DNO)],
+      ["DUoS granular operator", escapeHtml(lookup.granularDuosOperator)],
+      ["TNUoS demand zone", lookup.demandZone.zone ? `${lookup.demandZone.zone} <span style="color: var(--ink-3); font-weight: 400;">(${escapeHtml(lookup.demandZone.name)})</span>` : null],
+      ["GSP group", gspP.GSPGroup ? `<span class="mono">${escapeHtml(gspP.GSPGroup)}</span>` : null],
+      ["GSP code", gspP.GSPs ? `<span class="mono">${escapeHtml(gspP.GSPs)}</span>` : null],
+      ["TNUoS generation zone", escapeHtml(genLabel)],
+    ];
+
+    document.getElementById("region-kv").innerHTML = rows.map(([k, v]) => {
+      const value = (v === null || v === undefined || v === "") ? `<span class="muted">Not found</span>` : v;
+      return `<div class="kv"><span class="k">${k}</span><span class="v">${value}</span></div>`;
+    }).join("");
+
+    document.getElementById("region-section").classList.add("visible");
+  }
+
+  function renderTariffSet(lookup, archetype, demandBasis, capacity, capacityUnit) {
+    const demandZoneN = lookup.demandZone.zone ?? null;
+    const generationZone = getGenerationZoneLabel((lookup.gen && lookup.gen.properties && lookup.gen.properties.layer) || null);
+    const basisDisplay = basisLabelForDisplay(demandBasis);
+    const siteSpecificBasis = basisLabelForSiteSpecific(demandBasis);
+
+    const lvHvBand = archetype.needsLvHvBand ? recommendBandByBasis(demandBasis, capacity, capacityUnit) : null;
+    const residualBand = archetype.needsResidualBand
+      ? (archetype.residualType === "distribution"
         ? recommendBandByBasis(demandBasis, capacity, capacityUnit)
-            : recommendBandTDemand(capacity, capacityUnit))
-        : null;
+        : recommendBandTDemand(capacity, capacityUnit))
+      : null;
 
-      for (const t of archetype.tariffs) {
-        if (t === "duos_site_specific_import") {
-          out.push(`${siteSpecificBasis} Site Specific - Band ${lvHvBand ?? "pending"} (imports)`);
-        }
-        if (t === "duos_no_residual_import") {
-          out.push(`${siteSpecificBasis} Site Specific No Residual (imports)`);
-        }
-        if (t === "duos_generation_site_specific_export") {
-          out.push(`${siteSpecificBasis} Generation Site Specific (exports)`);
-        }
-        if (t === "tnuos_residual") {
-          const suffix = archetype.residualType === "t_demand" ? " (T-Demand)" : "";
-          const basisSuffix = archetype.residualType === "distribution" ? ` [${basisDisplay}]` : "";
-          out.push(`TNUoS Residual${suffix} - Band ${residualBand ?? "pending"}${basisSuffix}`);
-        }
-        if (t === "tnuos_import_triads") {
-          out.push(`TNUoS Import (Triads) - Demand Zone ${demandZone}`);
-        }
-        if (t === "tnuos_embedded_export") {
-          out.push(`TNUoS Embedded Export - Demand Zone ${demandZone}`);
-        }
-        if (t === "tnuos_wider_generation") {
-          out.push(`TNUoS Wider Generation - ${generationZone}`);
-        }
+    const rowsHtml = archetype.tariffs.map(t => {
+      const kind = TARIFF_KIND[t];
+      const badgeClass = kind.tag === "DUoS" ? "duos" : "tnuos";
+      let label = kind.short;
+      let meta = "";
+      if (t === "duos_site_specific_import") {
+        label = `${siteSpecificBasis} ${kind.short}`;
+        meta = lvHvBand ? `Band ${lvHvBand}` : "Band pending input";
+      } else if (t === "duos_no_residual_import" || t === "duos_generation_site_specific_export") {
+        label = `${siteSpecificBasis} ${kind.short}`;
+      } else if (t === "tnuos_residual") {
+        const suffix = archetype.residualType === "t_demand" ? " (T-Demand)" : "";
+        const basisSuffix = archetype.residualType === "distribution" ? ` · ${basisDisplay}` : "";
+        label = `${kind.short}${suffix}${basisSuffix}`;
+        meta = residualBand ? `Band ${residualBand}` : "Band pending input";
+      } else if (t === "tnuos_import_triads" || t === "tnuos_embedded_export") {
+        meta = demandZoneN ? `Zone ${demandZoneN}` : "Zone pending";
+      } else if (t === "tnuos_wider_generation") {
+        meta = generationZone || "Zone pending";
       }
+      return `
+        <li class="tariff-item">
+          <span class="badge ${badgeClass}">${kind.tag}</span>
+          <span class="tariff-label">${escapeHtml(label)}</span>
+          <span class="tariff-meta">${escapeHtml(meta)}</span>
+        </li>`;
+    }).join("");
 
-      return { list: out, lvHvBand, residualBand };
+    document.getElementById("tariff-list").innerHTML = rowsHtml;
+
+    let warningHtml = "";
+    if (
+      Number.isFinite(lookup.expectedDemandZoneFromGranular) &&
+      Number.isFinite(lookup.demandZone.zone) &&
+      lookup.expectedDemandZoneFromGranular !== lookup.demandZone.zone
+    ) {
+      warningHtml = `
+        <div class="alert">
+          <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 6a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 6zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+          <span><b>Mapping check.</b> The granular DUoS operator (${escapeHtml(lookup.granularDuosOperator)}) normally maps to demand zone ${lookup.expectedDemandZoneFromGranular}, but the GSP polygon returned zone ${lookup.demandZone.zone}. Sites near a boundary often land here. Check against the MPAN-registered region before using either figure.</span>
+        </div>`;
     }
+    document.getElementById("tariff-warning").innerHTML = warningHtml;
+    document.getElementById("tariff-section").classList.add("visible");
+  }
 
-    async function loadData() {
-      const status = document.getElementById("status");
-      try {
-        const [dno, gsp, gen] = await Promise.all([
-          fetch("./data/slim_dno_20240503.geojson").then(r => r.json()),
-          fetch("./data/slim_gsp_20251204.geojson").then(r => r.json()),
-          fetch("./data/slim_tnuos_generation_zones.geojson").then(r => r.json()),
-        ]);
-        datasets.dno = prepareFeatures(dno);
-        datasets.gsp = prepareFeatures(gsp);
-        datasets.gen = prepareFeatures(gen);
-        status.textContent = "Datasets loaded. Ready.";
-      } catch (err) {
-        status.textContent = "Failed to load local datasets. Start a local server and open this page from it.";
+  // ============================================================
+  // Handlers
+  // ============================================================
+  function handleLookup() {
+    const lookup = runLookup();
+    if (!lookup) return;
+    placeMarker(lookup.lat, lookup.lon);
+    drawMatchedRegions(lookup);
+    renderRegionSummary(lookup);
+    document.getElementById("tariff-section").classList.remove("visible");
+    setStatus(`Region lookup complete (${lookup.lat.toFixed(4)}, ${lookup.lon.toFixed(4)}).`, "ready");
+    toast("Region lookup complete");
+  }
+
+  function handleRecommend() {
+    const lookup = runLookup();
+    if (!lookup) return;
+    const siteType = document.getElementById("siteType").value;
+    const archetype = SITE_ARCHETYPES[siteType];
+    if (!archetype) {
+      setStatus("Pick a site archetype.", "error");
+      return;
+    }
+    const demandBasis = document.getElementById("demandBasis").value;
+    const capacity = parseFloat(document.getElementById("capacity").value);
+    const capacityUnit = document.getElementById("capacityUnit").value;
+
+    placeMarker(lookup.lat, lookup.lon);
+    drawMatchedRegions(lookup);
+    renderRegionSummary(lookup);
+    renderTariffSet(lookup, archetype, demandBasis, capacity, capacityUnit);
+    setStatus(`Recommendation ready (${lookup.lat.toFixed(4)}, ${lookup.lon.toFixed(4)}).`, "ready");
+    toast("Tariff set ready");
+  }
+
+  function syncInputVisibility() {
+    const siteType = document.getElementById("siteType").value;
+    const archetype = SITE_ARCHETYPES[siteType];
+    const demandBasisWrap = document.getElementById("demandBasisWrap");
+    const capacityUnit = document.getElementById("capacityUnit");
+    const needsBasis = !!(archetype && archetype.tariffs && archetype.tariffs.some(t => t.startsWith("duos_")));
+
+    demandBasisWrap.style.display = needsBasis ? "" : "none";
+
+    if (archetype && archetype.residualType === "t_demand" && capacityUnit.value !== "MWh" && capacityUnit.value !== "kWh") {
+      capacityUnit.value = "MWh";
+    }
+  }
+
+  // ============================================================
+  // Init
+  // ============================================================
+  async function loadData() {
+    try {
+      const [dno, gsp, gen] = await Promise.all([
+        fetch("./data/slim_dno_20240503.geojson").then(r => r.json()),
+        fetch("./data/slim_gsp_20251204.geojson").then(r => r.json()),
+        fetch("./data/slim_tnuos_generation_zones.geojson").then(r => r.json()),
+      ]);
+      datasets.dno = prepareFeatures(dno);
+      datasets.gsp = prepareFeatures(gsp);
+      datasets.gen = prepareFeatures(gen);
+      setStatus("Datasets loaded. Ready.", "ready");
+    } catch (err) {
+      setStatus("Could not load local datasets. If you are running locally, start a static server (e.g. python -m http.server) and open the page from it.", "error");
+    }
+  }
+
+  // Wire up
+  document.getElementById("siteType").innerHTML = Object.entries(SITE_ARCHETYPES)
+    .map(([value, cfg]) => `<option value="${value}">${cfg.label}</option>`).join("");
+
+  document.getElementById("siteType").addEventListener("change", syncInputVisibility);
+  document.getElementById("btn-lookup").addEventListener("click", handleLookup);
+  document.getElementById("btn-recommend").addEventListener("click", handleRecommend);
+
+  // Latitude / longitude inputs reposition the pin live
+  ["lat", "lon"].forEach(id => {
+    document.getElementById(id).addEventListener("input", () => {
+      const lat = parseFloat(document.getElementById("lat").value);
+      const lon = parseFloat(document.getElementById("lon").value);
+      if (Number.isFinite(lat) && Number.isFinite(lon)) {
+        placeMarker(lat, lon);
       }
-    }
-
-    document.getElementById("lookupBtn").addEventListener("click", () => {
-      const status = document.getElementById("status");
-      const lookup = collectLookup();
-      if (!lookup) return;
-      renderResult([
-        ["Latitude", lookup.lat],
-        ["Longitude", lookup.lon],
-        ["DUoS region", lookup.dno.Area],
-        ["DUoS operator", lookup.dno.DNO_Full || lookup.dno.DNO],
-        ["DUoS granular operator", lookup.granularDuosOperator],
-        ["TNUoS demand GSP group", lookup.gsp.GSPGroup],
-        ["Demand zone", lookup.demandZone.zone ? `${lookup.demandZone.zone} (${lookup.demandZone.name})` : null],
-        ["Demand zone from granular DUoS map", lookup.expectedDemandZoneFromGranular],
-        ["GSP code", lookup.gsp.GSPs],
-        ["TNUoS generation zone", getGenerationZoneLabel(lookup.gen.layer)],
-      ], "Note: Demand and generation zones are parallel spatial lookups.");
-      status.textContent = "Lookup complete.";
     });
+  });
 
-    document.getElementById("recommendBtn").addEventListener("click", () => {
-      const status = document.getElementById("status");
-      const lookup = collectLookup();
-      if (!lookup) return;
-
-      const siteType = document.getElementById("siteType").value;
-      const archetype = SITE_ARCHETYPES[siteType];
-      const demandBasis = document.getElementById("demandBasis").value;
-      const capacity = parseFloat(document.getElementById("capacity").value);
-      const capacityUnit = document.getElementById("capacityUnit").value;
-      if (!archetype) {
-        status.textContent = "Select a valid site archetype.";
-        return;
-      }
-
-      const recommendation = buildPresetList(archetype, lookup, demandBasis, capacity, capacityUnit);
-      const rows = [
-        ["Site archetype", archetype.label],
-        ["DUoS region", lookup.dno.Area],
-        ["DUoS granular operator", lookup.granularDuosOperator],
-        ["TNUoS demand zone", lookup.demandZone.zone ? `${lookup.demandZone.zone} (${lookup.demandZone.name})` : null],
-        ["TNUoS generation zone", getGenerationZoneLabel(lookup.gen.layer)],
-        ["Input", Number.isFinite(capacity) ? `${capacity} ${capacityUnit}` : "Not supplied"],
-        ["Recommended charge set", recommendation.list.join("; ")],
-      ];
-
-      if (
-        Number.isFinite(lookup.expectedDemandZoneFromGranular) &&
-        Number.isFinite(lookup.demandZone.zone) &&
-        lookup.expectedDemandZoneFromGranular !== lookup.demandZone.zone
-      ) {
-        rows.push([
-          "Mapping check",
-          `Warning: granular DUoS maps to demand zone ${lookup.expectedDemandZoneFromGranular}, but polygon lookup returned ${lookup.demandZone.zone}`,
-        ]);
-      }
-
-      if (archetype.needsLvHvBand) {
-        rows.push([`${basisLabelForSiteSpecific(demandBasis)} Site Specific band`, recommendation.lvHvBand ? `Band ${recommendation.lvHvBand}` : "Band pending input"]);
-      }
-      if (archetype.needsResidualBand) {
-        rows.push(["TNUoS Residual band", recommendation.residualBand ? `Band ${recommendation.residualBand}` : "Band pending input"]);
-      }
-
-      renderResult(
-        rows,
-        "Export-side tariffs (Generation Site Specific and Embedded Export) should be modelled as income on the left-hand side of your commercial model."
-      );
-      status.textContent = "Recommendation complete.";
-    });
-
-    function syncInputVisibility() {
-      const siteType = document.getElementById("siteType").value;
-      const archetype = SITE_ARCHETYPES[siteType];
-      const demandBasisWrap = document.getElementById("demandBasisWrap");
-      const capacityUnit = document.getElementById("capacityUnit");
-      const needsBasis = !!(archetype && archetype.tariffs && archetype.tariffs.some(t => t.startsWith("duos_")));
-
-      if (needsBasis) {
-        demandBasisWrap.classList.remove("hidden");
-      } else {
-        demandBasisWrap.classList.add("hidden");
-      }
-
-      if (archetype && archetype.residualType === "t_demand") {
-        capacityUnit.value = "MWh";
-      }
+  // Enter on form fields triggers recommend
+  document.addEventListener("keydown", (e) => {
+    const tag = (e.target.tagName || "").toLowerCase();
+    if (e.key === "Enter" && (tag === "input" || tag === "select")) {
+      e.preventDefault();
+      handleRecommend();
     }
+  });
 
-    document.getElementById("siteType" ).innerHTML = Object.entries(SITE_ARCHETYPES)
-      .map(([value, cfg]) => `<option value="${value}">${cfg.label}</option>`)
-      .join("");
+  initMap();
+  syncInputVisibility();
+  loadData();
+</script>
 
-    document.getElementById("demandBasis").innerHTML = `
-      <option value="LV_NO_MIC">LV no MIC (kWh)</option>
-      <option value="LV_MIC">LV MIC (kVA)</option>
-      <option value="HV">HV (kVA)</option>
-      <option value="EHV">EHV (kVA)</option>
-    `;
-
-    document.getElementById("siteType").addEventListener("change", syncInputVisibility);
-    syncInputVisibility();
-    loadData();
-  </script>
 </body>
 </html>
