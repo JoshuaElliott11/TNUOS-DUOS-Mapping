@@ -389,6 +389,57 @@
   }
   .map-hint b { color: var(--ink); font-weight: 600; }
 
+  .map-controls {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px 8px;
+    z-index: 500;
+    box-shadow: var(--shadow-sm);
+    min-width: 218px;
+  }
+  .map-controls-title {
+    font-size: 10.5px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--ink-3);
+    margin-bottom: 8px;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  }
+  .map-controls-title button {
+    background: none; border: 0; padding: 0;
+    font: inherit; font-size: 10.5px;
+    color: var(--primary);
+    cursor: pointer;
+    text-transform: none; letter-spacing: 0;
+  }
+  .map-controls-title button:hover { color: var(--primary-hov); }
+  .layer-toggle {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12.5px; color: var(--ink-2);
+    cursor: pointer;
+    padding: 3px 0;
+    user-select: none;
+  }
+  .layer-toggle input[type="checkbox"] {
+    width: 14px; height: 14px;
+    accent-color: var(--primary);
+    cursor: pointer;
+    margin: 0;
+  }
+  .layer-toggle:hover { color: var(--ink); }
+  .layer-toggle.disabled { opacity: 0.45; cursor: not-allowed; }
+  .layer-toggle.disabled input { cursor: not-allowed; }
+  .layer-swatch-sm {
+    display: inline-block;
+    width: 12px; height: 12px;
+    border-radius: 2px;
+    border: 2px solid;
+    background: rgba(255,255,255,0.4);
+    flex: 0 0 12px;
+  }
+
   /* Toast */
   .toast {
     position: fixed; bottom: 24px; right: 24px;
@@ -549,11 +600,34 @@
   <section class="map-panel">
     <div id="map"></div>
     <div class="map-hint"><b>Click the map</b> to set a coordinate, or drag the pin.</div>
+
+    <div class="map-controls" id="map-controls">
+      <div class="map-controls-title">
+        <span>Show all regions</span>
+        <button type="button" id="layers-clear">Clear</button>
+      </div>
+      <label class="layer-toggle disabled" id="layer-toggle-dno">
+        <input type="checkbox" id="layer-dno" disabled>
+        <span class="layer-swatch-sm" style="border-color: var(--map-dno);"></span>
+        DUoS licence areas
+      </label>
+      <label class="layer-toggle disabled" id="layer-toggle-gsp">
+        <input type="checkbox" id="layer-gsp" disabled>
+        <span class="layer-swatch-sm" style="border-color: var(--map-demand);"></span>
+        TNUoS demand zones
+      </label>
+      <label class="layer-toggle disabled" id="layer-toggle-gen">
+        <input type="checkbox" id="layer-gen" disabled>
+        <span class="layer-swatch-sm" style="border-color: var(--map-gen);"></span>
+        TNUoS generation zones
+      </label>
+    </div>
+
     <div class="map-overlay" id="map-legend">
       <div class="map-legend">
-        <div class="legend-item"><span class="legend-swatch" style="border-color: var(--map-dno);"></span> DUoS licence area</div>
-        <div class="legend-item"><span class="legend-swatch" style="border-color: var(--map-demand);"></span> TNUoS demand zone (GSP group)</div>
-        <div class="legend-item"><span class="legend-swatch" style="border-color: var(--map-gen);"></span> TNUoS generation zone</div>
+        <div class="legend-item"><span class="legend-swatch" style="border-color: var(--map-dno);"></span> DUoS licence area (match)</div>
+        <div class="legend-item"><span class="legend-swatch" style="border-color: var(--map-demand);"></span> TNUoS demand zone (match)</div>
+        <div class="legend-item"><span class="legend-swatch" style="border-color: var(--map-gen);"></span> TNUoS generation zone (match)</div>
       </div>
     </div>
   </section>
@@ -574,38 +648,53 @@
   // Reference data
   // ============================================================
   const SITE_ARCHETYPES = {
-    dist_import_final: {
-      label: "Distribution-connected pure demand (no export)",
+    pure_final_dist: {
+      label: "1. Pure final-demand import site, distribution-connected (no export)",
       needsLvHvBand: true, needsResidualBand: true, residualType: "distribution",
       tariffs: ["duos_site_specific_import", "tnuos_residual", "tnuos_import_triads"],
     },
-    trans_import_final: {
-      label: "Transmission-connected pure demand (no export)",
+    pure_final_trans: {
+      label: "2. Pure final-demand import site, transmission-connected (no export)",
       needsLvHvBand: false, needsResidualBand: true, residualType: "t_demand",
       tariffs: ["tnuos_residual", "tnuos_import_triads"],
     },
-    dist_import_export: {
-      label: "Distribution-connected import + export (final demand plus embedded export)",
-      needsLvHvBand: true, needsResidualBand: true, residualType: "distribution",
-      tariffs: ["duos_site_specific_import", "duos_generation_site_specific_export", "tnuos_residual", "tnuos_import_triads", "tnuos_embedded_export"],
-    },
-    dist_export_only: {
-      label: "Distribution-connected export-led (embedded export only)",
-      needsLvHvBand: false, needsResidualBand: false, residualType: "none",
-      tariffs: ["duos_generation_site_specific_export", "tnuos_embedded_export"],
-    },
-    trans_generation_export: {
-      label: "Transmission-connected generation / export",
-      needsLvHvBand: false, needsResidualBand: false, residualType: "none",
-      tariffs: ["tnuos_wider_generation"],
-    },
-    dist_storage_bidirectional: {
-      label: "Distribution-connected bidirectional storage / energy",
+    standalone_storage_dist: {
+      label: "3. Stand-alone storage / non-final demand site, distribution-connected",
       needsLvHvBand: false, needsResidualBand: false, residualType: "none",
       tariffs: ["duos_no_residual_import", "duos_generation_site_specific_export", "tnuos_import_triads", "tnuos_embedded_export"],
     },
-    trans_storage_bidirectional: {
-      label: "Transmission-connected bidirectional storage / energy",
+    standalone_storage_trans: {
+      label: "4. Stand-alone storage / non-final demand site, transmission-connected",
+      needsLvHvBand: false, needsResidualBand: false, residualType: "none",
+      tariffs: ["tnuos_import_triads", "tnuos_wider_generation"],
+    },
+    dist_generator_only: {
+      label: "5. Distribution-connected generator only (<100 MW TEC, no demand)",
+      needsLvHvBand: false, needsResidualBand: false, residualType: "none",
+      tariffs: ["duos_generation_site_specific_export", "tnuos_embedded_export"],
+    },
+    trans_generator_only: {
+      label: "6. Transmission-connected generator, or distribution-connected TEC >100 MW",
+      needsLvHvBand: false, needsResidualBand: false, residualType: "none",
+      tariffs: ["tnuos_wider_generation"],
+    },
+    mixed_dist: {
+      label: "7. Mixed final-demand + generation, distribution-connected (BtM co-loc + generation), <100 MW TEC",
+      needsLvHvBand: true, needsResidualBand: true, residualType: "distribution",
+      tariffs: ["duos_site_specific_import", "duos_generation_site_specific_export", "tnuos_residual", "tnuos_import_triads", "tnuos_embedded_export"],
+    },
+    mixed_trans: {
+      label: "8. Mixed final-demand + generation, transmission-connected (BtM co-location)",
+      needsLvHvBand: false, needsResidualBand: true, residualType: "t_demand",
+      tariffs: ["tnuos_residual", "tnuos_import_triads", "tnuos_wider_generation"],
+    },
+    colocated_dist: {
+      label: "9. Co-located renewables + BESS import, distribution-connected",
+      needsLvHvBand: false, needsResidualBand: false, residualType: "none",
+      tariffs: ["duos_no_residual_import", "duos_generation_site_specific_export", "tnuos_import_triads", "tnuos_embedded_export"],
+    },
+    colocated_trans: {
+      label: "10. Co-located renewables + BESS import, transmission-connected",
       needsLvHvBand: false, needsResidualBand: false, residualType: "none",
       tariffs: ["tnuos_import_triads", "tnuos_wider_generation"],
     },
@@ -812,6 +901,10 @@
   let gspLayer = null;
   let genLayer = null;
 
+  // "Show all" overlay layers
+  const allLayers = { dno: null, gsp: null, gen: null };
+  let reprojectedDnoFc = null; // cached after first render
+
   function setStatus(text, state) {
     document.getElementById("status-text").textContent = text;
     const dot = document.getElementById("status-dot");
@@ -920,6 +1013,116 @@
     }
 
     document.getElementById("map-legend").classList.add("visible");
+  }
+
+  // ============================================================
+  // "Show all" overlay layers
+  // ============================================================
+  const LAYER_COLOURS = {
+    dno: "#0891b2",
+    gsp: "#d97706",
+    gen: "#7c3aed",
+  };
+  const LAYER_DASH = {
+    dno: null,
+    gsp: "4 3",
+    gen: "1 4",
+  };
+
+  function buildFeatureCollection(items, reproject) {
+    return {
+      type: "FeatureCollection",
+      features: items.map(item => ({
+        type: "Feature",
+        properties: item.properties,
+        geometry: reproject ? reprojectGeometryToWgs84(item.geometry) : item.geometry,
+      })),
+    };
+  }
+
+  function popupForFeature(layerName, props) {
+    if (!props) return null;
+    if (layerName === "dno") {
+      const area = props.Area || "";
+      const op = props.DNO_Full || props.DNO || "";
+      return `<b>${escapeHtml(area)}</b>${op ? `<br><span style="color:#64748b;">${escapeHtml(op)}</span>` : ""}`;
+    }
+    if (layerName === "gsp") {
+      const grp = props.GSPGroup || "";
+      const code = props.GSPs || "";
+      return `<b>GSP group ${escapeHtml(grp)}</b>${code ? `<br><span style="color:#64748b;">${escapeHtml(code)}</span>` : ""}`;
+    }
+    if (layerName === "gen") {
+      const code = props.layer || "";
+      const name = TNUOS_GENERATION_ZONE_NAMES[code];
+      return `<b>${escapeHtml(code)}</b>${name ? `<br><span style="color:#64748b;">${escapeHtml(name)}</span>` : ""}`;
+    }
+    return null;
+  }
+
+  function addAllLayer(layerName) {
+    if (allLayers[layerName]) return;
+    if (!datasets.dno || !datasets.gsp || !datasets.gen) return;
+
+    let fc;
+    if (layerName === "dno") {
+      if (!reprojectedDnoFc) reprojectedDnoFc = buildFeatureCollection(datasets.dno, true);
+      fc = reprojectedDnoFc;
+    } else if (layerName === "gsp") {
+      fc = buildFeatureCollection(datasets.gsp, false);
+    } else if (layerName === "gen") {
+      fc = buildFeatureCollection(datasets.gen, false);
+    }
+
+    const color = LAYER_COLOURS[layerName];
+    const dashArray = LAYER_DASH[layerName];
+
+    allLayers[layerName] = L.geoJSON(fc, {
+      style: { color, weight: 1, opacity: 0.55, fillColor: color, fillOpacity: 0.04, dashArray },
+      onEachFeature: (feature, layer) => {
+        const html = popupForFeature(layerName, feature.properties);
+        if (html) layer.bindPopup(html);
+      },
+    }).addTo(map);
+
+    // Keep matched layers on top so the highlight remains visible.
+    if (dnoLayer) dnoLayer.bringToFront();
+    if (gspLayer) gspLayer.bringToFront();
+    if (genLayer) genLayer.bringToFront();
+    if (marker) marker.setZIndexOffset(1000);
+  }
+
+  function removeAllLayer(layerName) {
+    if (allLayers[layerName]) {
+      map.removeLayer(allLayers[layerName]);
+      allLayers[layerName] = null;
+    }
+  }
+
+  function enableLayerToggles() {
+    ["dno", "gsp", "gen"].forEach(name => {
+      const wrap = document.getElementById(`layer-toggle-${name}`);
+      const cb = document.getElementById(`layer-${name}`);
+      wrap.classList.remove("disabled");
+      cb.disabled = false;
+    });
+  }
+
+  function wireLayerToggles() {
+    ["dno", "gsp", "gen"].forEach(name => {
+      const cb = document.getElementById(`layer-${name}`);
+      cb.addEventListener("change", () => {
+        if (cb.checked) addAllLayer(name);
+        else removeAllLayer(name);
+      });
+    });
+    document.getElementById("layers-clear").addEventListener("click", () => {
+      ["dno", "gsp", "gen"].forEach(name => {
+        const cb = document.getElementById(`layer-${name}`);
+        cb.checked = false;
+        removeAllLayer(name);
+      });
+    });
   }
 
   // ============================================================
@@ -1116,6 +1319,7 @@
       datasets.dno = prepareFeatures(dno);
       datasets.gsp = prepareFeatures(gsp);
       datasets.gen = prepareFeatures(gen);
+      enableLayerToggles();
       setStatus("Datasets loaded. Ready.", "ready");
     } catch (err) {
       setStatus("Could not load local datasets. If you are running locally, start a static server (e.g. python -m http.server) and open the page from it.", "error");
@@ -1151,6 +1355,7 @@
   });
 
   initMap();
+  wireLayerToggles();
   syncInputVisibility();
   loadData();
 </script>
