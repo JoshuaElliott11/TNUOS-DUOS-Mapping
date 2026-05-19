@@ -506,19 +506,22 @@
   .leaflet-popup-content { font-size: 12.5px; margin: 10px 14px; }
   .leaflet-control-attribution { font-size: 10.5px; }
 
-  /* Footer */
-  .footer {
+  /* Disclaimer section (in panel) */
+  .disclaimer-section {
+    margin-top: 28px;
+    padding-top: 22px;
     border-top: 1px solid var(--line);
-    background: var(--surface);
-    padding: 18px 28px 20px;
+  }
+  .disclaimer-section .disclaimer-text {
+    margin: 0;
     font-size: 11.5px;
     color: var(--ink-3);
     line-height: 1.55;
   }
-  .footer .disclaimer-text { margin: 0; max-width: 980px; }
-  .footer .disclaimer-attr { margin: 6px 0 0; color: var(--ink-4); font-size: 11px; }
-  @media (max-width: 880px) {
-    .footer { padding: 14px 20px 16px; }
+  .disclaimer-section .disclaimer-attr {
+    margin: 8px 0 0;
+    font-size: 11px;
+    color: var(--ink-4);
   }
 </style>
 </head>
@@ -636,6 +639,11 @@
         </div>
       </div>
     </div>
+
+    <section class="disclaimer-section">
+      <p class="disclaimer-text">This tool is provided for information purposes only and may not reflect the DUoS or TNUoS regions, or the tariffs, that apply to a specific site. Users should verify any output with the relevant Distribution Network Operator, energy supplier, or NESO before relying on it for commercial, regulatory, or contractual purposes. No warranty is given as to the accuracy or completeness of the information presented.</p>
+      <p class="disclaimer-attr">Boundary data: NESO public publications.</p>
+    </section>
   </aside>
 
   <section class="map-panel">
@@ -674,11 +682,6 @@
   </section>
 
 </div>
-
-<footer class="footer">
-  <p class="disclaimer-text">This tool is provided for information purposes only and may not reflect the DUoS or TNUoS regions, or the tariffs, that apply to a specific site. Users should verify any output with the relevant Distribution Network Operator, energy supplier, or NESO before relying on it for commercial, regulatory, or contractual purposes. No warranty is given as to the accuracy or completeness of the information presented.</p>
-  <p class="disclaimer-attr">Boundary data: NESO public publications.</p>
-</footer>
 
 <div class="toast" id="toast">Done</div>
 
